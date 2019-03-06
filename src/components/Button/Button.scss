@@ -67,7 +67,7 @@
     }
   }
   
-  &.warning {
+  &.yellow {
     background-color: rgba($yellow-color, 0.1);
     color: darken($yellow-color, 10);
     border-color: $yellow-color;

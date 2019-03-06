@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { SIZES, BUTTON_TYPES } from 'constants';
 import styles from './Button.scss';
 
-console.log(SIZES, BUTTON_TYPES);
-
 /**
  * Button component. Renders a button
  * based on type and size. Uses the children prop
