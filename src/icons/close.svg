@@ -1,0 +1,13 @@
+<svg width="24px" height="24px" viewBox="0 0 24 24">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke="#333333">
+            <g transform="translate(3.000000, 3.000000)">
+                <circle fill="#FFFFFF" cx="9" cy="9" r="9"></circle>
+                <g transform="translate(5.000000, 5.000000)" fill="#DDDDDD">
+                    <path d="M8,8 L0,0 L8,8 Z"></path>
+                    <path d="M8,8 L0,0 L8,8 Z" transform="translate(4.000000, 4.000000) scale(-1, 1) translate(-4.000000, -4.000000) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

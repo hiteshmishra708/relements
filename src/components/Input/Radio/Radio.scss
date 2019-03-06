@@ -1,0 +1,25 @@
+@import 'constants/index.scss';
+
+.radio {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.radioLabel {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-left: 2px;
+  transition: 0.2s ease-out;
+
+  &.focused {
+    color: $primary-color;
+  }
+}
+
+.radioOptions {
+  display: flex;
+  margin-left: 2px;
+}

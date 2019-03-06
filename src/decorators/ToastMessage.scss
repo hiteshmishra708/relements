@@ -1,0 +1,44 @@
+@import '../constants/index.scss';
+
+.toastMessage {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+.toastMessageIconError {
+  margin-right: 4px;
+  width: 32px;
+  height: 32px;
+  svg circle {
+    fill: $warning-color;
+  }
+
+  path,
+  g {
+    stroke: #fff;
+  }
+}
+
+.toastMessageIconSuccess {
+  margin-right: 4px;
+  width: 32px;
+  height: 32px;
+  svg circle {
+    fill: $primary-color;
+  }
+
+  path,
+  g {
+    stroke: #fff;
+  }
+}
+
+.toastMessageIconWarning {
+  margin-right: 8px;
+  width: 24px;
+  height: 24px;
+}
+
+.toastMessageText {
+}

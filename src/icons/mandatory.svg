@@ -1,0 +1,12 @@
+<svg width="20px" height="20px" viewBox="0 0 25 24">
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/text-blue">
+            <path d="M3,8 L8,8" id="Line" stroke="#333333" stroke-linecap="square"></path>
+            <path d="M3,12 L10,12" id="Line" stroke="#333333" stroke-linecap="square"></path>
+            <circle opacity="0" id="Oval-1-Copy-2" stroke="#21ABF3" fill="#21ABF3" stroke-linecap="round" stroke-linejoin="round" cx="17" cy="7" r="5"></circle>
+            <polyline opacity="0" id="Oval-1-Copy-3" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" points="19.3814734 5.30111017 15.9952939 8.83858748 14.5331231 7.44998251"></polyline>
+            <path d="M3,16 L19,16" id="Line" stroke="#333333" stroke-linecap="square"></path>
+            <path d="M3,20 L19,20" id="Line" stroke="#333333" stroke-linecap="square"></path>
+        </g>
+    </g>
+</svg>

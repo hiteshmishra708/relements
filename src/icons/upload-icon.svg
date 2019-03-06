@@ -1,0 +1,11 @@
+<svg width="52px" height="52px" viewBox="0 0 52 52">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <path d="M4,0 L48,0 C50.209139,-4.05812251e-16 52,1.790861 52,4 L52,48 C52,50.209139 50.209139,52 48,52 L4,52 C1.790861,52 2.705415e-16,50.209139 0,48 L0,4 C-2.705415e-16,1.790861 1.790861,4.05812251e-16 4,0 Z" id="path-1" fill="#FFFFFF"></path>
+            <path d="M4,0.5 C2.06700338,0.5 0.5,2.06700338 0.5,4 L0.5,48 C0.5,49.9329966 2.06700338,51.5 4,51.5 L48,51.5 C49.9329966,51.5 51.5,49.9329966 51.5,48 L51.5,4 C51.5,2.06700338 49.9329966,0.5 48,0.5 L4,0.5 Z" id="Shape" stroke="#DEDEDE"></path>
+            <polyline id="Rectangle-543" stroke="#333333" points="34.742174 29.4285714 34.742174 33.5998286 17 33.5998286 17 29.4285714"></polyline>
+            <path d="M25.8888889,30.7999997 L25.8888889,19.3953069" id="Line-175" stroke="#333333" stroke-linecap="square"></path>
+            <polyline id="Rectangle-321" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" transform="translate(25.888889, 21.333472) rotate(-45.000000) translate(-25.888889, -21.333472) " points="23.8080087 19.1267879 27.9697691 19.1267879 27.9697691 23.540156"></polyline>
+        </g>
+    </g>
+</svg>

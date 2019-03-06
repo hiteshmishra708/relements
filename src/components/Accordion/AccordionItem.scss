@@ -1,0 +1,99 @@
+@import 'constants/index.scss';
+
+.accordionItem {
+  position: relative;
+  border-top: 1px solid $border-color;
+  overflow: hidden;
+  transition: height 0.2s ease-out, transform 0.1s ease-out, background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+  background-color: #fff;
+  z-index: $z-index + 1;
+  border-bottom: 1px solid $border-color;
+  margin-top: -1px;
+  * {
+    font-family: $font;
+  }
+
+  &.active:not(.transparent) {
+    background-color: #eee;
+  }
+
+  &.noBorder {
+    border: none;
+  }
+}
+
+.accordionItemHeader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  cursor: pointer;
+  padding-right: 40px;
+  &.noPadding {
+    padding: 0;
+  }
+}
+
+.accordionItemHeaderText {
+  font-weight: 600;
+}
+
+.leftColumn,
+.rightColumn {
+  display: flex;
+  align-items: center;
+}
+
+.rightColumn {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.icon {
+  margin-right: 8px;
+  transition: 0.2s ease-out;
+  &.arrowIcon {
+    transform: rotate(0deg);
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    margin-top: -12px;
+  }
+  &.active {
+    transform: rotate(180deg);
+  }
+  svg path {
+    transition: 0.2s ease-out;
+  }
+}
+
+.reorderIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 16px;
+}
+
+.iconStarred {
+  path {
+    fill: #ffdf9b;
+    stroke: #f9ba31;
+  }
+}
+
+.accordionItemBody {
+  padding: 16px;
+  &.noPadding {
+    padding: 0;
+  }
+}
+
+:global {
+  .sortableElement {
+    transition: none;
+    box-shadow: 0 10px 30px rgba(1, 1, 1, 0.1);
+  }
+}

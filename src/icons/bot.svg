@@ -1,0 +1,11 @@
+<svg width="40px" height="40px" viewBox="0 0 40 40">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bot" stroke="#5CAED9" stroke-width="2">
+            <g id="Group-11" transform="translate(8.000000, 4.000000)">
+                <path d="M12,0 C18.6274169,-1.262527e-15 24,5.57156756 24,12.4444444 L24,24.8888889 C24,28.8162471 20.9299526,32 17.1428571,32 L6.85714286,32 C3.07004743,32 4.63785429e-16,28.8162471 0,24.8888889 L0,12.4444444 C-8.11624502e-16,5.57156756 5.372583,1.262527e-15 12,0 Z" id="Rectangle-63" fill="#73CFFF" fill-rule="nonzero"></path>
+                <rect id="Rectangle-64" fill="#FFFFFF" fill-rule="nonzero" x="3.42857143" y="8.88888889" width="17.1428571" height="5.33333333" rx="1.5"></rect>
+                <path d="M12,19.5555556 L12,26.6666667" id="Line"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>colored/template</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Final-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="mockup-05" transform="translate(-232.000000, -110.000000)" fill="#FFC985" stroke="#FF9106">
+            <g id="Components/Tabs" transform="translate(60.000000, 105.000000)">
+                <g id="image/template/colored" transform="translate(167.000000, 0.000000)">
+                    <rect id="Rectangle-2114" x="6.22222222" y="6.22222222" width="7.33333333" height="7.33333333" rx="1"></rect>
+                    <rect id="Rectangle-2114" x="18.4444444" y="6.22222222" width="7.33333333" height="7.33333333" rx="1"></rect>
+                    <rect id="Rectangle-2114" x="6.22222222" y="18.4444444" width="7.33333333" height="7.33333333" rx="1"></rect>
+                    <rect id="Rectangle-2114" x="18.4444444" y="18.4444444" width="7.33333333" height="7.33333333" rx="1"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

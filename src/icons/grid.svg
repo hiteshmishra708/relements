@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/grid</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon/grid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <rect id="Rectangle-2105" stroke="#333333" x="3" y="3" width="3.6" height="3.6"></rect>
+        <rect id="Rectangle-2106" stroke="#333333" x="10.2" y="3" width="3.6" height="3.6"></rect>
+        <rect id="Rectangle-2107" stroke="#333333" x="17.4" y="3" width="3.6" height="3.6"></rect>
+        <rect id="Rectangle-2110" stroke="#333333" x="3" y="10.2" width="3.6" height="3.6"></rect>
+        <rect id="Rectangle-2108" stroke="#333333" x="10.2" y="10.2" width="3.6" height="3.6"></rect>
+        <rect id="Rectangle-2109" stroke="#333333" x="17.4" y="10.2" width="3.6" height="3.6"></rect>
+        <rect id="Rectangle-2113" stroke="#333333" x="3" y="17.4" width="3.6" height="3.6"></rect>
+        <rect id="Rectangle-2111" stroke="#333333" x="10.2" y="17.4" width="3.6" height="3.6"></rect>
+        <rect id="Rectangle-2112" stroke="#333333" x="17.4" y="17.4" width="3.6" height="3.6"></rect>
+    </g>
+</svg>

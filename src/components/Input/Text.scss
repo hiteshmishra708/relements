@@ -1,0 +1,185 @@
+@import 'constants/index.scss';
+
+.text {
+  margin-bottom: 24px;
+  flex: 1;
+  position: relative;
+}
+
+.textWithMargin {
+  margin-right: 16px;
+  outline: none;
+}
+
+.textActive {
+  .textLabel {
+    color: $primary-color;
+  }
+  .textInputWrapper {
+    border-color: $primary-color;
+    background-color: rgba($primary-color, 0.05);
+  }
+}
+
+.textError {
+  .textLabel {
+    color: $warning-color;
+  }
+  .textInputWrapper {
+    border-color: $warning-color;
+    background-color: rgba($warning-color, 0.05);
+  }
+}
+
+.emojiIcon {
+  cursor: pointer;
+}
+
+.textLabelWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.textLabel {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 2px;
+  transition: 0.2s ease-out;
+  margin-right: 8px;
+}
+
+.speakerIcon {
+  cursor: pointer;
+  color: #666;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: 0.2s ease-out;
+  opacity: 0.6;
+  &:hover {
+    opacity: 1;
+  }
+
+  #wave3 {
+    opacity: 0;
+  }
+
+  svg path {
+    transition: 1s ease-out;
+  }
+
+  &.speaking {
+    opacity: 1;
+    svg {
+      overflow: visible;
+      path {
+        fill: darken($primary-color, 10);
+      }
+    }
+
+    @for $i from 1 through 3 {
+      svg :global(#wave#{$i}) {
+        animation: soundwave 1s ease-out infinite;
+        animation-delay: 0.2s * $i;
+      }
+    }
+  }
+}
+
+.textHint {
+  display: block;
+  color: #999;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  margin-left: 2px;
+  margin-top: -6px;
+  transition: 0.2s ease-out;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.textInputWrapper {
+  flex: 1;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: 0.2s ease-out;
+  &.disabled {
+    pointer-events: none;
+    background-color: #eee;
+  }
+}
+
+.textInput {
+  border: none !important;
+  outline: none !important;
+  padding: 4px 8px !important;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px !important;
+  resize: none;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  &.multiline {
+    min-height: 64px;
+  }
+  &.disabled {
+    color: #999;
+  }
+  &:not(.multiline) {
+    height: auto !important;
+  }
+  &::placeholder {
+    color: #000;
+    opacity: 0.3;
+  }
+}
+
+.textInputSubtext {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 4px;
+  font-size: 12px;
+
+  position: absolute;
+  bottom: 0;
+  transform: translate3d(0,100%,0);
+  padding-top: 4px;
+}
+
+.textInputSubtextCount {
+  opacity: 0.5;
+}
+
+.textInputSubtextError {
+  color: #ff0c0c;
+  opacity: 0.8;
+}
+
+@keyframes soundwave {
+  0% {
+    opacity: 0;
+    transform: translate3d(-5px, 0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(5px, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(10px, 0, 0);
+  }
+}

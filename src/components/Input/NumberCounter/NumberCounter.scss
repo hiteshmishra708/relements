@@ -1,0 +1,69 @@
+@import 'constants/index.scss';
+
+.numberCounter {
+  position: relative;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.numberCounterLabel {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-left: 2px;
+  transition: 0.2s ease-out;
+
+  &.focused {
+    color: $primary-color;
+  }
+}
+
+.numberCounterError {
+  .numberCounterLabel {
+    color: $warning-color;
+  }
+  .numberCounterInputWrapper {
+    border-color: $warning-color;
+    background-color: rgba($warning-color, 0.05);
+  }
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+
+  &.isZero {
+    color: #999;
+  }
+
+  .counterButton {
+    width: 18px;
+    height: 18px;
+    transition: 0.2s ease-out;
+    svg g {
+      stroke: $primary-color;
+    }
+
+    &.disabled {
+      filter: grayscale(1);
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    &:first-child {
+      margin-right: 8px;
+    }
+    
+    &:last-child {
+      margin-left: 8px;
+    }
+  }
+
+  .counterText {
+    margin: 0 8px;
+  }
+}

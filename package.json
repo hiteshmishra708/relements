@@ -1,0 +1,114 @@
+{
+  "name": "@haptik/relements",
+  "version": "1.0.0",
+  "description": "UI Components Library for React",
+  "main": "build/bundle.umd.js",
+  "module": "build/bundle.mjs",
+  "scripts": {
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "build": "NODE_ENV=production rollup -c --config config/rollup.config.js",
+    "dev": "NODE_ENV=development webpack --watch --config config/webpack.development.config.js --colors",
+    "rollup": "NODE_ENV=production rollup -c --config config/rollup.config.js",
+    "test": "jest --no-cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hellohaptik/atlas/zeus/common/hsl"
+  },
+  "author": "Pratham Agrawal",
+  "license": "",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "react": "~16.8.4",
+    "react-dom": "~16.8.4",
+    "react-input-autosize": "^2.2.1",
+    "react-portal": "^4.1.4",
+    "react-sortable-hoc": "^1.7.1",
+    "react-svg-loader": "^2.1.0",
+    "react-textarea-autosize": "^7.1.0-1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-external-helpers": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@dump247/storybook-state": "^1.3.0",
+    "@storybook/addon-knobs": "^5.0.0",
+    "@storybook/react": "^5.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^2.1.0",
+    "dayjs": "^1.7.5",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-babel-module": "^5.0.1",
+    "eslint-import-resolver-webpack": "^0.11.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "6.2.1",
+    "eslint-plugin-react": "^7.7.0",
+    "flatpickr": "^4.5.2",
+    "fuse.js": "^3.2.1",
+    "json-loader": "^0.5.7",
+    "node-sass": "^4.8.3",
+    "prop-types": "^15.6.1",
+    "require-context": "^1.0.4",
+    "rollup": "^1.4.1",
+    "rollup-plugin-alias": "^1.4.0",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-react-svg": "^2.1.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-sass": "^1.1.0",
+    "rollup-plugin-scss": "^1.0.1",
+    "rollup-plugin-svg": "^1.0.1",
+    "rollup-plugin-svg-to-jsx": "^1.0.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-uglify": "^6.0.0",
+    "sass-loader": "^7.1.0",
+    "storybook-addon-specifications": "^2.1.1",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "url-loader": "^1.0.1",
+    "webfontloader": "^1.6.28",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "jest": {
+    "verbose": true,
+    "setupFiles": [
+      "./.storybook/__conf__/jestMockConfig.js",
+      "./.storybook/__conf__/enzymeConfig.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.(css|scss|less)$": "jest-css-modules"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "testRegex": "../.*.storybook.js$",
+    "automock": false,
+    "globals": {
+      "__TESTS__": true
+    }
+  }
+}

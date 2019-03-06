@@ -1,0 +1,13 @@
+<svg width="54px" height="54px" viewBox="0 0 54 54">
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="image/entity-type/email">
+            <polygon id="W" fill="#333333" points="9.76 31.136 5.782 7.2 8.094 7.2 10.916 26.308 14.316 7.2 16.356 7.2 19.722 26.308 22.578 7.2 24.822 7.2 20.844 31.136 18.634 31.136 15.302 12.164 11.936 31.136"></polygon>
+            <path d="M28.5,23.5 L48.5,23.5" id="Line" stroke="#333333" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M28.5,28.5 L48.5,28.5" id="Line" stroke="#333333" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M28.5,33.5 L48.5,33.5" id="Line" stroke="#333333" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8.5,39.5 L48.5,39.5" id="Line" stroke="#333333" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8.5,43.5 L48.5,43.5" id="Line" stroke="#333333" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8.5,48.5 L48.5,48.5" id="Line" stroke="#333333" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

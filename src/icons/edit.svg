@@ -1,0 +1,10 @@
+<svg width="24px" height="24px" viewBox="0 0 24 24">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square" stroke-linejoin="round">
+        <g fill="#FFFFFF" stroke="#333333">
+            <g transform="translate(4.000000, 4.000000)">
+                <polygon transform="translate(7.625563, 8.979030) rotate(45.000000) translate(-7.625563, -8.979030) " points="5.449832 0.441176693 9.80129393 0.441176693 9.80129393 14.4655759 7.62556296 17.5168829 5.449832 14.4655759"></polygon>
+                <polygon transform="translate(13.001019, 3.603574) rotate(45.000000) translate(-13.001019, -3.603574) " points="10.825288 1.14210996 15.1767499 1.14210996 15.1767499 6.06503765 10.825288 6.06503765"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

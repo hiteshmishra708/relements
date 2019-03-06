@@ -1,0 +1,8 @@
+@import 'constants/index.scss';
+
+.odometer {
+  height: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+}

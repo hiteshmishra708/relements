@@ -1,0 +1,17 @@
+<svg width="40px" height="40px" viewBox="0 0 40 40">
+    <defs>
+        <path d="M8.05317324,0 L24.9468268,0 L24.9468268,4.4245283 C24.9468268,6.86812781 22.9758473,8.8490566 20.5302845,8.8490566 L12.4697155,8.8490566 C10.0305266,8.8490566 8.05317324,6.86315557 8.05317324,4.4245283 L8.05317324,0 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="business">
+            <g id="Group-5" transform="translate(4.000000, 4.000000)">
+                <rect id="Rectangle-1501" stroke="#846A59" stroke-width="2" fill="#D4BBA9" stroke-linecap="round" stroke-linejoin="round" x="0" y="13.2075472" width="33" height="18.0566038"></rect>
+                <g id="Rectangle-1503" transform="translate(16.500000, 4.424528) rotate(-180.000000) translate(-16.500000, -4.424528) ">
+                    <use fill="#FFFFFF" fill-rule="evenodd"></use>
+                    <path stroke="#846A59" stroke-width="2" d="M9.05317324,1 L9.05317324,4.4245283 C9.05317324,6.31316538 10.5851031,7.8490566 12.4697155,7.8490566 L20.5302845,7.8490566 C22.4207325,7.8490566 23.9468268,6.31867729 23.9468268,4.4245283 L23.9468268,1 L9.05317324,1 Z"></path>
+                </g>
+                <rect id="Rectangle-1501" stroke="#846A59" stroke-width="2" fill="#D4BBA9" stroke-linecap="round" stroke-linejoin="round" x="0" y="8.22641509" width="33" height="4.98113208"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

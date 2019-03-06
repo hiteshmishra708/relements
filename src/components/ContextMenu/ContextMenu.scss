@@ -1,0 +1,55 @@
+@import 'constants/index.scss';
+
+.contextMenuWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1099999999999;
+}
+
+.contextMenuOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.contextMenu {
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  background-color: #fff;
+  border-radius: 8px;
+  outline: none;
+  filter: drop-shadow(rgba(0, 0, 0, 0.2) 3px 0px 12px);
+  transition: 0.1s ease-in-out;
+  transform: translate3d(0, -5px, 0);
+  overflow: hidden;
+
+  * {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  &.contextMenuActive {
+    opacity: 1 !important;
+    transform: translate3d(0, 0px, 0) !important;
+  }
+}
+
+.contextMenuContent {
+  max-width: 550px;
+  overflow-y: auto;
+}
+
+.contextMenuButtonIcon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  top: 2px;
+}

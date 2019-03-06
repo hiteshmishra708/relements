@@ -1,0 +1,11 @@
+<svg width="24px" height="24px" viewBox="0 0 24 24">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="story">
+            <rect id="bot" x="0" y="0" width="24" height="24"></rect>
+            <g id="Group" transform="translate(2.000000, 3.000000)" fill="#FFFFFF" stroke="#333333" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M0,2.03506019 C0,2.03506019 3.33333333,0 5,0 C6.66666667,0 10,2.03506019 10,2.03506019 L10,18.9099998 C10,18.9099998 6.66666667,16.8749397 5,16.8749397 C3.33333333,16.8749397 0,18.9099998 0,18.9099998 L0,2.03506019 Z" id="Rectangle-1670"></path>
+                <path d="M10,2.03506019 C10,2.03506019 13.3333333,0 15,0 C16.6666667,0 20,2.03506019 20,2.03506019 L20,18.9099998 C20,18.9099998 16.6666667,16.8749397 15,16.8749397 C13.3333333,16.8749397 10,18.9099998 10,18.9099998 L10,2.03506019 Z" id="Rectangle-1670"></path>
+            </g>
+        </g>
+    </g>
+</svg>

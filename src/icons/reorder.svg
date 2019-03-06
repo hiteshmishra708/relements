@@ -1,0 +1,13 @@
+<svg width="26px" height="26px" viewBox="1 1 26 26">
+  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Group" transform="translate(2.000000, 2.000000)">
+          <rect id="bounds" x="0" y="0" width="24" height="24"></rect>
+          <path d="M2.5,4 L2.5,9 C2.5,9.82842712 3.17157288,10.5 4,10.5 L9,10.5 C9.82842712,10.5 10.5,9.82842712 10.5,9 L10.5,4 C10.5,3.17157288 9.82842712,2.5 9,2.5 L4,2.5 C3.17157288,2.5 2.5,3.17157288 2.5,4 Z" id="Shape" stroke="#333333"></path>
+          <path d="M13.5,15 L13.5,20 C13.5,20.8284271 14.1715729,21.5 15,21.5 L20,21.5 C20.8284271,21.5 21.5,20.8284271 21.5,20 L21.5,15 C21.5,14.1715729 20.8284271,13.5 20,13.5 L15,13.5 C14.1715729,13.5 13.5,14.1715729 13.5,15 Z" id="Shape" stroke="#333333"></path>
+          <polyline id="Rectangle-1501" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" points="8.11894201 19.0370032 6.498942 20.6570032 4.878942 19.0370032"></polyline>
+          <path d="M8.93946478,14.8073909 L4.11699641,19.6298593" id="Path-3399" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" transform="translate(6.528231, 17.218625) rotate(135.000000) translate(-6.528231, -17.218625) "></path>
+          <polyline id="Rectangle-1501" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" transform="translate(17.501058, 4.152997) rotate(-180.000000) translate(-17.501058, -4.152997) " points="19.121058 3.34299683 17.501058 4.96299683 15.881058 3.34299683"></polyline>
+          <path d="M19.8830036,4.37014072 L15.0605352,9.19260909" id="Path-3399" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" transform="translate(17.471769, 6.781375) rotate(-45.000000) translate(-17.471769, -6.781375) "></path>
+      </g>
+  </g>
+</svg>

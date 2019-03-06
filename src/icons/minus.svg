@@ -1,0 +1,11 @@
+
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group-2" transform="translate(1.000000, 1.000000)" stroke="#333333">
+            <circle id="Oval" fill="#FFFFFF" cx="9" cy="9" r="9"></circle>
+            <g id="Group" transform="translate(3.000000, 9.000000)" fill="#DDDDDD" fill-rule="nonzero">
+                <path d="M0.343,0 L11.657,0 L0.343,0 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

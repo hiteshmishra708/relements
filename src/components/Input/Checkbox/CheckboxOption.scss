@@ -1,0 +1,58 @@
+@import 'constants/index.scss';
+
+.checkboxOption {
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+  cursor: pointer;
+  &:hover {
+    svg path {
+      fill: rgba($primary-color, 0.1);
+    }
+  }
+}
+
+.checkboxOptionBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  border-radius: 4px;
+  border: 1px solid #666;
+  transition: 0.2s ease-out;
+  &.selected {
+    background-color: $primary-color;
+    border-color: $primary-color;
+  }
+}
+
+.checkboxOptionBoxTick {
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: 0.2s ease-out;
+  svg * {
+    stroke: #fff;
+    stroke-width: 2px;
+  }
+  &.selected {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.checkboxOptionText {
+  font-size: 14px;
+  font-weight: 400;
+  transition: 0.2s ease-out;
+  color: #666;
+  &.selected {
+    color: $primary-color;
+  }
+}

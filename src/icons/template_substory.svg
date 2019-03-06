@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/template/sub story</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon/template/sub-story" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <polyline id="Rectangle-670" stroke="#3A9ACB" points="5.20689655 15.5517241 5.20689655 7.37931034 8.93103448 7.37931034"></polyline>
+        <polyline id="Rectangle-670" stroke="#3A9ACB" transform="translate(16.931034, 11.465517) scale(-1, 1) translate(-16.931034, -11.465517) " points="15.0689655 15.5517241 15.0689655 7.37931034 18.7931034 7.37931034"></polyline>
+        <rect id="Rectangle-664" stroke="#3A9ACB" x="9.0862069" y="5.5" width="5.82758621" height="3.75862069"></rect>
+        <rect id="Rectangle-664" stroke="#3A9ACB" x="2.29310345" y="15.7068966" width="5.82758621" height="3.75862069"></rect>
+        <rect id="Rectangle-665" stroke="#3A9ACB" x="15.8793103" y="15.7068966" width="5.82758621" height="3.75862069"></rect>
+    </g>
+</svg>

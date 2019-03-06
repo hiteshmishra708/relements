@@ -1,0 +1,68 @@
+@import '../constants/index.scss';
+
+.dialogHeader {
+  padding: 16px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dialogHeaderText {
+  margin: 0;
+  font-size: 22px;
+}
+
+.dialogHeaderCloseIcon {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.2 ease-out;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.dialogBody {
+  padding: 16px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dialogText {
+  margin-bottom: 32px;
+  margin-top: 0;
+  font-size: 16px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.dialogButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: -16px;
+}
+
+.dialogButton {
+  outline: none;
+  padding: 6px 18px;
+  border: 2px solid $primary-color;
+  background-color: $primary-color;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  margin-right: 16px;
+  transition: 0.2s ease-out;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($primary-color, 10);
+  }
+}
+
+.dialogButtonNegative {
+  background-color: transparent;
+  color: $primary-color;
+  &:hover {
+    background-color: rgba($primary-color, 0.2);
+  }
+}

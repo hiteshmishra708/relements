@@ -1,0 +1,12 @@
+@import 'constants/index.scss';
+
+.withTooltip {
+  padding: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 32px;
+  background-color: rgba(0,0,0,0.8);
+  color: #FFF;
+  white-space: nowrap;
+  text-align: center;
+}

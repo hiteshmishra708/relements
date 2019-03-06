@@ -1,0 +1,20 @@
+@import 'constants/index.scss';
+
+.digit {
+  line-height: 16px;
+  display: flex;
+  flex-direction: column;
+
+  &.animating {
+    transition: 0.3s ease-out;
+  }
+
+}
+
+.digitNumber {
+  // opacity: 0;
+  // transition: 0.3s ease-out;
+  &.active {
+    opacity: 1;
+  }  
+}

@@ -1,0 +1,109 @@
+@import 'constants/index.scss';
+
+.label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.labelText {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 2px;
+  transition: 0.2s ease-out;
+  margin-right: 8px;
+}
+
+.hint {
+  display: block;
+  color: #999;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  margin-left: 2px;
+  margin-top: -6px;
+  transition: 0.2s ease-out;
+}
+
+.chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 4px;
+
+  flex: 1;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: 0.2s ease-out;
+  &.disabled {
+    pointer-events: none;
+    background-color: #eee;
+  }
+}
+
+.chipsTrack {
+  margin-bottom: -6px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-block;
+  font-size: 12px;
+  border: 1px solid #DDD;
+  background-color: #F2F2F2;
+  color: #333333;
+  border-radius: 8px;
+  padding: 2px 8px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  svg {
+    circle {
+      transition: 0.2s ease-out;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(#eeeeef, 0.2);
+  }
+}
+
+.deleteChipIcon {
+  margin-left: 6px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.newChip {
+  margin-right: 6px;
+  margin-bottom: 6px;
+  border: none;
+
+  border: 1px solid #DDD;
+  border-radius: 8px;
+  padding: 4px 8px;
+  line-height: 14px;
+  outline: none;
+  min-width: 80px;
+  font-size: 12px;
+
+  &:focus {
+    border: 1px solid #DDD;
+  }
+
+  &::placeholder {
+    color: #AAA;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+}

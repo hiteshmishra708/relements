@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10" viewBox="0 0 20 10">
+  <g fill="none" fill-rule="evenodd" transform="translate(-2 -7)">
+    <rect width="24" height="24"/>
+    <path stroke="#333" d="M13,9.5 L13,14.5 C13,15.3284271 13.6715729,16 14.5,16 L19.5,16 C20.3284271,16 21,15.3284271 21,14.5 L21,9.5 C21,8.67157288 20.3284271,8 19.5,8 L14.5,8 C13.6715729,8 13,8.67157288 13,9.5 Z" transform="rotate(90 17 12)"/>
+    <polyline stroke="#333" stroke-linecap="round" stroke-linejoin="round" points="5.273 11.189 3.653 12.809 2.033 11.189" transform="rotate(90 3.653 11.999)"/>
+    <path stroke="#333" stroke-linecap="round" stroke-linejoin="round" d="M8.69260954,9.61699702 L3.87014117,14.4394654" transform="rotate(-135 6.281 12.028)"/>
+  </g>
+</svg>

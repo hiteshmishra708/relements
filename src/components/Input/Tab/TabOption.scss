@@ -1,0 +1,30 @@
+@import 'constants/index.scss';
+
+.tabOption {
+  padding: 4px 8px;
+  min-width: 64px;
+  cursor: pointer;
+  border-right: 1px solid $primary-color;
+  text-align: center;
+  &:last-child {
+    border-right: none;
+  }
+  &:hover {
+  }
+
+  &.selected {
+    // background-color: $primary-color;
+    // box-shadow: 0 5px 10px rgba($primary-color, 0.5);
+  }
+}
+
+.tabOptionText {
+  font-size: 12px;
+  font-weight: 400;
+  transition: 0.2s ease-out;
+  color: $primary-color;
+  text-align: center;
+  &.selected {
+    color: #fff;
+  }
+}

@@ -1,0 +1,8 @@
+<svg width="24px" height="24px" viewBox="0 0 24 24">
+    <g id="icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="icon14" fill="#FFFFFF" fill-rule="nonzero" stroke="#333333" transform="translate(3.000000, 3.000000)">
+            <path d="M4,12.75 C4,13.9875 18.625,13.9875 18.625,12.75 L18.625,1.5 C18.625,0.291722416 4,-0.031347681 4,1.5 L4,12.75 Z" id="Shape"></path>
+            <path d="M-9.09494702e-13,16.75 C-9.09494702e-13,17.9875 14.625,17.9875 14.625,16.75 L14.625,5.5 C14.625,4.29172242 -4.03896783e-28,3.96865232 -9.09494702e-13,5.5 L-9.09494702e-13,16.75 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

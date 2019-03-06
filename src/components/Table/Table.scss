@@ -1,0 +1,123 @@
+@import 'constants/index.scss';
+
+:local {
+  .table {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #DDDDDD;
+    overflow: hidden;
+
+    &.simple {
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  .tableHeader {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #EEE;
+  }
+
+  .tableHeaderItem {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    border-right: 1px solid #EEE;
+    padding: 8px 12px;
+    cursor: pointer;
+    &:last-child {
+      border-right: none;
+    }
+
+    &.simple {
+      border-right: none;
+      .tableHeaderItemText {
+        font-weight: 400;
+        color: #999;
+      }
+    }
+
+    &.active {
+      .tableHeaderItemText {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .tableHeaderItemText {
+    font-weight: 600;
+    color: #000;
+    user-select: none;
+  }
+
+  .tableHeaderItemIcon {
+    font-size: 8px;
+    padding-left: 6px;
+    color: $primary-color;
+  }
+
+  .tableBody {
+
+  }
+
+  .tableRow {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
+    &:hover {
+      background-color: #F5F5F5;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background-color: $primary-color;
+      opacity: 0;
+    }
+
+    &.selected {
+      background-color: rgba($primary-color, 0.1);
+      &:before {
+        opacity: 1;
+      }
+    }
+
+    &.disabled {
+        opacity: 0.4;
+    }
+  }
+
+  .tableRowItem {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    border-right: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
+    padding: 8px 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:last-child {
+      border-right: none;
+    }
+
+    &.simple {
+      border-right: none;
+      border-bottom: 1px solid #EEE;
+    }
+  }
+
+  .tableRowItemText {
+    display: inline-flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+}

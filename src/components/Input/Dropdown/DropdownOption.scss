@@ -1,0 +1,34 @@
+@import 'constants/index.scss';
+
+.dropdownOption {
+  padding: 8px;
+  font-family: $font;
+  border-bottom: 1px solid rgba($border-color, 0.4);
+  &:first-child {
+    padding-top: 8px;
+  }
+
+  &:hover {
+    background-color: #fafafa;
+    cursor: pointer;
+  }
+
+  &.dropdownOptionSelected {
+    background-color: rgba($primary-color, 0.1);
+  }
+}
+
+.dropdownOptionText {
+  font-size: 12px;
+  font-weight: 400;
+  &.dropdownOptionSelected {
+    color: $primary-color;
+  }
+
+  &.dropdownOptionTextCreate {
+    color: $primary-color;
+    em {
+      font-weight: 600;
+    }
+  }
+}

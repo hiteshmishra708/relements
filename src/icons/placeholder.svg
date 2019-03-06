@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="53px" height="45px" viewBox="0 0 53 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Chat-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="mockup-25" transform="translate(-229.000000, -391.000000)">
+            <g id="Group-8" transform="translate(62.000000, 80.000000)">
+                <g id="Group-5">
+                    <g id="Group-8" transform="translate(70.000000, 263.000000)">
+                        <g id="Group-9" transform="translate(97.000000, 48.000000)">
+                            <rect id="Rectangle-166" fill="#82959E" x="0" y="0" width="53" height="45" rx="2"></rect>
+                            <polyline id="Rectangle-167-Copy" fill="#D5F1FF" points="48 24.2072988 48 24.2072988 48 6 5 6 5 20.5565514"></polyline>
+                            <path d="M48,24.2072988 L48,32 L5,32 L5,20.5565514 C7.72314955,19.6467173 10.7608507,18.8886979 14,18.5 C26.5,17 29,21 38.5,23 C41.3553478,23.6011259 44.707555,23.9764065 48,24.2072988 Z" id="Rectangle-167" fill="#28CF82"></path>
+                            <circle id="Oval-84" fill="#F98431" cx="40" cy="13" r="3"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

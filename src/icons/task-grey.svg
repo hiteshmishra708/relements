@@ -1,0 +1,16 @@
+<svg width="40px" height="40px" viewBox="0 0 40 40">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="task-grey" stroke="#ACACAC">
+            <g id="Group" transform="translate(7.000000, 5.000000)">
+                <path d="M20.803906,28.7155425 L0,28.7155425 L0,2.43346618 L20.803906,2.43346618 L20.803906,28.7155425 Z" id="Rectangle-1672"></path>
+                <path d="M4.08832299,24.6272195 L13.4330612,24.6272195" id="Line" transform="translate(8.760692, 24.627220) scale(-1, 1) rotate(-180.000000) translate(-8.760692, -24.627220) "></path>
+                <path d="M4.08832299,20.5388965 L10.5393232,20.5388965" id="Line" transform="translate(7.592600, 20.538897) scale(-1, 1) rotate(-180.000000) translate(-7.592600, -20.538897) "></path>
+                <path d="M4.08832299,16.4505736 L8.17664597,16.4505736" id="Line" transform="translate(6.132484, 16.450574) scale(-1, 1) rotate(-180.000000) translate(-6.132484, -16.450574) "></path>
+                <path d="M4.08832299,11.7782044 L8.17664597,11.7782044" id="Line" transform="translate(6.132484, 11.778204) scale(-1, 1) rotate(-180.000000) translate(-6.132484, -11.778204) "></path>
+                <path d="M4.08832299,6.77331685 L8.17664597,6.77331685" id="Line" transform="translate(6.132484, 6.773317) scale(-1, 1) rotate(-180.000000) translate(-6.132484, -6.773317) "></path>
+                <circle id="Oval-1788" fill="#FFFFFF" cx="20.2197458" cy="6.91729648" r="6.71653062"></circle>
+                <polyline id="Line-401" transform="translate(20.219746, 6.917296) scale(1, -1) rotate(-85.000000) translate(-20.219746, -6.917296) " points="18.1755844 10.1295503 22.2639073 5.75488613 20.416348 3.70504271"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,30 @@
+@import 'constants/index.scss';
+
+.imagePlaceholder {
+  display: flex;
+  align-items: center;
+}
+
+.imagePlaceholderIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  margin-right: 24px;
+}
+
+.imagePlaceholderText {
+  font-size: $default-font-size;
+  > span {
+    display: block;
+  }
+}
+
+.imagePlaceholderTextTitle {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.imagePlaceholderTextSubtitle {
+  margin-bottom: 4px;
+  opacity: 0.5;
+}

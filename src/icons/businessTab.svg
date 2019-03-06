@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="26px" viewBox="0 0 27 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>b&amp;w/business</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Final-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="mockup-03" transform="translate(-361.000000, -108.000000)">
+            <g id="Components/Tabs" transform="translate(60.000000, 105.000000)">
+                <g id="image/business-disabled" transform="translate(298.000000, 0.000000)">
+                    <rect id="Rectangle-1501" stroke="#333333" fill="#DDDDDD" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" x="3.55555556" y="13.8725621" width="25.7777778" height="14.1048218"></rect>
+                    <path d="M11.8375262,5.61784512 L11.8375262,7.79289753 C11.8375262,8.99190873 12.815914,9.96794994 14.0210915,9.96794994 L18.8677974,9.96794994 C20.0802521,9.96794994 21.0513627,8.99746528 21.0513627,7.79289753 L21.0513627,5.61784512 L11.8375262,5.61784512 Z" id="Rectangle-1503" stroke="#6A5343" transform="translate(16.444444, 7.792898) rotate(-180.000000) translate(-16.444444, -7.792898) "></path>
+                    <path d="M10.3462498,4.05555556 L10.3462498,7.01175275 C10.3462498,8.64216142 11.6686189,9.96794994 13.2962088,9.96794994 L19.5926801,9.96794994 C21.2248425,9.96794994 22.5426391,8.64645312 22.5426391,7.01175275 L22.5426391,4.05555556 L10.3462498,4.05555556 Z" id="Rectangle-1503" stroke="#333333" fill="#FFFFFF" fill-rule="evenodd" transform="translate(16.444444, 7.011753) rotate(-180.000000) translate(-16.444444, -7.011753) "></path>
+                    <rect id="Rectangle-1501" stroke="#333333" fill="#FFFFFF" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" x="3.55555556" y="9.98157677" width="25.7777778" height="3.89098532"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

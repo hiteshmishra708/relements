@@ -1,0 +1,62 @@
+@import 'constants/index.scss';
+
+.tab {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.tabLabel {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-left: 2px;
+  transition: 0.2s ease-out;
+
+  &.focused {
+    color: $primary-color;
+  }
+}
+
+.textHint {
+  display: block;
+  color: #999;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  margin-left: 2px;
+  margin-top: -6px;
+  transition: 0.2s ease-out;
+}
+
+.tabOptionsWrapper {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid $primary-color;
+  margin-left: 2px;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+    filter: grayscale(1);
+  }
+}
+
+.tabOptions {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  overflow: hidden;
+  background-color: rgba($primary-color, 0.2);
+}
+
+.tabOptionsBG {
+  position: absolute;
+  height: 100%;
+  background-color: $primary-color;
+  opacity: 0.9;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1);
+}

@@ -1,0 +1,221 @@
+@import 'constants/index.scss';
+
+$IMAGE_WIDTH: 320px / 1.5;
+$IMAGE_HEIGHT: 180px / 1.5;
+
+.files {
+  position: relative;
+  margin-bottom: 24px;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 8px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.filesList {
+  display: flex;
+  align-items: stretch;
+  // margin-right: -16px;
+}
+
+.addNewFile {
+  position: relative;
+  width: $IMAGE_WIDTH;
+  min-width: $IMAGE_WIDTH;
+  margin-right: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $border-color;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  transform: translateY(10px);
+  animation: slide-up 0.5s ease-out;
+  animation-fill-mode: both;
+  opacity: 0;
+  &:hover {
+    background-color: mix($primary-color, #fff, 8);
+  }
+}
+
+.addNewFileIcon {
+  margin-bottom: 8px;
+  width: 32px;
+  height: 32px;
+  svg g {
+    stroke: $primary-color;
+  }
+
+  svg path {
+    fill: $primary-color;
+  }
+}
+
+.addNewFileText {
+  text-align: center;
+  color: $primary-color;
+}
+
+.imageInputWrapper {
+  position: relative;
+  width: $IMAGE_WIDTH;
+  height: $IMAGE_HEIGHT;
+  margin-right: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #000;
+  border: 1px solid #fff;
+  transition: 0.2s ease-out;
+  overflow: hidden;
+  transform: translateY(10px);
+  animation: slide-up 0.5s ease-out;
+  animation-fill-mode: both;
+  opacity: 0;
+}
+
+.fileInput {
+  @include absoluteFill;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.imageInputPreviewWrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  &.isUploading {
+  }
+}
+
+.imageInputPreview {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  filter: blur(0px);
+  object-fit: contain;
+  transition: 0.2s ease-out;
+  &.isUploading {
+    filter: blur(8px);
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 16px;
+  opacity: 0;
+  transition: 0.2s ease-out;
+  &.isUploading {
+    opacity: 1;
+  }
+
+
+}
+
+.imageInputPreviewDelete {
+  @include absoluteFill;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  cursor: pointer;
+  transition: 0.1s ease-out;
+  font-size: 14px;
+  &:hover {
+    opacity: 1;
+    > div {
+      transform: translateY(0);
+    }
+  }
+
+  &:after {
+    content: '';
+    @include absoluteFill;
+    background-color: #000;
+    opacity: 0.6;
+  }
+
+  .imageInputPreviewDeleteIcon {
+    position: relative;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 100px;
+    transform: translateY(5px);
+    transition: 0.2s ease-out;
+  }
+}
+
+.customKeyImage {
+  width: 100%;
+  min-height: 150px;
+  height: 100%;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  > div {
+    padding-bottom: 8px;
+  }
+}
+
+
+.filePreviewWrapper {
+  position: relative;
+  width: 100%;
+  border: 1px solid #DDD;
+  border-radius: 8px;
+  padding: 8px;
+  overflow: hidden;
+  .filePreview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.2s ease-out;
+    &Title {
+      font-size: 18px;
+      font-weight: 600;
+      transition: 0.2s ease-out;
+      color: #333;
+    }
+
+    &.isUploading {
+      padding-bottom: 5px;
+      .filePreviewTitle {
+        padding-left: 28px;
+      }
+    }
+  }
+
+  .loader {
+    left: 0;
+    right: auto;
+    transform: scale3d(0.6,0.6,1);
+    margin: 2px;
+  }
+}
+
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

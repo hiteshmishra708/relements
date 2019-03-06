@@ -1,0 +1,79 @@
+@import 'constants/index.scss';
+
+.button {
+  outline: none;
+  border: none;
+  background-color: #fff;
+  border: 1px solid #DDD;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  transition: 0.2s ease-out;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  &.small {
+    font-size: 10px;
+  }
+
+  &.primary {
+    background-color: $primary-color;
+    color: #FFF;
+    border-color: $primary-color;
+  }
+
+  &.disabled {
+    background-color: #f2f2f2;
+    cursor: not-allowed;
+    border-color: #dddddd;
+
+    &:hover {
+      box-shadow: none;
+      transform: none;
+    }
+  }
+  
+  &.grey {
+    background-color: #f2f2f2;
+    border-color: #dddddd;
+  }
+
+  &:hover {
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+  }
+
+  &.big {
+    font-size: 14px;
+  }
+
+  &.outline {
+    background-color: rgba($primary-color, 0.1);
+    color: $primary-color;
+    border-color: $primary-color;
+    &:hover {
+      background-color: rgba($primary-color, 0.2);
+      color: darken($primary-color, 10);
+    }
+  }
+
+  &.warning {
+    background-color: rgba($warning-color, 0.1);
+    color: $warning-color;
+    border-color: $warning-color;
+    &:hover {
+      background-color: rgba($warning-color, 0.2);
+      color: darken($warning-color, 10);
+    }
+  }
+  
+  &.warning {
+    background-color: rgba($yellow-color, 0.1);
+    color: darken($yellow-color, 10);
+    border-color: $yellow-color;
+    &:hover {
+      background-color: rgba($yellow-color, 0.2);
+      color: darken($yellow-color, 20);
+    }
+  }
+}

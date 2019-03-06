@@ -1,0 +1,20 @@
+<svg width="40px" height="40px" viewBox="0 0 40 40">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="task" stroke="#24B077" stroke-width="2">
+            <g id="Group-15" transform="translate(5.000000, 3.000000)">
+                <g id="Group-14" transform="translate(0.000000, 1.882353)">
+                    <path d="M23.1834377,30.1176471 L0,30.1176471 L0,0.829450869 L23.1834377,0.829450869 L23.1834377,30.1176471 Z" id="Rectangle-1672" fill="#96F5CE" stroke-linecap="round"></path>
+                    <path d="M4.55594163,25.5617054 L14.9695225,25.5617054" id="Line" stroke-linecap="square" transform="translate(9.762732, 25.561705) scale(-1, 1) rotate(-180.000000) translate(-9.762732, -25.561705) "></path>
+                    <path d="M4.55594163,21.0057638 L11.7448013,21.0057638" id="Line" stroke-linecap="square" transform="translate(8.461034, 21.005764) scale(-1, 1) rotate(-180.000000) translate(-8.461034, -21.005764) "></path>
+                    <path d="M4.55594163,16.4498222 L9.11188326,16.4498222" id="Line" stroke-linecap="square" transform="translate(6.833912, 16.449822) scale(-1, 1) rotate(-180.000000) translate(-6.833912, -16.449822) "></path>
+                    <path d="M4.55594163,11.2430317 L9.11188326,11.2430317" id="Line" stroke-linecap="square" transform="translate(6.833912, 11.243032) scale(-1, 1) rotate(-180.000000) translate(-6.833912, -11.243032) "></path>
+                    <path d="M4.55594163,5.66568969 L9.11188326,5.66568969" id="Line" stroke-linecap="square" transform="translate(6.833912, 5.665690) scale(-1, 1) rotate(-180.000000) translate(-6.833912, -5.665690) "></path>
+                </g>
+                <g id="Group-13" transform="translate(14.501089, 0.000000)" stroke-linecap="round">
+                    <circle id="Oval-1788" fill="#FFFFFF" cx="8.03137255" cy="7.70849053" r="7.48476125"></circle>
+                    <polyline id="Line-401" transform="translate(8.031373, 7.708491) scale(1, -1) rotate(-85.000000) translate(-8.031373, -7.708491) " points="5.75340173 11.2881589 10.3093434 6.41312474 8.25046183 4.1288221"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

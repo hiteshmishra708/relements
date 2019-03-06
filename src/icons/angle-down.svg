@@ -1,0 +1,8 @@
+<svg width="24px" height="24px" viewBox="0 0 24 24">
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/arrow">
+            <rect id="bounds" x="0" y="0" width="24" height="24"></rect>
+            <polyline id="Path-2" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" points="6 9 12 15 18 9"></polyline>
+        </g>
+    </g>
+</svg>

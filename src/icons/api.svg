@@ -1,0 +1,13 @@
+<svg width="24px" height="24px" viewBox="0 0 24 24">
+    <g id="icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon10" stroke="#333333">
+            <g id="Group" transform="translate(3.000000, 3.000000)">
+                <g id="Group-13">
+                    <path d="M13.9736776,12.983628 C14.4023929,8.08339057 10.7630887,3.76215935 5.84506437,3.33188797" id="Oval-474" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M17.1060845,14.1103717 C17.730264,6.97596801 12.4316912,0.68455703 5.27139108,0.0581119394" id="Oval-473" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <circle id="Oval" cx="5.14285714" cy="12.8571429" r="5.14285714"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

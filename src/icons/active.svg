@@ -1,0 +1,10 @@
+<svg width="24px" height="24px" viewBox="0 0 24 24">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke="#333333">
+            <g transform="translate(3.000000, 3.000000)">
+                <circle fill="#FFFFFF" cx="9" cy="9" r="9"></circle>
+                <polyline points="13.2866522 5.9419983 7.19152908 12.3094575 4.55962161 9.80996853"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

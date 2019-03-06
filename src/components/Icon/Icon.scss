@@ -1,0 +1,20 @@
+@import 'constants/index.scss';
+
+.icon {
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.iconTooltip {
+  padding: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: rgba(0,0,0,0.8);
+  color: #FFF;
+  white-space: nowrap;
+}

@@ -1,0 +1,67 @@
+@import 'constants/index.scss';
+
+$knob-size: 24px;
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 4px;
+  margin-bottom: 24px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.toggleLabel {
+  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.toggleInput {
+  width: $knob-size * 1.5;
+  height: $knob-size;
+  border-radius: $knob-size;
+  border: 1px solid $border-color;
+  transition: 0.1s ease-out;
+  &.active {
+    background-color: rgba($primary-color, 0.2);
+    border-color: rgba($primary-color, 1);
+  }
+
+  &.redGreen {
+    background-color: rgba($red-color, 0.2);
+    border-color: rgba($red-color, 1);
+    &.active {
+      background-color: rgba($green-color, 0.2);
+      border-color: rgba($green-color, 1);
+    }
+  }
+}
+
+.toggleInputKnob {
+  width: $knob-size - 6;
+  height: $knob-size - 6;
+  margin-top: 2px;
+  margin-left: 2px;
+  border-radius: $knob-size / 2;
+  background-color: $knob-color;
+  border: 1px solid #BBB;
+  transform: translate3d(0, 0, 0);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.1s ease-out;
+  &.active {
+    transform: translate3d(60%, 0, 0);
+    background-color: $primary-color;
+    border-color: $primary-color;
+  }
+
+  &.redGreen {
+    background-color: $red-color;
+    border-color: darken($red-color, 4);
+    &.active {
+      background-color: $green-color;
+      border-color: darken($green-color, 4);
+    }
+  }
+}

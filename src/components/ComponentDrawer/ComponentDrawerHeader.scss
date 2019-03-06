@@ -1,0 +1,99 @@
+@import 'constants/index.scss';
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.leftColumn,
+.rightColumn {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 8px;
+  cursor: pointer;
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.doneButton {
+  margin-right: 12px;
+}
+
+.saveButton {
+  cursor: pointer;
+  padding: 6px 12px;
+  background-color: $primary-color;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: 400;
+  margin-left: 8px;
+  animation-delay: 0.2s;
+  animation: popin 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+.saveButtonDisabled {
+  cursor: pointer;
+  padding: 6px 12px;
+  background-color: #999;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: 400;
+  margin-left: 8px;
+  opacity: 0.4;
+  &:hover {
+    background-color: darken($primary-color, 10);
+  }
+}
+
+.copyButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+  // background-color: $knob-color;
+  color: #000;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: 400;
+  transition: 0.2s ease-out;
+  padding: 4px 0;
+  &:after {
+    content: 'COPY JSON ';
+    font-size: 12px;
+    padding-left: 0px;
+    padding-right: 12px;
+    white-space: nowrap;
+    position: relative;
+    width: 0;
+    transition: 0.3s ease-out;
+    opacity: 0;
+  }
+  &:hover {
+    background-color: #eee;
+    &:after {
+      opacity: 1;
+      width: 80px;
+    }
+  }
+}
+
+@keyframes popin {
+  0% {
+    background-color: #999;
+  }
+  100% {
+    background-color: $primary-color;
+  }
+}
