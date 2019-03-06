@@ -1,7 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { specs } from 'storybook-addon-specifications';
-
 import Tabs from './Tabs';
 
 storiesOf('Tabs', module).add('Default', () => {

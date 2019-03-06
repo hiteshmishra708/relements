@@ -1,7 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { specs } from 'storybook-addon-specifications';
-
 import Table from './Table';
 
 const TABLE = {
@@ -38,6 +36,6 @@ const TABLE = {
 };
 
 storiesOf('Table', module).add('Default', () => {
-  const story = <Table sortable sortKey={'title'} sortOrder={-1} columns={TABLE.columns} data={TABLE.data} />;
+  const story = <Table sortable sortKey="title" sortOrder={-1} columns={TABLE.columns} data={TABLE.data} />;
   return story;
 });

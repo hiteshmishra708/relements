@@ -1,7 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { specs } from 'storybook-addon-specifications';
-
 import Button from './Button';
 
 storiesOf('Button Component', module)

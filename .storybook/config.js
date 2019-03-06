@@ -1,19 +1,9 @@
-import React from 'react';
-import expect from 'expect';
-import { configure, addDecorator } from '@storybook/react';
-import { describe, it } from 'storybook-addon-specifications';
-import styles from './config.scss';
-import './__conf__/enzymeConfig';
-// import './__conf__/jestMockConfig';
+import { configure } from '@storybook/react';
 
-addDecorator(story => <div className={styles.storybook}>{story()}</div>);
-
-const req = require.context('../src', true, /\.storybook\.js$/);
-configure(loadStories, module);
+// automatically import all files ending in *.storybook.js
+const req = require.context('../src', true, /.storybook.js$/);
 function loadStories() {
   req.keys().forEach(filename => req(filename));
 }
 
-window.describe = describe;
-window.it = it;
-window.expect = expect;
+configure(loadStories, module);
