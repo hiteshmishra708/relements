@@ -13,7 +13,7 @@ storiesOf('Icon', module).add('Default', () => {
         paddingLeft: 200,
       }}
     >
-      <Icon tooltip="Yo ! This is some longer message. Like really really long" iconType="invisible" />
+      <Icon src="invisible" />
     </div>
   );
   return story;

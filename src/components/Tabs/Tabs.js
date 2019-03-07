@@ -13,7 +13,7 @@ import styles from './Tabs.scss';
  * @type {Object}
  */
 
-export const Tabs = ({
+const Tabs = ({
   className, prefixClassName, children, value = '',
 }) => {
   const DOMRefs = new Array(React.Children.count(children)).fill().map(() => React.useRef());
@@ -35,3 +35,5 @@ Tabs.propTypes = {
   prefixClassName: PropTypes.string,
   children: PropTypes.node,
 };
+
+export default Tabs;
