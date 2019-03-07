@@ -5,13 +5,10 @@ import Icon from 'components/Icon';
 import styles from './TabsItem.scss';
 
 /**
- * Custom renderer to render the individual menu items
- * Using the ref attribute, we get the DOMElement wrapper associated with this
- * menu item. We push the DOMElement into the this._menuItems array at it's
- * index
- * @param  {[type]} item [description]
- * @param  {[type]} i    [description]
- * @return {[type]}      [description]
+ * Renders an individual tab with an optional icon and text
+ * if the children is of type string then it uses it as a title and renders
+ * the tab with our design.
+ * If the children is an element instead, then it just directly get's rendered inside the div
  */
 export const TabsItem = ({
   children, active, disabled, icon, prefixClassName, onClick, innerRef, value,
@@ -50,12 +47,20 @@ export const TabsItem = ({
 };
 
 TabsItem.propTypes = {
+  /* If the children is an element instead, then it just directly get's rendered inside the div */
   children: PropTypes.node,
+  /* Whether the tab inside the tabs is active or not */
   active: PropTypes.bool,
+  /* Whether the tab is disabled (not clickable) */
   disabled: PropTypes.bool,
+  /* The icon to render inside the tab. Can be a string (icon type) or the icon element itself */
   icon: PropTypes.oneOf([PropTypes.string, PropTypes.node]),
+  /* The classname that  gets added to all the dom elements of this component */
   prefixClassName: PropTypes.string,
+  /* The onClick callback */
   onClick: PropTypes.func,
+  /* The ref that's passed down to the top level DOM Element */
   innerRef: PropTypes.object,
+  /* The value of the tab item. This gets passed to the onClick as a parameter */
   value: PropTypes.string,
 };

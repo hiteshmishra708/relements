@@ -6,13 +6,10 @@ import { useTabs } from './hooks/useTabs';
 import styles from './Tabs.scss';
 
 /**
- * Navigation Component
- *
- * Renders the menu based on the items prop that contains everything such as title,
- * icon, url etc.
- * @type {Object}
+ * Renders the container for tabs and handles the calculation and placement of the tab
+ * indicator.
+ * It also exposes a static property called Item which is what the component uses to render the children
  */
-
 const Tabs = ({
   className, prefixClassName, children, value = '',
 }) => {
@@ -28,11 +25,18 @@ const Tabs = ({
   );
 };
 
+// TabsItem becomes available as a static property
+// and can be referred to as <Tabs.Item .../>
 Tabs.Item = TabsItem;
+
 Tabs.propTypes = {
+  /* The value of the current tab selected */
   value: PropTypes.string,
+  /* The classname to be attached to the outermost element */
   className: PropTypes.string,
+  /* The classname that  gets added to all the dom elements of this component */
   prefixClassName: PropTypes.string,
+  /* tabs that need to be rendered. Expect <Tabs.Item> as children */
   children: PropTypes.node,
 };
 

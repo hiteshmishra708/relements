@@ -1,6 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
 import InfoIcon from 'icons/info.svg';
 import UserSaysIcon from 'icons/user-says.svg';
 import BotSaysIcon from 'icons/bot-says.svg';
@@ -87,6 +84,14 @@ import BusinessTabColoredIcon from 'icons/businessTabColored.svg';
 import GridIcon from 'icons/grid.svg';
 import AnalyticsIcon from 'icons/analytics.svg';
 
+
+/**
+ * Based on the icon identifier (string), it returns the 
+ * icon component.
+ * @export
+ * @param {string} iconType icon identifier
+ * @returns {Object} the react component corresponding to the iconType
+ */
 export function getIcon(iconType) {
   switch (iconType) {
     case 'info':

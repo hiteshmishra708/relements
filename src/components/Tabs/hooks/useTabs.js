@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
+/**
+ * React hook to manage calculation and positioning of the tab indicator
+ * It is also responsible for injecting children with additional calculated
+ * props.
+ * @export
+ * @param {string} value the identifier of the tab selected
+ * @param {array} DOMRefs the array of dom element refs used for width and offset calc
+ * @param {array} children the array of children that need to be rendered as tabs
+ * @returns {array} returns an array containing left, width, renderTabs(func to render tabs)
+ */
 export function useTabs(value, DOMRefs, children) {
   /**
    * activeIndex tracks the index of the currently selected menu item
@@ -31,25 +41,22 @@ export function useTabs(value, DOMRefs, children) {
   };
 
   /**
-   * Returns the index of the item in the menu that's already selected
-   * (based on the URL and the path property specified in the menu item obj)
-   * @param  {Array}  [items=[]] [description]
-   * @return {[type]}            [description]
+   * Returns the width and offset of the item that's selected
+   * @param  {number} index the index of the tab for which the calculation needs to run
+   * @return {array} an array containing the left offset and the width of the indicator
    */
-  const calcWidthAndPosition = (newIndex) => {
+  const calcWidthAndPosition = (index) => {
     let left = 0;
     let width = 0;
     DOMRefs.map((DOMElement, i) => {
-      if (i < newIndex && i >= 0) {
+      if (i < index && i >= 0) {
         left += DOMElement.current.getBoundingClientRect().width;
-      } else if (i === newIndex) {
+      } else if (i === index) {
         width = DOMElement.current.getBoundingClientRect().width - 1;
       }
     });
 
-    setLeft(left);
-    setWidth(width);
-    setActiveIndex(newIndex);
+    return [left, width];
   };
 
   /**
@@ -60,9 +67,17 @@ export function useTabs(value, DOMRefs, children) {
    */
   useEffect(() => {
     const index = getIndexFromValue(value);
-    calcWidthAndPosition(index);
+    const [left, width] = calcWidthAndPosition(index);
+    setLeft(left);
+    setWidth(width);
+    setActiveIndex(index);
   }, [value]);
 
+  /**
+   * Injects props such as innerRef and the active bool by
+   * cloning the element
+   * @returns children cloned with Props
+   */
   const renderTabs = () => React.Children.map(children, (child, i) => {
     return React.cloneElement(child, { innerRef: DOMRefs[i], active: activeIndex === i });
   });
