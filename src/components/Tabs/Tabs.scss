@@ -2,86 +2,23 @@ $LABEL-COLOR: #000;
 $UNDERLINE_COLOR: #68b2fc;
 $ICON_COLOR: #37aded;
 
-:local {
-  .Tabs {
-    position: relative;
-  }
+.Tabs {
+  position: relative;
+}
 
-  .TabsItems {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-  }
+.TabsItems {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
 
-  .TabsItem {
-    // max-width: 25%;
-    // flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 8px 12px;
-    cursor: pointer;
-    opacity: 0.75;
-    transition: 0.2s ease-out;
-    &:hover {
-      opacity: 1;
-    }
-    &.active {
-      opacity: 1;
-    }
-    &.disabled {
-      opacity: 0.2;
-      pointer-events: none;
-    }
-  }
-
-  .TabsItemIcon {
-    margin-bottom: 4px;
-    width: 28px;
-    height: 28px;
-    path,
-    circle,
-    rect,
-    polyline {
-      transition: 0.2s ease-out;
-    }
-
-    &.active {
-      path,
-      circle,
-      rect,
-      polyline {
-        stroke: $ICON_COLOR;
-        fill: #fff;
-      }
-
-      #icon10 path {
-        fill: transparent !important;
-      }
-    }
-  }
-
-  .TabsItemText {
-    font-size: 14px;
-    text-align: center;
-    -webkit-font-smoothing: antialiased;
-    &.active {
-      color: $ICON_COLOR;
-    }
-
-    &.big {
-      font-size: 16px;
-    }
-  }
-
-  .TabsIndicator {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 1px;
-    transform-origin: 0 0;
-    background-color: $UNDERLINE_COLOR;
-    transition: 0.5s cubic-bezier(0.175, 0.5, 0.12, 1);
-  }
+.TabsIndicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 1px;
+  transform-origin: 0 0;
+  background-color: $UNDERLINE_COLOR;
+  transition: 0.5s cubic-bezier(0.175, 0.5, 0.12, 1);
 }
