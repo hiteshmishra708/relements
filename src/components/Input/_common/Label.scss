@@ -1,0 +1,19 @@
+@import 'constants/index.scss';
+
+.label {
+  display: block;
+  color: #666;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-left: 2px;
+  transition: 0.2s ease-out;
+
+  &.focused {
+    color: $primary-color;
+  }
+
+  &.error {
+    color: $warning-color;
+  }
+}

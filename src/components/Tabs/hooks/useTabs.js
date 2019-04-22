@@ -25,8 +25,8 @@ export function useTabs(value, DOMRefs, children) {
    * This calculates the width and the offset of a particular menu item (whose
    * index is the param). Uses getBoundingClientRect and the DOMElements to
    * determine the right values
-   * @param  {[type]} newIndex [description]
-   * @return {[type]}          [description]
+   * @param  {string} value the value for which the index needs to be calculated
+   * @returns {number} the index corresponding to the value provided
    */
   const getIndexFromValue = (value) => {
     let index = -1;

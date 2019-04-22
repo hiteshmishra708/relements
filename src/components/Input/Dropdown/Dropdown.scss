@@ -2,63 +2,6 @@
 
 .dropdown {
   position: relative;
-  margin-bottom: 24px;
-}
-
-.dropdownLabel {
-  display: block;
-  color: #666;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  margin-left: 2px;
-  transition: 0.2s ease-out;
-
-  &.focused {
-    color: $primary-color;
-  }
-
-  &.error {
-    color: $warning-color;
-  }
-}
-
-.dropdownInputWrapper {
-  border: 1px solid $border-color;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #fff;
-  padding: 4px 8px;
-  box-sizing: border-box;
-  cursor: pointer;
-  outline: none;
-  transition: 0.2s ease-out;
-  &.active {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  &.focused {
-    border-color: $primary-color;
-  }
-
-  &.error {
-    border-color: $warning-color;
-    background-color: rgba($warning-color, 0.05);
-  }
-
-  &.reverse {
-    &.active {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
-    }
-  }
 }
 
 .textHint {
@@ -73,19 +16,7 @@
 }
 
 
-.dropdownInput {
-  border: none;
-  outline: none;
-  width: 100%;
-  font-size: 14px;
-  white-space: nowrap;
-  span {
-    opacity: 0.3;
-  }
-}
-
 .dropdownInputZeroState {
-  font-family: 'Roboto';
   display: block;
   padding: 8px;
   font-size: 14px;

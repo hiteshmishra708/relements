@@ -7,7 +7,7 @@ import Dropdown from './Dropdown';
 
 const stories = storiesOf('Dropdown', module);
 stories.addDecorator(withKnobs);
-const props = {
+const defaultProps = {
   // placeholder: PropTypes.string,
   placeholder: 'Select',
   // className: PropTypes.string,
@@ -32,13 +32,33 @@ const props = {
   hint: 'This is a dropdown',
 };
 
-stories.add('Default', () => {
-  const label = text('Label', props.label);
-  const options = props.options.map((option, i) => {
-    return { text: text(`Option ${i + 1}`, option.text) };
+stories
+  .add('Default', () => {
+    return <DropdownTest />;
+  })
+  .add('With Search', () => {
+    return <DropdownTest withSearch />;
+  })
+  .add('With Chips', () => {
+    return <DropdownTest withMultiple />;
+  })
+  .add('With Create', () => {
+    return <DropdownTest withCreate />;
   });
-  const mode = boolean('Position (Top/Bottom)', false);
-  const placeholder = text('Placeholder', props.placeholder);
-  const story = <Dropdown placeholder={placeholder} options={options} label={label} reverseMode={mode} />;
-  return story;
-});
+
+const DropdownTest = (props) => {
+  const options = defaultProps.options.map((option, i) => ({ text: text(`Option ${i + 1}`, option.text) }));
+  const [value, setValue] = React.useState();
+  return (
+    <Dropdown
+      placeholder="Test placeholder"
+      className="my-dropdown"
+      prefixClassName="my-yoooo"
+      options={options}
+      label="This is the label"
+      onChange={setValue}
+      value={value}
+      {...props}
+    />
+  );
+};

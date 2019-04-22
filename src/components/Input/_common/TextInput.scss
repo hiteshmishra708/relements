@@ -1,0 +1,53 @@
+@import 'constants/index.scss';
+
+.inputWrapper {
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 0 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: none;
+  transition: 0.2s ease-out;
+  
+  &.focused {
+    border-color: $primary-color;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &.error {
+    border-color: $warning-color;
+    background-color: rgba($warning-color, 0.05);
+  }
+
+  &.reverse {
+    &.focused {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
+
+  input {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    padding: 4px 0;
+    width: 100%;
+    line-height: 1.9;
+    &::placeholder {
+      color: #000;
+      opacity: 0.3;
+    }
+  }
+}
