@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'components/Icon';
-import AngleDownIcon from 'icons/angle-down.svg';
 import styles from './TextInput.scss';
 
 export const TextInput = ({
@@ -18,8 +16,12 @@ export const TextInput = ({
   placeholder = 'Type here...',
   inputRef,
   disabled,
+
+  prefixComponent,
+  postfixComponent,
 }) => {
   const focusedClassName = focused ? styles.focused : '';
+  const focusedClassNameString = focused ? 'focused' : '';
   const errorClassName = error ? styles.error : '';
   const [textValue, setTextValue] = useState();
 
@@ -51,25 +53,11 @@ export const TextInput = ({
       onFocus={onFocus}
       onBlur={onBlur}
       onMouseDown={onMouseDown}
-      className={`${styles.inputWrapper} ${className} ${focusedClassName} ${errorClassName}`}
+      className={`${styles.inputWrapper} ${className} ${focusedClassName} ${focusedClassNameString} ${errorClassName}`}
     >
+      {prefixComponent}
       <div className={styles.input}>{renderInput()}</div>
-      <Icon src={AngleDownIcon} />
+      {postfixComponent}
     </div>
   );
-};
-
-TextInput.propTypes = {
-  onKeyDown: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onMouseDown: PropTypes.func,
-  innerRef: PropTypes.object,
-  className: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  focused: PropTypes.bool,
-  error: PropTypes.bool,
-  placeholder: PropTypes.string,
-  inputRef: PropTypes.object,
 };

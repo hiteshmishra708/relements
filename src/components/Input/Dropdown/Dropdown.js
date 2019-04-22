@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from 'components/Icon';
+import AngleDownIcon from 'icons/angle-down.svg';
+
 import DropdownOptions from './components/DropdownOptions';
 import DropdownOption from './components/DropdownOption';
 
@@ -13,6 +16,7 @@ import { useDropdown } from './hooks/useDropdown';
 
 import styles from './Dropdown.scss';
 import { ChipsInput } from '../_common/ChipsInput';
+import { useInput } from './hooks/useInput';
 
 const Dropdown = ({
   className,
@@ -26,6 +30,9 @@ const Dropdown = ({
   onChange,
   placeholder,
 
+  onFocus,
+  onBlur,
+
   withSearch = false,
   withCreate = false,
   withMultiple = false,
@@ -34,14 +41,15 @@ const Dropdown = ({
   const _TextInputDOM = useRef();
   const _TextInputWrapperDOM = useRef();
   const [searchTerm, searchResults, handleSearch] = useSearch(options, [optionKey]);
-  const useDropdownProps = [searchTerm, searchResults, optionKey, valueArray, _TextInputDOM, withCreate];
-  const [dropdownOptions, focused, setFocused, handleFocus, handleBlur] = useDropdown(...useDropdownProps);
+  const useDropdownProps = [searchTerm, searchResults, optionKey, valueArray, withCreate];
+  const [focused, setFocused, handleFocus, handleBlur] = useInput(_TextInputDOM, onFocus, onBlur);
+  const [dropdownOptions] = useDropdown(...useDropdownProps);
   const [highlightIndex, handleKeyDown, _DropdownOptionDOMs] = useKeyboardSelect(dropdownOptions, onChange);
 
   const handleToggle = () => setFocused(!focused);
 
-  const isReversed = () => _TextInputWrapperDOM.current
-    && _TextInputWrapperDOM.current.getBoundingClientRect().bottom + 150 > window.innerHeight;
+  const isReversed = _TextInputWrapperDOM.current
+    && _TextInputWrapperDOM.current.getBoundingClientRect().bottom + 64 > window.innerHeight;
 
   const handleChange = (valueToChange) => {
     const newValue = withMultiple ? [...value, valueToChange] : valueToChange;
@@ -84,7 +92,7 @@ const Dropdown = ({
       <Input
         innerRef={_TextInputWrapperDOM}
         inputRef={_TextInputDOM}
-        className={`${reverseModeClassName}`}
+        className={`${styles.dropdownInput} ${reverseModeClassName}`}
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -96,6 +104,7 @@ const Dropdown = ({
         placeholder={placeholder}
         disabled={!withSearch}
         withMultiple={withMultiple}
+        postfixComponent={<Icon src={AngleDownIcon} />}
       />
       <DropdownOptions
         onClose={handleBlur}
@@ -103,6 +112,7 @@ const Dropdown = ({
         active={focused}
         focused={focused}
         prefixClassName={`${prefixClassName}-options`}
+        reverseMode={isReversed}
       >
         {renderOptions()}
       </DropdownOptions>
@@ -121,6 +131,9 @@ Dropdown.propTypes = {
   onChange: PropTypes.func,
   options: PropTypes.array,
   prefixClassName: PropTypes.string,
+
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
 
   withSearch: PropTypes.bool,
   withCreate: PropTypes.bool,

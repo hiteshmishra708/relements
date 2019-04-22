@@ -5,7 +5,7 @@ import {
 } from '@storybook/addon-knobs';
 import Dropdown from './Dropdown';
 
-const stories = storiesOf('Dropdown', module);
+const stories = storiesOf('Inputs/Dropdown', module);
 stories.addDecorator(withKnobs);
 const defaultProps = {
   // placeholder: PropTypes.string,

@@ -4,6 +4,24 @@
   position: relative;
 }
 
+.dropdownInput {
+  cursor: pointer;
+  &.reverse {
+    &:global(.focused) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
+
+  &:global(.focused) {
+    border-color: $primary-color;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
 .textHint {
   display: block;
   color: #999;

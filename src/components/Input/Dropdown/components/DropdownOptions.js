@@ -23,7 +23,7 @@ class DropdownOptions extends React.Component {
       width: rect.width,
     };
 
-    if (rect.bottom + 150 >= window.innerHeight || reverseMode) {
+    if (reverseMode) {
       reverseMode = true;
       position.top = 'none';
       position.bottom = window.innerHeight - rect.top + window.scrollY - 1;
