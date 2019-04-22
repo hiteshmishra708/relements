@@ -20,19 +20,18 @@ export const ChipsInput = ({
   placeholder = 'Type here...',
   inputRef,
   disabled,
+  onValueChange,
 }) => {
   const focusedClassName = focused ? styles.focused : '';
   const errorClassName = error ? styles.error : '';
   const [inputValue, setInputValue] = useState();
-  const [onKeyDownChips, addChip, deleteChip] = useChips(value, inputValue, setInputValue);
+  const [onKeyDownChips, addChip, deleteChip] = useChips(value, inputValue, onChange, setInputValue);
 
   const renderChip = (title, i) => {
     return (
       <div key={i} className={styles.chip}>
         {title}
-        {!disabled && (
-          <Icon onClick={() => deleteChip(title)} src={{ default: CrossIcon }} className={styles.deleteChipIcon} />
-        )}
+        {!disabled && <Icon onClick={() => deleteChip(title)} src={CrossIcon} className={styles.deleteChipIcon} />}
       </div>
     );
   };
@@ -40,7 +39,7 @@ export const ChipsInput = ({
   const handleChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
-    onChange(value);
+    onValueChange(value);
   };
 
   const handleKeyDown = (e) => {
@@ -85,6 +84,7 @@ ChipsInput.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
+  onValueChange: PropTypes.func,
   focused: PropTypes.bool,
   error: PropTypes.bool,
   placeholder: PropTypes.string,

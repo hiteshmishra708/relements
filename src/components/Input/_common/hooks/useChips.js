@@ -1,4 +1,3 @@
-import { useState, useRef, useEffect } from 'react';
 import { KEY_CODES } from 'constants';
 
 export function useChips(value, inputValue, onChange, setInputValue) {
@@ -20,7 +19,7 @@ export function useChips(value, inputValue, onChange, setInputValue) {
   const handleKeyDown = (e) => {
     switch (e.keyCode) {
       case KEY_CODES.ENTER:
-        // addChip(e.target.value);
+        addChip(e.target.value);
         break;
 
       case KEY_CODES.ESC:
