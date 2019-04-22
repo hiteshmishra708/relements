@@ -7,38 +7,38 @@ import Icon from 'components/Icon';
 import styles from './CheckboxOption.scss';
 
 const CheckboxOption = ({
-  children, onClick, selected, innerRef, className,
+  label, onChange, value, innerRef, className,
 }) => {
-  const selectedClassName = selected ? styles.selected : '';
-  const selectedCustomClassName = selected ? 'selected' : '';
+  const selectedClassName = value ? styles.selected : '';
+  const selectedCustomClassName = value ? 'selected' : '';
   return (
     <div
       ref={innerRef}
       className={`${styles.checkboxOption} ${className} ${selectedClassName} ${selectedCustomClassName}`}
-      onClick={e => onClick(!selected, e)}
+      onClick={e => onChange(!value, e)}
     >
       <div className={`${styles.checkboxOptionBox} ${className}-box ${selectedClassName} ${selectedCustomClassName}`}>
         <Icon
           className={`${
             styles.checkboxOptionBoxTick
           } ${className}-box-tick ${selectedClassName} ${selectedCustomClassName}`}
-          src={{ default: TickIcon }}
+          src={TickIcon}
         />
       </div>
       <span
         className={`${styles.checkboxOptionText} ${className}-text ${selectedClassName} ${selectedCustomClassName}`}
       >
-        {children}
+        {label}
       </span>
     </div>
   );
 };
 
 CheckboxOption.propTypes = {
-  children: PropTypes.string,
+  label: PropTypes.string,
   className: PropTypes.string,
-  onClick: PropTypes.func,
-  selected: PropTypes.bool,
+  onChange: PropTypes.func,
+  value: PropTypes.bool,
   innerRef: PropTypes.func,
 };
 
