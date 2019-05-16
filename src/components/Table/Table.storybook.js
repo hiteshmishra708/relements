@@ -36,6 +36,6 @@ const TABLE = {
 };
 
 storiesOf('Table', module).add('Default', () => {
-  const story = <Table sortable sortKey="title" sortOrder={-1} columns={TABLE.columns} data={TABLE.data} />;
+  const story = <Table sortable sortKey="title" sortOrder={-1} columns={TABLE.columns} rows={TABLE.data} />;
   return story;
 });

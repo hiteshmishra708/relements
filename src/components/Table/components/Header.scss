@@ -1,0 +1,39 @@
+@import 'constants/index.scss';
+
+:local {
+  .tableHeader {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #EEE;
+  }
+
+  .tableHeaderItem {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    border-right: 1px solid #EEE;
+    padding: 8px 12px;
+    cursor: pointer;
+    &:last-child {
+      border-right: none;
+    }
+
+    &.active {
+      .tableHeaderItemText {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .tableHeaderItemText {
+    font-weight: 600;
+    color: #000;
+    user-select: none;
+  }
+
+  .tableHeaderItemIcon {
+    font-size: 8px;
+    padding-left: 6px;
+    color: $primary-color;
+  }
+}

@@ -1,0 +1,65 @@
+@import 'constants/index.scss';
+
+:local {
+  .tableBody {
+
+  }
+
+  .tableRow {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
+    &:hover {
+      background-color: #F5F5F5;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background-color: $primary-color;
+      opacity: 0;
+    }
+
+    &.selected {
+      background-color: rgba($primary-color, 0.1);
+      &:before {
+        opacity: 1;
+      }
+    }
+
+    &.disabled {
+        opacity: 0.4;
+    }
+  }
+
+  .tableRowItem {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    border-right: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
+    padding: 8px 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:last-child {
+      border-right: none;
+    }
+
+    &.simple {
+      border-right: none;
+      border-bottom: 1px solid #EEE;
+    }
+  }
+
+  .tableRowItemText {
+    display: inline-flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+}
