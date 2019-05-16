@@ -4,7 +4,8 @@
   position: relative;
   border-top: 1px solid $border-color;
   overflow: hidden;
-  transition: height 0.2s ease-out, transform 0.1s ease-out, background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+  transition: height 0.2s ease-out, transform 0.1s ease-out,
+    background-color 0.3s ease-out, box-shadow 0.3s ease-out;
   background-color: #fff;
   z-index: $z-index + 1;
   border-bottom: 1px solid $border-color;
@@ -12,31 +13,12 @@
   * {
     font-family: $font;
   }
-
-  &.active:not(.transparent) {
-    background-color: #eee;
-  }
-
-  &.noBorder {
-    border: none;
-  }
 }
 
 .accordionItemHeader {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
+  padding: 0;
   cursor: pointer;
-  padding-right: 40px;
-  &.noPadding {
-    padding: 0;
-  }
-}
-
-.accordionItemHeaderText {
-  font-weight: 600;
 }
 
 .leftColumn,
@@ -85,9 +67,43 @@
 }
 
 .accordionItemBody {
-  padding: 16px;
-  &.noPadding {
-    padding: 0;
+  padding: 0;
+
+  > div {
+  }
+
+  :global {
+    .animating-enter {
+      opacity: 0;
+      &-active {
+        opacity: 1;
+        transition: 0.2s ease-out;
+      }
+      &-done {
+        opacity: 1;
+      }
+    }
+
+    .animating-exit {
+      opacity: 1;
+      &-active {
+        opacity: 0;
+        transition: 0.2s ease-out;
+      }
+    }
+  }
+
+  .accordionItemBodyInner {
+    // animation: show-in-opacity 0.2s ease-out both;
+  }
+
+  @keyframes show-in-opacity {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 }
 
