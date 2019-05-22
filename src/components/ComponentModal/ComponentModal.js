@@ -1,11 +1,11 @@
 import React from 'react';
 import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
-import { Activify } from 'decorators';
+// import { Activify } from 'decorators';
 import { KEY_CODES } from 'constants/key_codes';
 import styles from './ComponentModal.scss';
 
-@Activify()
+// @Activify()
 export default class ComponentModal extends React.Component {
   componentDidMount() {
     document.addEventListener('keyup', this._handleKeyUp);
@@ -31,7 +31,7 @@ export default class ComponentModal extends React.Component {
     );
   }
 
-  _handleKeyUp = e => {
+  _handleKeyUp = (e) => {
     if (e.keyCode === KEY_CODES.ESC) {
       this.props.onOverlayClick();
     } else if (e.keyCode === KEY_CODES.ENTER) {

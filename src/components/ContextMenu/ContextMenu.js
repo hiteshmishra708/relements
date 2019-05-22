@@ -1,11 +1,11 @@
 import React from 'react';
 import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
-import { Activify } from 'decorators';
+// import { Activify } from 'decorators';
 import { KEY_CODES } from 'constants/key_codes';
 import styles from './ContextMenu.scss';
 
-@Activify()
+// @Activify()
 export default class ContextMenu extends React.Component {
   state = {
     position: {},
@@ -38,7 +38,7 @@ export default class ContextMenu extends React.Component {
         <div className={styles.contextMenuOverlay} onClick={this.props.onOverlayClick} />
         <div
           className={`${activeClassName} ${styles.contextMenu}`}
-          ref={DOMNode => {
+          ref={(DOMNode) => {
             if (DOMNode && this.props.active) DOMNode.focus();
             this._contextMenu = DOMNode;
           }}
@@ -74,7 +74,7 @@ export default class ContextMenu extends React.Component {
     this.setState({ position });
   };
 
-  _handleKeyUp = e => {
+  _handleKeyUp = (e) => {
     if (e.keyCode === KEY_CODES.ESC) {
       this.props.onOverlayClick();
     } else if (e.keyCode === KEY_CODES.ENTER) {

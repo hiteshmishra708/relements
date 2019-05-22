@@ -1,11 +1,11 @@
 import React from 'react';
 import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
-import { Activify } from 'decorators';
+// import { Activify } from 'decorators';
 import { KEY_CODES } from 'constants/key_codes';
 import styles from './ComponentDrawer.scss';
 
-@Activify()
+// @Activify()
 export default class ComponentDrawer extends React.Component {
   componentDidMount() {
     document.addEventListener('keyup', this._handleKeyUp);
@@ -28,8 +28,7 @@ export default class ComponentDrawer extends React.Component {
     const activeClassName = this.props.active ? styles.drawerActive : '';
     const placementClassName = this.props.placement === 'LEFT' ? styles.left : '';
     const noDisableClassName = this.props.noDisable ? styles.noDisable : '';
-    const transformAmount =
-      this.props.placement === 'LEFT' ? -1 * (this.props.width + offset) : this.props.width + offset;
+    const transformAmount = this.props.placement === 'LEFT' ? -1 * (this.props.width + offset) : this.props.width + offset;
     const style = {};
     style.zIndex = zIndex;
     style.left = this.props.placement === 'LEFT' ? offset : 'auto';
@@ -52,7 +51,7 @@ export default class ComponentDrawer extends React.Component {
     );
   }
 
-  _handleKeyUp = e => {
+  _handleKeyUp = (e) => {
     if (e.keyCode === KEY_CODES.ESC && this.props.onOverlayClick) {
       this.props.onOverlayClick();
     }

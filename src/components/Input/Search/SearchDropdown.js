@@ -1,11 +1,11 @@
 import React from 'react';
 import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
-import { Activify } from 'decorators';
+// import { Activify } from 'decorators';
 
 import styles from './SearchDropdown.scss';
 
-@Activify()
+// @Activify()
 class SearchDropdown extends React.Component {
   render() {
     return <Portal>{this.renderPortalContainer()}</Portal>;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
-import { Activify } from 'decorators';
+// import { Activify } from 'decorators';
 import { KEY_CODES } from 'constants/key_codes';
 import styles from './ComponentTooltip.scss';
 
-@Activify()
+// @Activify()
 export default class ComponentTooltip extends React.Component {
   state = {
     position: {},
@@ -49,7 +49,7 @@ export default class ComponentTooltip extends React.Component {
         />
         <div
           className={`${activeClassName} ${styles.tooltip}`}
-          ref={DOMNode => {
+          ref={(DOMNode) => {
             if (DOMNode && this.props.active) DOMNode.focus();
             this._tooltip = DOMNode;
           }}
@@ -114,7 +114,7 @@ export default class ComponentTooltip extends React.Component {
     });
   };
 
-  _handleKeyUp = e => {
+  _handleKeyUp = (e) => {
     if (e.keyCode === KEY_CODES.ESC) {
       this.props.onOverlayClick();
     } else if (e.keyCode === KEY_CODES.ENTER) {
