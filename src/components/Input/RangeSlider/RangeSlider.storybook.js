@@ -3,9 +3,13 @@ import { storiesOf } from '@storybook/react';
 
 import RangeSlider from './RangeSlider';
 
-storiesOf('RangeSliderInput', module).add('Single', () => {
-  return <RangeSliderTest />;
-});
+storiesOf('Inputs/RangeSlider', module)
+  .add('Single', () => {
+    return <RangeSliderTest single />;
+  })
+  .add('Multiple', () => {
+    return <RangeSliderTest />;
+  });
 
 class RangeSliderTest extends React.Component {
   state = {
@@ -20,8 +24,9 @@ class RangeSliderTest extends React.Component {
         step={100}
         value={this.state.value}
         onChange={console.log}
-        placeholder="Add Message"
-        label="Message to send when no agent is online"
+        placeholder="Delay (seconds)"
+        label="Delay time"
+        {...this.props}
       />
     );
   }

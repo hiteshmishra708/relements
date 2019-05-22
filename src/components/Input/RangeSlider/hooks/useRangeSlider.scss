@@ -1,59 +1,6 @@
 @import 'constants/index.scss';
 
-.slider {
-  position: relative;
-  margin-bottom: 24px;
-}
-
-.sliderLabel {
-  display: block;
-  color: #666;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  margin-left: 2px;
-  transition: 0.2s ease-out;
-
-  &.focused {
-    color: $primary-color;
-  }
-}
-
-.textHint {
-  display: block;
-  color: #999;
-  font-size: 13px;
-  font-weight: 400;
-  margin-bottom: 8px;
-  margin-left: 2px;
-  margin-top: -6px;
-  transition: 0.2s ease-out;
-}
-
-.sliderInput {
-  width: calc( 100% - 2px );
-  margin-bottom: 36px;
-  margin-left: 2px;
-}
-
-.sliderTrack {
-  position: relative;
-  width: 100%;
-  height: 4px;
-  border-radius: 8px;
-  background-color: #EEE;
-}
-
-.sliderFilled {
-  position: absolute;
-  width: 40%;
-  height: 100%;
-  border-radius: 8px;
-  background-color: $primary-color;
-  // transition: 0.1s ease-out;
-}
-
-$knob-size: 18px;
+$knob-size: 14px;
 
 .sliderKnobWrapper {
   position: relative;
@@ -65,6 +12,9 @@ $knob-size: 18px;
   margin-top: - $knob-size / 2 - 2px;
   margin-left: - $knob-size / 2 - 2px;
   cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   // transition: 0.1s ease-out;
 
   &:active {
@@ -136,5 +86,41 @@ $knob-size: 18px;
 
   &.active {
     opacity: 0.5;
+  }
+}
+
+.sliderTextInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  flex: 1;
+  max-width: 200px;
+  
+  &:first-child {
+    margin-right: 8px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding: 4px 8px;
+    padding-left: 40px;
+    font-size: 14px;
+    text-align: right;
+  }
+
+  .sliderTextInputLabel {
+    position: absolute;
+    font-size: 12px;
+    pointer-events: none;
+    color: #888;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
   }
 }
