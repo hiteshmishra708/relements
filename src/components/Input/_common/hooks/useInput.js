@@ -17,5 +17,7 @@ export function useInput(inputDOM, onFocus, onBlur) {
     onBlur(e);
   };
 
-  return [focused, setFocused, handleFocus, handleBlur];
+  return {
+    focused, setFocused, handleFocus, handleBlur,
+  };
 }

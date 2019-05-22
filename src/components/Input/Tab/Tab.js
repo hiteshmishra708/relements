@@ -1,113 +1,84 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import TabOption from './TabOption';
+import { useTabs } from '../_common/hooks/useTabs';
+import { useInput } from '../_common/hooks/useInput';
+import { Label } from '../_common/Label';
+import TabOption from './components/TabOption';
 import styles from './Tab.scss';
 
-class Tab extends React.Component {
-  state = {
-    activeIndex: 0,
-    DOMRects: [],
-  };
+function Tab({
+  className,
+  prefixClassName,
+  error,
+  label,
+  options = [],
+  disabled,
+  value,
+  onChange,
+  onFocus,
+  onBlur,
+  optionKey,
+}) {
+  const {
+    handleChange, handleRef, width, offset, activeIndex, displayOptions,
+  } = useTabs(
+    value,
+    onChange,
+    options,
+    optionKey
+  );
+  const _TextInputDOM = useRef();
+  const { focused, handleFocus, handleBlur } = useInput(_TextInputDOM, onFocus, onBlur);
+  const disabledClassName = disabled ? styles.disabled : '';
 
-  _TabOptionDOMs = [];
-
-  componentDidMount() {
-    this.props.options.map((option, i) => {
-      if (option === this.props.value) {
-        setTimeout(() => this._toggle(i, true), 100);
-      }
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    nextProps.options.map((option, i) => {
-      if (option === (nextProps.value || '')) {
-        this._toggle(i, true);
-      }
-    });
-  }
-
-  render() {
-    const {
-      className, label, options = [], hint, disabled,
-    } = this.props;
-    const { width, offset } = this._getPosition();
-    const disabledClassName = disabled ? styles.disabled : '';
-
-    return (
-      <div className={`${styles.tab} ${className}`}>
-        <span className={`${styles.tabLabel}`}>{label}</span>
-        {hint ? <span className={`${styles.textHint}`}>{hint}</span> : null}
-        <div className={`${styles.tabOptionsWrapper} ${disabledClassName}`}>
-          <div className={styles.tabOptions}>
-            {options.map((option, i) => {
-              return (
-                <TabOption
-                  innerRef={this._addDOMElementToStack(i)}
-                  selected={this.state.activeIndex === i}
-                  onClick={() => this._toggle(i)}
-                >
-                  {this._getOption(option)}
-                </TabOption>
-              );
-            })}
-          </div>
-          <div className={styles.tabOptionsBG} style={{ width, left: offset }} />
+  return (
+    <div tabIndex="0" onFocus={handleFocus} onBlur={handleBlur} className={`${styles.tab} ${className}`}>
+      <Label focused={focused} error={error} className={`${styles.dropdownLabel} ${prefixClassName}-label`}>
+        {label}
+      </Label>
+      <div className={`${styles.tabOptionsWrapper} ${disabledClassName}`}>
+        <div className={styles.tabOptions}>
+          {displayOptions.map((displayOption, i) => {
+            return (
+              <TabOption innerRef={handleRef(i)} onClick={handleChange(i)} selected={activeIndex === i}>
+                {displayOption}
+              </TabOption>
+            );
+          })}
         </div>
+        <div className={styles.tabOptionsBG} style={{ width, left: offset }} />
       </div>
-    );
-  }
-
-  _getOption = (option) => {
-    if (typeof option === 'string') {
-      return option;
-    }
-    return option[this.props.optionKey || 'name'];
-  };
-
-  _addDOMElementToStack = index => (DOMElement) => {
-    if (DOMElement) {
-      const DOMElementRect = DOMElement.getBoundingClientRect();
-      const currentRect = this.state.DOMRects[index];
-
-      if (!currentRect || currentRect.width !== DOMElementRect.width) {
-        const DOMRects = this.state.DOMRects;
-        DOMRects[index] = DOMElementRect;
-        this.setState({ DOMRects });
-      }
-    }
-  };
-
-  _getPosition = () => {
-    let offset = 0;
-    let width = 0;
-    this.state.DOMRects.map((DOMElementRect, i) => {
-      if (i === this.state.activeIndex) {
-        width = DOMElementRect.width;
-      } else if (i < this.state.activeIndex) {
-        offset += DOMElementRect.width;
-      }
-    });
-
-    return { width, offset };
-  };
-
-  _toggle = (index, isInitCall) => {
-    this.setState({ activeIndex: index });
-    if (!isInitCall) this.props.onChange(this.props.options[index]);
-  };
+    </div>
+  );
 }
 
 Tab.propTypes = {
   className: PropTypes.string,
-  value: PropTypes.string,
-  label: PropTypes.string,
-  hint: PropTypes.string,
   disabled: PropTypes.bool,
+  error: PropTypes.string,
+  label: PropTypes.string,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func,
-  options: PropTypes.array,
+  onFocus: PropTypes.func,
   optionKey: PropTypes.string,
+  options: PropTypes.array,
+  prefixClassName: PropTypes.string,
+  value: PropTypes.string,
+};
+
+Tab.defaultProps = {
+  className: '',
+  disabled: false,
+  error: '',
+  label: '',
+  onBlur: () => {},
+  onChange: () => {},
+  onFocus: () => {},
+  optionKey: '',
+  options: [],
+  prefixClassName: '',
+  value: '',
 };
 
 export default Tab;

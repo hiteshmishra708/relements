@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { TextInput } from '../_common/TextInput';
 import { Label } from '../_common/Label';
 import styles from './Text.scss';
-import { useInput } from '../Dropdown/hooks/useInput';
+import { useInput } from '../_common/hooks/useInput';
 
 const Text = ({
   value,
@@ -23,7 +23,9 @@ const Text = ({
   innerRef,
 }) => {
   const _TextInputDOM = useRef();
-  const [focused, setFocused, handleFocus, handleBlur] = useInput(_TextInputDOM, onFocus, onBlur);
+  const {
+    focused, setFocused, handleFocus, handleBlur,
+  } = useInput(_TextInputDOM, onFocus, onBlur);
 
   return (
     <div className={`${styles.text} ${prefixClassName} ${className}`}>

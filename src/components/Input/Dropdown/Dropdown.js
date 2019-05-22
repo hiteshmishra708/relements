@@ -16,7 +16,7 @@ import { useDropdown } from './hooks/useDropdown';
 
 import styles from './Dropdown.scss';
 import { ChipsInput } from '../_common/ChipsInput';
-import { useInput } from './hooks/useInput';
+import { useInput } from '../_common/hooks/useInput';
 
 const Dropdown = ({
   className,
