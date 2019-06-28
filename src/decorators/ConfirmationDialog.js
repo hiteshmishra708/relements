@@ -1,6 +1,6 @@
 import React from 'react';
 import ComponentModal from 'components/ComponentModal';
-import Icon from 'components/Icon';
+import Icon from 'components/UI/Icon';
 import CloseIcon from 'icons/close.svg';
 import styles from './ConfirmationDialog.scss';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'components/Icon';
+import Icon from 'components/UI/Icon';
 import ErrorIcon from 'icons/close.svg';
 import SuccessIcon from 'icons/tick.svg';
 import WarningIcon from 'icons/alert.svg';

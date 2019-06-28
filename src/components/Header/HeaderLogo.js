@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from 'components/Icon';
+import Icon from 'components/UI/Icon';
 import styles from './HeaderLogo.scss';
 
 const Header = ({ children, className }) => {

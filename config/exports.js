@@ -1,4 +1,4 @@
 export default {
-  button: 'src/components/button/index.js',
+  button: 'src/components/UI/Button/index.js',
   input: 'src/components/input/index.js',
 };

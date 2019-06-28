@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useActivify from '../useActivify';
-import SpinningLoader from '../../components/Loader';
+import SpinningLoader from '../../components/UI/Loader';
 import styles from './useLoader.scss';
 
 export default function useLoader(isLoading) {
