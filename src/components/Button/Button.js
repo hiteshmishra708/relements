@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { SIZES, BUTTON_TYPES } from 'constants';
 import styles from './Button.scss';
 
 /**
@@ -18,17 +17,17 @@ const Button = ({
    */
   const getTypeClassName = () => {
     switch (type) {
-      case BUTTON_TYPES.PRIMARY:
+      case Button.TYPES.PRIMARY:
         return styles.primary;
-      case BUTTON_TYPES.SECONDARY:
+      case Button.TYPES.SECONDARY:
         return styles.secondary;
-      case BUTTON_TYPES.OUTLINE:
+      case Button.TYPES.OUTLINE:
         return styles.outline;
-      case BUTTON_TYPES.GREY:
+      case Button.TYPES.GREY:
         return styles.grey;
-      case BUTTON_TYPES.WARNING:
+      case Button.TYPES.WARNING:
         return styles.warning;
-      case BUTTON_TYPES.YELLOW:
+      case Button.TYPES.YELLOW:
         return styles.yellow;
       default:
         return '';
@@ -41,11 +40,11 @@ const Button = ({
    */
   const getSizeClassName = () => {
     switch (size) {
-      case SIZES.BIG:
+      case Button.SIZES.BIG:
         return styles.big;
-      case SIZES.MEDIUM:
+      case Button.SIZES.MEDIUM:
         return styles.medium;
-      case SIZES.SMALL:
+      case Button.SIZES.SMALL:
         return styles.small;
       default:
         return '';
@@ -65,29 +64,58 @@ const Button = ({
   );
 };
 
+Button.SIZES = {
+  SMALL: 'small',
+  MEDIUM: 'medium',
+  BIG: 'big',
+};
+
+Button.TYPES = {
+  DEFAULT: 'default',
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+  OUTLINE: 'outline',
+  GREY: 'grey',
+  WARNING: 'warning',
+  YELLOW: 'yellow',
+};
+
 Button.propTypes = {
   /** The classname to appended to the outermost element */
   className: PropTypes.string,
-  /* The type of the button (primary, secondary, grey etc.) */
-  type: PropTypes.oneOf(BUTTON_TYPES.ALL),
-  /* The size of the button (small/medium/big) */
-  size: PropTypes.oneOf(SIZES.ALL),
-  /* Whether the button is disabled */
+  /** The type of the button (primary, secondary, grey etc.) */
+  type: PropTypes.oneOf([
+    Button.TYPES.DEFAULT,
+    Button.TYPES.PRIMARY,
+    Button.TYPES.SECONDARY,
+    Button.TYPES.OUTLINE,
+    Button.TYPES.GREY,
+    Button.TYPES.WARNING,
+    Button.TYPES.YELLOW,
+  ]),
+  /** The size of the button (small/medium/big) */
+  size: PropTypes.oneOf([Button.SIZES.SMALL, Button.SIZES.MEDIUM, Button.SIZES.LARGE]),
+  /** Whether the button is disabled */
   disabled: PropTypes.bool,
-  /* OnClick callback */
+  /** OnClick callback */
   onClick: PropTypes.func,
-  /* The ref passed down to the outermost DOM element */
+  /** The ref passed down to the outermost DOM element */
   innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.instanceOf(Element) })]),
-  /* Children to render inside the button */
+  /** Children to render inside the button */
   children: PropTypes.element.isRequired,
 };
 
 Button.defaultProps = {
   className: '',
-  type: BUTTON_TYPES.DEFAULT,
-  size: SIZES.MEDIUM,
+  type: Button.TYPES.DEFAULT,
+  size: Button.SIZES.MEDIUM,
   disabled: false,
   onClick: () => {},
+};
+
+Button.classNames = {
+  $prefix: 'world!',
+  '$prefix-child': 'world!',
 };
 
 export default Button;

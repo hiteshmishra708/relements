@@ -38,18 +38,19 @@ const Dropdown = ({
   withMultiple = false,
 }) => {
   const valueArray = Array.isArray(value) ? value : [value];
-  const _TextInputDOM = useRef();
-  const _TextInputWrapperDOM = useRef();
+  const _InputDOM = useRef();
+  const _InputWrapperDOM = useRef();
   const [searchTerm, searchResults, handleSearch] = useSearch(options, [optionKey]);
   const useDropdownProps = [searchTerm, searchResults, optionKey, valueArray, withCreate];
-  const [focused, setFocused, handleFocus, handleBlur] = useInput(_TextInputDOM, onFocus, onBlur);
   const [dropdownOptions] = useDropdown(...useDropdownProps);
   const [highlightIndex, handleKeyDown, _DropdownOptionDOMs] = useKeyboardSelect(dropdownOptions, onChange);
+  const {
+    focused, setFocused, handleFocus, handleBlur,
+  } = useInput(_InputDOM, onFocus, onBlur);
 
   const handleToggle = () => setFocused(!focused);
 
-  const isReversed = _TextInputWrapperDOM.current
-    && _TextInputWrapperDOM.current.getBoundingClientRect().bottom + 64 > window.innerHeight;
+  const isReversed = _InputWrapperDOM.current && _InputWrapperDOM.current.getBoundingClientRect().bottom + 64 > window.innerHeight;
 
   const handleChange = (valueToChange) => {
     const newValue = withMultiple ? [...value, valueToChange] : valueToChange;
@@ -90,8 +91,8 @@ const Dropdown = ({
         {label}
       </Label>
       <Input
-        innerRef={_TextInputWrapperDOM}
-        inputRef={_TextInputDOM}
+        innerRef={_InputWrapperDOM}
+        inputRef={_InputDOM}
         className={`${styles.dropdownInput} ${reverseModeClassName}`}
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
@@ -108,7 +109,7 @@ const Dropdown = ({
       />
       <DropdownOptions
         onClose={handleBlur}
-        attachTo={_TextInputWrapperDOM}
+        attachTo={_InputWrapperDOM}
         active={focused}
         focused={focused}
         prefixClassName={`${prefixClassName}-options`}

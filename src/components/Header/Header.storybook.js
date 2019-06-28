@@ -8,8 +8,7 @@ import HeaderButtons from './HeaderButtons';
 import HeaderLeft from './HeaderLeft';
 import HeaderRight from './HeaderRight';
 import Button from '../Button';
-import ContextMenuButton from '../ContextMenu/ContextMenuButton';
-import ContextMenuItem from '../ContextMenu/ContextMenuItem';
+import ContextMenu from '../ContextMenu';
 
 storiesOf('Header Component', module).add('Default', () => {
   const story = (
@@ -23,15 +22,15 @@ storiesOf('Header Component', module).add('Default', () => {
             Train
           </Button>
           <Button size="big">Transfer</Button>
-          <ContextMenuButton size="big" title="General Nodes" offset={{ top: 40, left: -144 }}>
-            <ContextMenuItem size="big">Bot General Nodes</ContextMenuItem>
-            <ContextMenuItem size="big">Story General Nodes</ContextMenuItem>
-          </ContextMenuButton>
-          <ContextMenuButton size="big" title="More" offset={{ top: 40, left: -108 }}>
-            <ContextMenuItem size="big">Extract Bot</ContextMenuItem>
-            <ContextMenuItem size="big">General Responses</ContextMenuItem>
-            <ContextMenuItem size="big">Node Priority</ContextMenuItem>
-          </ContextMenuButton>
+          <ContextMenu.Button size="big" title="General Nodes" offset={{ top: 40, left: -144 }}>
+            <ContextMenu.Item size="big">Bot General Nodes</ContextMenu.Item>
+            <ContextMenu.Item size="big">Story General Nodes</ContextMenu.Item>
+          </ContextMenu.Button>
+          <ContextMenu.Button size="big" title="More" offset={{ top: 40, left: -108 }}>
+            <ContextMenu.Item size="big">Extract Bot</ContextMenu.Item>
+            <ContextMenu.Item size="big">General Responses</ContextMenu.Item>
+            <ContextMenu.Item size="big">Node Priority</ContextMenu.Item>
+          </ContextMenu.Button>
         </HeaderButtons>
         <HeaderProfile
           permissions={[

@@ -1,0 +1,52 @@
+import { CodeBlock, ConfigBlock } from '@src/helpers/DocBlocks';
+import Button from './Button';
+
+# Button
+
+> A clickable UI element with active and hover states. Indicates to the user that it's clickable.
+
+<CodeBlock>
+  <Button>Click Me</Button>
+</CodeBlock>
+
+## Configuration
+
+<ConfigBlock of={Button} />
+
+## Examples
+
+<CodeBlock title="Type: Primary">
+  <Button type={Button.TYPES.PRIMARY}>Click Me</Button>
+</CodeBlock>
+
+<CodeBlock title="Type: Secondary">
+  <Button type={Button.TYPES.SECONDARY}>Click Me</Button>
+</CodeBlock>
+
+<CodeBlock title="Type: Outline">
+  <Button type={Button.TYPES.OUTLINE}>Click Me</Button>
+</CodeBlock>
+
+<CodeBlock title="Type: Grey">
+  <Button type={Button.TYPES.GREY}>Click Me</Button>
+</CodeBlock>
+
+<CodeBlock title="Type: Warning">
+  <Button type={Button.TYPES.WARNING}>Click Me</Button>
+</CodeBlock>
+
+<CodeBlock title="Type: Yellow">
+  <Button type={Button.TYPES.YELLOW}>Click Me</Button>
+</CodeBlock>
+
+<CodeBlock title="Size: Small">
+  <Button size={Button.SIZES.SMALL}>Click Me</Button>
+</CodeBlock>
+
+<CodeBlock title="Size: Medium">
+  <Button size={Button.SIZES.MEDIUM}>Click Me</Button>
+</CodeBlock>
+
+<CodeBlock title="Size: Big">
+  <Button size={Button.SIZES.BIG}>Click Me</Button>
+</CodeBlock>

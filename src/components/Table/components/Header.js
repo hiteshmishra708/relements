@@ -9,7 +9,7 @@ function Header({
 }) {
   if (!columns || columns.length === 0) return null;
   return (
-    <div className={`${styles.tableHeader} ${prefixClassName}-header`}>
+    <div className={`${styles.tableHeader} ${prefixClassName}`}>
       {columns.map((column, i) => {
         const isTheSortedColumn = sortKey === column.sortKey;
         const activeClassName = column.sortKey && (isTheSortedColumn ? styles.active : '');
@@ -17,7 +17,9 @@ function Header({
         return (
           <div
             key={i}
-            className={`${styles.tableHeaderItem} ${activeClassName} ${prefixClassName}-header ${column.className}`}
+            className={`${styles.tableHeaderItem} ${activeClassName} ${prefixClassName}-header-column ${
+              column.className
+            }`}
             style={{ width: column.width, maxWidth: column.width, minWidth: column.width }}
             onClick={() => onSort(column)}
           >

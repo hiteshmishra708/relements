@@ -1,0 +1,17 @@
+import { CodeBlock, ConfigBlock } from '@src/helpers/DocBlocks';
+import Pagination from './Pagination';
+import { IconSheet } from './Pagination.storybook.js';
+
+# Pagination
+
+> A clickable UI element with active and hover states. Indicates to the user that it's clickable.
+
+<CodeBlock defaultValue={4}>
+  {(value, onChange) => <Pagination numPages={33} page={value} onChange={onChange} />}
+</CodeBlock>
+
+## Configuration
+
+<ConfigBlock of={Pagination} />
+
+## Examples

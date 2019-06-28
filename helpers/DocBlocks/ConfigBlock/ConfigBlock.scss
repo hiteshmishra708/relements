@@ -1,0 +1,14 @@
+.configBlock {
+  font-size: 14px;
+  margin-bottom: 48px;
+  border: 1px solid #DDD;
+  border-radius: 8px;
+  &Tabs {
+    &:global(-items) {
+      border-bottom: none;
+    }
+    &:global(-item-text) {
+      font-size: 14px;
+    }
+  }
+}

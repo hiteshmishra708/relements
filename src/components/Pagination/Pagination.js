@@ -4,15 +4,21 @@ import Icon from 'components/Icon';
 import AngleDownIcon from 'icons/angle-down.svg';
 import styles from './Pagination.scss';
 
+const renderDots = () => (
+  <div className={`${styles.paginationSeparator}`}>
+    <div className={`${styles.paginationDot}`} />
+    <div className={`${styles.paginationDot}`} />
+    <div className={`${styles.paginationDot}`} />
+  </div>
+);
+
 const Pagination = ({
-  className, children, size, primary, secondary, numPages, page, onChange,
+  className, numPages, page, onChange,
 }) => {
   const NUM_PAGES = numPages || 1;
   const PAGE = page - 1;
-
-  const primaryClassName = primary ? styles.primary : '';
-  const secondaryClassName = secondary ? styles.secondary : '';
-  const smallClassName = size === 'small' ? styles.small : '';
+  const leftDisabled = PAGE === 0 ? styles.disabled : '';
+  const rightDisabled = PAGE === NUM_PAGES - 1 ? styles.disabled : '';
 
   const visiblePages = Array(NUM_PAGES)
     .fill(0)
@@ -21,46 +27,34 @@ const Pagination = ({
       return Math.abs(PAGE - i) < 6 ? 1 : 0;
     });
 
-  return (
-    <div className={styles.pagination}>
-      <div
-        onClick={e => onChange(page - 1)}
-        className={`${styles.paginationArrow} ${styles.left} ${PAGE === 0 ? styles.disabled : ''}`}
-      >
-        <Icon src={{ default: AngleDownIcon }} />
+  const renderArrow = React.useCallback((className, newPage) => {
+    return (
+      <div onClick={() => onChange(newPage)} className={`${styles.paginationArrow} ${className}`}>
+        <Icon src={AngleDownIcon} />
       </div>
+    );
+  });
+
+  return (
+    <div className={`${styles.pagination} ${className}`}>
+      {renderArrow(`${styles.left} ${leftDisabled}`, page - 1)}
       {visiblePages.map((page, i) => {
         const paginationButtonActive = PAGE === i ? styles.active : '';
-        if (page === 0 && visiblePages[i - 1] !== 0) {
-          return (
-            <div className={`${styles.paginationSeparator}`}>
-              <div className={`${styles.paginationDot}`} />
-              <div className={`${styles.paginationDot}`} />
-              <div className={`${styles.paginationDot}`} />
-            </div>
-          );
-        } else if (page === 0) return null;
+        if (page === 0 && visiblePages[i - 1] !== 0) return renderDots();
+        if (page === 0) return null;
         return (
-          <div onClick={e => onChange(i + 1)} className={`${styles.paginationButton} ${paginationButtonActive}`}>
+          <div onClick={() => onChange(i + 1)} className={`${styles.paginationButton} ${paginationButtonActive}`}>
             {i + 1}
           </div>
         );
       })}
-      <div
-        onClick={e => onChange(page + 1)}
-        className={`${styles.paginationArrow} ${styles.right} ${PAGE === NUM_PAGES - 1 ? styles.disabled : ''}`}
-      >
-        <Icon src={{ default: AngleDownIcon }} />
-      </div>
+      {renderArrow(`${styles.right} ${rightDisabled}`, page + 1)}
     </div>
   );
 };
 
 Pagination.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.string,
-  primary: PropTypes.bool,
-  secondary: PropTypes.bool,
   onChange: PropTypes.func,
   numPages: PropTypes.number,
   page: PropTypes.number,

@@ -1,8 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Icon from './Icon';
+import Docs from './Icon.mdx';
 
-storiesOf('Icon', module).add('Default', () => {
-  return <Icon src="user-says" />;
+storiesOf('UI/Icon', module).add('Documentation', () => {
+  return <Docs />;
 });
+
+export const IconSheet = () => null;

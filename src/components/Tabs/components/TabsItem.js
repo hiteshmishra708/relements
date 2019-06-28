@@ -33,10 +33,12 @@ export const TabsItem = ({
         React.cloneElement(component, { active })
       ) : (
         <React.Fragment>
-          <Icon
-            src={icon}
-            className={`${styles.TabsItemIcon} ${bigClassName} ${prefixClassName}-item-icon ${activeIconClassName}`}
-          />
+          {icon ? (
+            <Icon
+              src={icon}
+              className={`${styles.TabsItemIcon} ${bigClassName} ${prefixClassName}-item-icon ${activeIconClassName}`}
+            />
+          ) : null}
           <span className={`${styles.TabsItemText} ${activeClassName} ${bigClassName} ${prefixClassName}-item-text`}>
             {title}
           </span>

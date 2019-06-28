@@ -1,24 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Tabs from './Tabs';
+import Docs from './Tabs.mdx';
 
-storiesOf('Tabs', module).add('Default', () => {
-  return <TabsTest />;
+storiesOf('UI/Tabs', module).add('Documentation', () => {
+  return <Docs />;
 });
-
-const TabsTest = () => {
-  const [value, setValue] = React.useState('bots');
-  return (
-    <Tabs value={value}>
-      <Tabs.Item value="bots" onClick={setValue} icon="bot-says">
-        Bots
-      </Tabs.Item>
-      <Tabs.Item value="templates" onClick={setValue} icon="bot-says">
-        Templates
-      </Tabs.Item>
-      <Tabs.Item value="businesses" onClick={setValue} icon="bot-says">
-        Businesses
-      </Tabs.Item>
-    </Tabs>
-  );
-};

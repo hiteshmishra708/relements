@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Table from './Table';
+import Docs from './Table.mdx';
 
-const TABLE = {
+export const DATA = {
   columns: [
     {
       title: 'Rating',
@@ -35,7 +35,4 @@ const TABLE = {
   ],
 };
 
-storiesOf('Table', module).add('Default', () => {
-  const story = <Table sortable sortKey="title" sortOrder={-1} columns={TABLE.columns} rows={TABLE.data} />;
-  return story;
-});
+storiesOf('UI/Table', module).add('Documentation', () => <Docs />);

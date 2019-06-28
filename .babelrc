@@ -1,14 +1,27 @@
 {
-  "presets": [
-    "@babel/preset-react",
-    ["@babel/preset-env", { "modules": false }]
-  ],
+  "presets": ["@babel/preset-react", ["@babel/preset-env", { "modules": false }]],
   "plugins": [
+    ["babel-plugin-react-element-to-jsx-string"],
     ["@babel/plugin-syntax-dynamic-import"],
     ["@babel/plugin-proposal-object-rest-spread"],
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     ["@babel/plugin-proposal-class-properties"],
     ["@babel/plugin-proposal-export-default-from"],
-    ["@babel/plugin-proposal-export-namespace-from"]
+    ["@babel/plugin-proposal-export-namespace-from"],
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "@src": "./"
+        }
+      }
+    ],
+    [
+      "babel-plugin-react-docgen",
+      {
+        "handlers:": ["react-docgen-external-proptypes-handler"]
+      }
+    ]
   ]
 }

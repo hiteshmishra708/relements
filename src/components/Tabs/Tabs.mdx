@@ -1,0 +1,28 @@
+import { CodeBlock, ConfigBlock } from '@src/helpers/DocBlocks';
+import Tabs from './Tabs';
+
+# Tabs
+
+> A clickable UI element with active and hover states. Indicates to the user that it's clickable.
+
+<CodeBlock defaultValue="bots">
+  {(value, setValue) => (
+    <Tabs value={value}>
+      <Tabs.Item value="bots" onClick={setValue} icon="bot-says">
+        Bots
+      </Tabs.Item>
+      <Tabs.Item value="templates" onClick={setValue} icon="user-says">
+        Templates
+      </Tabs.Item>
+      <Tabs.Item value="businesses" onClick={setValue} icon="entities">
+        Businesses
+      </Tabs.Item>
+    </Tabs>
+  )}
+</CodeBlock>
+
+## Configuration
+
+<ConfigBlock of={Tabs} />
+
+## Examples

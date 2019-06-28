@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import Icon from '../Icon';
-import ContextMenuIcon from '../ContextMenu/ContextMenuIcon';
-import ContextMenuItem from '../ContextMenu/ContextMenuItem';
+import ContextMenu from '../ContextMenu';
 import styles from './HeaderProfile.scss';
 
 const PAGES = {
@@ -39,17 +38,17 @@ const HeaderProfile = ({
         Give Feedback
       </Button> */}
       {helpSection && (
-        <ContextMenuIcon
+        <ContextMenu.Icon
           iconType="question"
           className={styles.headerProfileFeedbackIcon}
           offset={{ top: 38, left: -32 }}
           maxMenuHeight="600px"
         >
           {helpSection}
-        </ContextMenuIcon>
+        </ContextMenu.Icon>
       )}
       {permissions.length > 0 ? (
-        <ContextMenuIcon iconType="grid" className={styles.headerProfileFeedbackIcon} offset={{ top: 38, left: -32 }}>
+        <ContextMenu.Icon iconType="grid" className={styles.headerProfileFeedbackIcon} offset={{ top: 38, left: -32 }}>
           {permissions
             .filter((permission, pos) => {
               return permissions.indexOf(permission) == pos;
@@ -63,26 +62,26 @@ const HeaderProfile = ({
               const page = PAGES[permission];
               if (!page) return null;
               return (
-                <ContextMenuItem size="big" href={page.url}>
+                <ContextMenu.Item size="big" href={page.url}>
                   {page.title}
-                </ContextMenuItem>
+                </ContextMenu.Item>
               );
             })}
-        </ContextMenuIcon>
+        </ContextMenu.Icon>
       ) : null}
-      <ContextMenuIcon
+      <ContextMenu.Icon
         iconComponent={renderProfileImage()}
         className={styles.headerProfileFeedbackIcon}
         offset={{ top: 38, left: -32 }}
       >
-        <ContextMenuItem size="big" href="/profile/">
+        <ContextMenu.Item size="big" href="/profile/">
           My Profile
-        </ContextMenuItem>
+        </ContextMenu.Item>
         {children}
-        <ContextMenuItem size="big" onClick={onLogout}>
+        <ContextMenu.Item size="big" onClick={onLogout}>
           Logout
-        </ContextMenuItem>
-      </ContextMenuIcon>
+        </ContextMenu.Item>
+      </ContextMenu.Icon>
     </div>
   );
 };

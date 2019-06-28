@@ -1,0 +1,23 @@
+import { CodeBlock, ConfigBlock } from '@src/helpers/DocBlocks';
+import Slider from './Slider';
+import { Card } from './Slider.storybook.js';
+
+# Slider
+
+> A clickable UI element with active and hover states. Indicates to the user that it's clickable.
+
+<CodeBlock>
+  <Slider onChange={console.log}>
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+  </Slider>
+</CodeBlock>
+
+## Configuration
+
+<ConfigBlock of={Slider} />
+
+## Examples

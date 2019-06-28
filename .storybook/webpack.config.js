@@ -4,6 +4,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.mdx?$/,
+        use: ['babel-loader', '@mdx-js/loader'],
+      },
+      {
         test: /\.scss$/,
         use: [
           {
@@ -49,8 +53,9 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.scss'],
+    extensions: ['.js', '.jsx', '.scss', '.mdx'],
     alias: {
+      '@src': path.join(__dirname, '../src'),
       constants: path.join(__dirname, '../src/constants'),
       api: path.join(__dirname, '../src/api'),
       components: path.join(__dirname, '../src/components'),

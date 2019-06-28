@@ -1,8 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import Pagination from './Pagination';
+import Docs from './Pagination.mdx';
 
-storiesOf('Pagination Component', module).add('Default', () => {
-  const story = <Pagination />;
-  return story;
-});
+storiesOf('UI/Pagination', module).add('Documentation', () => <Docs />);

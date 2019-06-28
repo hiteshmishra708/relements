@@ -1,0 +1,17 @@
+import { CodeBlock, ConfigBlock } from '@src/helpers/DocBlocks';
+import Table from './Table';
+import { DATA } from './Table.storybook.js';
+
+# Table
+
+> A clickable UI element with active and hover states. Indicates to the user that it's clickable.
+
+<CodeBlock defaultValue="bots">
+  <Table sortable sortKey="title" sortOrder={-1} columns={DATA.columns} rows={DATA.data} />
+</CodeBlock>
+
+## Configuration
+
+<ConfigBlock of={Table} />
+
+## Examples
