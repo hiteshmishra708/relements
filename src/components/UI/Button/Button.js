@@ -53,6 +53,7 @@ const Button = ({
 
   return (
     <button
+      data-testid="button"
       type="button"
       disabled={disabled}
       ref={innerRef}
@@ -94,7 +95,7 @@ Button.propTypes = {
     Button.TYPES.YELLOW,
   ]),
   /** The size of the button (small/medium/big) */
-  size: PropTypes.oneOf([Button.SIZES.SMALL, Button.SIZES.MEDIUM, Button.SIZES.LARGE]),
+  size: PropTypes.oneOf([Button.SIZES.SMALL, Button.SIZES.MEDIUM, Button.SIZES.BIG]),
   /** Whether the button is disabled */
   disabled: PropTypes.bool,
   /** OnClick callback */
@@ -102,7 +103,7 @@ Button.propTypes = {
   /** The ref passed down to the outermost DOM element */
   innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.instanceOf(Element) })]),
   /** Children to render inside the button */
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]).isRequired,
 };
 
 Button.defaultProps = {

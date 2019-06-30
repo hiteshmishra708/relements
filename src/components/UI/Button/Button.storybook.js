@@ -5,4 +5,4 @@ import Button from './Button';
 
 storiesOf('UI/Button', module)
   .add('Documentation', () => <Docs />)
-  .add('Playground', () => <Button />);
+  .add('Playground', () => <Button>Button</Button>);

@@ -1,14 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
+import Button from 'components/UI/Button';
+import ContextMenu from 'components/Overlays/ContextMenu';
 import Header from './Header';
 import HeaderLogo from './HeaderLogo';
 import HeaderProfile from './HeaderProfile';
 import HeaderButtons from './HeaderButtons';
 import HeaderLeft from './HeaderLeft';
 import HeaderRight from './HeaderRight';
-import Button from '../Button';
-import ContextMenu from '../ContextMenu';
 
 storiesOf('Header Component', module).add('Default', () => {
   const story = (

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../Button';
-import Icon from '../Icon';
-import ContextMenu from '../ContextMenu';
+import Button from 'components/UI/Button';
+import Icon from 'components/UI/Icon';
+import ContextMenu from 'components/Overlays/ContextMenu';
 import styles from './HeaderProfile.scss';
 
 const PAGES = {

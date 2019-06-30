@@ -1,7 +1,7 @@
 import React from 'react';
 import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
-import useActivify from '@src/src/hooks/useActivify';
+import useActivify from '@src/hooks/useActivify';
 
 import styles from './DropdownOptions.scss';
 

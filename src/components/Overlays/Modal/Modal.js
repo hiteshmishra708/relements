@@ -2,9 +2,9 @@ import React from 'react';
 import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
 
-import useActivify from '@src/src/hooks/useActivify';
-import useEscapeKey from '@src/src/hooks/useEscapeKey';
-import useEnterKey from '@src/src/hooks/useEnterKey';
+import useActivify from '@src/hooks/useActivify';
+import useEscapeKey from '@src/hooks/useEscapeKey';
+import useEnterKey from '@src/hooks/useEnterKey';
 
 import styles from './Modal.scss';
 import ModalHeader from './components/ModalHeader';

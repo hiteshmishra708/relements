@@ -2,8 +2,8 @@ import React from 'react';
 import { Portal } from 'react-portal';
 import PropTypes from 'prop-types';
 
-import useActivify from '@src/src/hooks/useActivify';
-import useEscapeKey from '@src/src/hooks/useEscapeKey';
+import useActivify from '@src/hooks/useActivify';
+import useEscapeKey from '@src/hooks/useEscapeKey';
 
 import DrawerHeader from './components/DrawerHeader';
 import styles from './Drawer.scss';

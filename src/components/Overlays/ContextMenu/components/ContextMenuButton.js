@@ -37,7 +37,7 @@ export default class ContextMenuIcon extends React.Component {
         >
           {title}
           {' '}
-          <Icon className={styles.contextMenuButtonIcon} iconType="angle-down" />
+          <Icon className={styles.contextMenuButtonIcon} src="angle-down" />
         </Button>
       </React.Fragment>
     );
