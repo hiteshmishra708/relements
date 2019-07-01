@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import React from 'react';
 import 'jest-dom/extend-expect';
 import { render, fireEvent, cleanup } from '@testing-library/react';
@@ -6,7 +8,7 @@ import Button from '../Button';
 
 afterEach(cleanup);
 
-test('loads the button', async () => {
+test('Smoke', async () => {
   const { rerender, getByTestId } = render(<Button>Button</Button>);
   expect(getByTestId('button')).toBeInTheDocument();
   expect(getByTestId('button')).toHaveTextContent('Button');
@@ -15,7 +17,7 @@ test('loads the button', async () => {
 });
 
 test('Custom class', async () => {
-  const { rerender, getByTestId } = render(<Button className="test">Button</Button>);
+  const { getByTestId } = render(<Button className="test">Button</Button>);
   expect(getByTestId('button')).toHaveClass('test');
 });
 
@@ -40,10 +42,14 @@ test('Size variations', async () => {
     rerender(<Button size={Button.SIZES[type]}>Button</Button>);
     expect(getByTestId('button')).toBeInTheDocument();
   });
+
+  // invalid size
+  rerender(<Button size="123">Button</Button>);
+  expect(getByTestId('button')).toBeInTheDocument();
 });
 
 test('Disabled', async () => {
-  const { getByTestId, rerender } = render(<Button disabled>Button</Button>);
+  const { getByTestId } = render(<Button disabled>Button</Button>);
   expect(getByTestId('button')).toBeInTheDocument();
 });
 

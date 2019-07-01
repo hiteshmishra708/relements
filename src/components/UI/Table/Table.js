@@ -9,7 +9,7 @@ function Table({
   columns, rows, onSort, onRowClick, sortKey, sortOrder, className, prefixClassName,
 }) {
   return (
-    <div className={`${styles.table} ${className} ${prefixClassName}`}>
+    <div data-testid="table" className={`${styles.table} ${className} ${prefixClassName}`}>
       <Header
         prefixClassName={`${prefixClassName}-header`}
         onSort={onSort}

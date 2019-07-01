@@ -11,15 +11,14 @@ import styles from './TabsItem.scss';
  * If the children is an element instead, then it just directly get's rendered inside the div
  */
 export const TabsItem = ({
-  children, active, disabled, icon, prefixClassName, onClick, innerRef, value,
+  children, active, disabled, icon, prefixClassName, onClick, innerRef, value, type
 }) => {
   const component = typeof children !== 'string' && typeof children !== 'number' ? children : null;
   const title = component ? null : children;
-  const activeClassName = active ? styles.active : '';
-  const activeStringClassName = active ? 'active' : '';
+  const activeClassName = active ? `${styles.active} ${prefixClassName}-active` : '';
   const activeIconClassName = active ? 'active' : '';
   const disabledClassName = disabled ? styles.disabled : '';
-  const bigClassName = 'big' ? styles.big : '';
+  const bigClassName = type === 'big' ? styles.big : '';
 
   return (
     <div
@@ -27,7 +26,7 @@ export const TabsItem = ({
       ref={innerRef}
       className={`${
         styles.TabsItem
-      } ${prefixClassName}-item ${activeClassName} ${activeStringClassName} ${disabledClassName} ${bigClassName}`}
+      } ${prefixClassName} ${activeClassName} ${disabledClassName} ${bigClassName}`}
     >
       {component ? (
         React.cloneElement(component, { active })
@@ -36,10 +35,10 @@ export const TabsItem = ({
           {icon ? (
             <Icon
               src={icon}
-              className={`${styles.TabsItemIcon} ${bigClassName} ${prefixClassName}-item-icon ${activeIconClassName}`}
+              className={`${styles.TabsItemIcon} ${bigClassName} ${prefixClassName}-icon ${activeIconClassName}`}
             />
           ) : null}
-          <span className={`${styles.TabsItemText} ${activeClassName} ${bigClassName} ${prefixClassName}-item-text`}>
+          <span className={`${styles.TabsItemText} ${activeClassName} ${bigClassName} ${prefixClassName}-text`}>
             {title}
           </span>
         </React.Fragment>

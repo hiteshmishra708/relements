@@ -12,7 +12,7 @@ const getNumChildren = (children) => {
 export default function useSlider(children, { onChange, centerMode, initialSlide }) {
   const [left, setLeft] = React.useState(0);
   const [offset, setOffset] = React.useState(0);
-  const [slide, setSlide] = React.useState(0);
+  const [slide, setSlide] = React.useState(initialSlide);
   const sliderWrapperRef = React.useRef();
   const numberOfElements = getNumChildren(children);
   const sliderElementRefs = new Array(numberOfElements).fill(0).map(() => React.createRef());

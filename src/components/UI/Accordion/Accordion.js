@@ -6,7 +6,9 @@ import AccordionItem from './components/AccordionItem';
 import styles from './Accordion.scss';
 
 const Accordion = ({ children, className = '' }) => (
-  <div className={`${styles.accordionWrapper} ${className}`}>{children}</div>
+  <div data-testid="accordion" className={`${styles.accordionWrapper} ${className}`}>
+    {children}
+  </div>
 );
 
 Accordion.propTypes = {

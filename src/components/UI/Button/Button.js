@@ -47,7 +47,7 @@ const Button = ({
       case Button.SIZES.SMALL:
         return styles.small;
       default:
-        return '';
+        return styles.medium;
     }
   };
 

@@ -17,7 +17,7 @@ function Header({
         return (
           <div
             key={i}
-            className={`${styles.tableHeaderItem} ${activeClassName} ${prefixClassName}-header-column ${
+            className={`${styles.tableHeaderItem} ${activeClassName} ${prefixClassName}-column ${
               column.className
             }`}
             style={{ width: column.width, maxWidth: column.width, minWidth: column.width }}

@@ -6,6 +6,6 @@ import styles from './Slider.scss';
 
 storiesOf('UI/Slider', module).add('Documentation', () => <Docs />);
 
-export const Card = ({ active }) => {
-  return <div className={`${styles.card} ${active ? styles.active : ''}`} />;
+export const Card = ({ active, children }) => {
+  return <div className={`${styles.card} ${active ? styles.active : ''}`} > {children} </div>;
 };

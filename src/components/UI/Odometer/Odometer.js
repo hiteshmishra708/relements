@@ -9,11 +9,13 @@ const Odometer = ({
   children, fontSize, onClick, innerRef, className,
 }) => {
   let string = children;
+  if (!string) return null;
   string = typeof string === 'number' ? string.toString() : string;
   string = Array.isArray(string) ? string.join('') : string;
 
   return (
     <span
+      data-testid="odometer"
       style={{ fontSize, height: `${fontSize}px` }}
       ref={innerRef}
       onClick={onClick}

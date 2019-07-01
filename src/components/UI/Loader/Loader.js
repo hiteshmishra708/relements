@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import styles from './Loader.scss';
 
-const Loader = ({ size }) => {
+const Loader = ({ size, className }) => {
   return (
-    <div className={styles.loader}>
+    <div data-testid="loader" className={`${styles.loader} ${className}`}>
       <span className={styles.loaderInner} />
     </div>
   );

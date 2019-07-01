@@ -7,6 +7,7 @@ export const DATA = {
     {
       title: 'Rating',
       width: '100px',
+      sortKey: 'rating',
     },
     {
       title: 'Comment',
@@ -33,6 +34,26 @@ export const DATA = {
       { content: 'item', value: 'item' },
     ],
   ],
+
+  dataWithHidden: [{
+    hidden: true,
+    columns: [
+      { content: 'hello', value: 'hello' },
+      { content: 'this', value: 'this' },
+      { content: 'is', value: 'is' },
+      { content: 'an', value: 'an' },
+      { content: 'item', value: 'item'},
+    ],
+  },{
+    disabled: true,
+    columns: [
+      { content: 'hello', value: 'hello' },
+      { content: 'this', value: 'this' },
+      { content: 'is', value: 'is' },
+      { content: 'an', value: 'an' },
+      { content: 'item', value: 'item'},
+    ],
+  }],
 };
 
 storiesOf('UI/Table', module).add('Documentation', () => <Docs />);

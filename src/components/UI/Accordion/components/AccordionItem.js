@@ -55,7 +55,7 @@ function AccordionItem({
           if (!child) return null;
           return (
             <div className={`${styles.accordionItemBodyInner} ${prefixClassName}-body-item`} key={i}>
-              {React.cloneElement(child, { resizeContainer: _resize })}
+              {React.cloneElement(child, child.type !== 'div' ? { resizeContainer: _resize } : null)}
             </div>
           );
         })}

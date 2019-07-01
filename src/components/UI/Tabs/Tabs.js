@@ -18,7 +18,7 @@ const Tabs = ({
   const transform = `translateX(${left}px) scale(${width}, 1)`;
 
   return (
-    <div className={`${styles.Tabs} ${prefixClassName} ${className}`}>
+    <div data-testid="tabs" className={`${styles.Tabs} ${prefixClassName} ${className}`}>
       <div className={`${styles.TabsItems} ${prefixClassName}-items`}>{renderTabs()}</div>
       <div style={{ transform }} className={`${styles.TabsIndicator} ${prefixClassName}-indicator`} />
     </div>

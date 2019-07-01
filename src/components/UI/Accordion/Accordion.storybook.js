@@ -21,8 +21,8 @@ export class AccordionTest extends React.Component {
           onChange={i => this.setState({ active: i })}
           noPadding
         >
-          <div style={{ padding: 8, boxSizing: 'border-box' }} className="body">
-            <h3 style={{ marginTop: 0 }}>This is the body</h3>
+          <div data-testid="accordion-body" style={{ padding: 8, boxSizing: 'border-box' }} className="body">
+            <h3 style={{ marginTop: 0 }}>This is the body 1</h3>
             <p>This is some long form body</p>
           </div>
         </Accordion.Item>
@@ -33,8 +33,8 @@ export class AccordionTest extends React.Component {
           onChange={i => this.setState({ active: i })}
           noPadding
         >
-          <div style={{ padding: 8, boxSizing: 'border-box' }} className="body">
-            <h3 style={{ marginTop: 0 }}>This is the body</h3>
+          <div data-testid="accordion-body" style={{ padding: 8, boxSizing: 'border-box' }} className="body">
+            <h3 style={{ marginTop: 0 }}>This is the body 2</h3>
             <p>This is some long form body</p>
           </div>
         </Accordion.Item>
@@ -44,8 +44,9 @@ export class AccordionTest extends React.Component {
 
   renderHeader(i) {
     return (
-      <div style={{ padding: 8 }} className="header">
+      <div style={{ padding: 8 }} className="header" data-testid="accordion-header">
         Accordion Header
+        {' '}
         {i}
       </div>
     );

@@ -13,9 +13,9 @@ const renderDots = () => (
 );
 
 const Pagination = ({
-  className, numPages, page, onChange,
+  className, numPages, page, onChange, prefixClassName
 }) => {
-  const NUM_PAGES = numPages || 1;
+  const NUM_PAGES = numPages;
   const PAGE = page - 1;
   const leftDisabled = PAGE === 0 ? styles.disabled : '';
   const rightDisabled = PAGE === NUM_PAGES - 1 ? styles.disabled : '';
@@ -29,26 +29,26 @@ const Pagination = ({
 
   const renderArrow = React.useCallback((className, newPage) => {
     return (
-      <div onClick={() => onChange(newPage)} className={`${styles.paginationArrow} ${className}`}>
+      <div onClick={() => onChange(newPage)} className={`${styles.paginationArrow} ${prefixClassName}-arrow ${className}`}>
         <Icon src={AngleDownIcon} />
       </div>
     );
   });
 
   return (
-    <div className={`${styles.pagination} ${className}`}>
-      {renderArrow(`${styles.left} ${leftDisabled}`, page - 1)}
+    <div data-testid="pagination" className={`${styles.pagination} ${prefixClassName} ${className}`}>
+      {renderArrow(`${prefixClassName}-arrow-left ${styles.left} ${leftDisabled}`, page - 1)}
       {visiblePages.map((page, i) => {
-        const paginationButtonActive = PAGE === i ? styles.active : '';
+        const paginationButtonActive = PAGE === i ? `${styles.active} ${prefixClassName}-page-active` : '';
         if (page === 0 && visiblePages[i - 1] !== 0) return renderDots();
         if (page === 0) return null;
         return (
-          <div onClick={() => onChange(i + 1)} className={`${styles.paginationButton} ${paginationButtonActive}`}>
+          <div onClick={() => onChange(i + 1)} className={`${styles.paginationButton} ${paginationButtonActive} ${prefixClassName}-page`}>
             {i + 1}
           </div>
         );
       })}
-      {renderArrow(`${styles.right} ${rightDisabled}`, page + 1)}
+      {renderArrow(`${prefixClassName}-arrow-right ${styles.right} ${rightDisabled}`, page + 1)}
     </div>
   );
 };
@@ -58,6 +58,13 @@ Pagination.propTypes = {
   onChange: PropTypes.func,
   numPages: PropTypes.number,
   page: PropTypes.number,
+};
+
+Pagination.defaultProps = {
+  className: '',
+  onChange: () => {},
+  numPages: 1,
+  page: 1,
 };
 
 export default Pagination;

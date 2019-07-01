@@ -5,16 +5,10 @@ import PropTypes from 'prop-types';
 import styles from './Digit.scss';
 
 export default class Digit extends React.Component {
-  static propTypes = {
-    children: PropTypes.node,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    fontSize: PropTypes.number,
-  };
-
   constructor(props) {
     super(props);
     this.state = {
-      value: props.children || 0,
+      value: props.children,
     };
   }
 
@@ -55,9 +49,10 @@ export default class Digit extends React.Component {
         className={`${styles.digit} ${animatingClassName}`}
       >
         {new Array(30).fill(0).map((_, i) => {
-          const activeClassName = i % 10 === this.props.children ? styles.active : '';
+          const active = i === this.props.children;
+          const activeClassName = active % 10 ? styles.active : '';
           return (
-            <span key={i} className={`${styles.digitNumber} ${activeClassName}`}>
+            <span data-testid={active ? 'odometer-value' : undefined} key={i} className={`${styles.digitNumber} ${activeClassName}`}>
               {i % 10}
             </span>
           );
@@ -66,3 +61,9 @@ export default class Digit extends React.Component {
     );
   }
 }
+
+Digit.propTypes = {
+  children: PropTypes.node,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fontSize: PropTypes.number,
+};
