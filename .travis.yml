@@ -10,23 +10,24 @@ jobs:
   include:
     # Run the entire test suite
     - stage: test
+      name: 'All Tests'
       script: yarn test
 
     # Build the components for npm registry
-    - stage: build:relements
-      script: yarn build
-
     # Build the documentation website
-    - stage: build:documentation
-      script: yarn build:storybook
+    - stage: build
+    - script: yarn build
+      name: 'Build Relements'
+    - script: yarn build:storybook
+      name: 'Build Documentation'
 
     # Publish the package npm
-    - stage: publish:relements
-      script: yarn deploy
-
     # Publish the website on github pages
-    - stage: publish:storybook
-      script: yarn deploy:storybook
+    - stage: publish
+    - script: yarn deploy
+      name: 'Publish Relements'
+    - script: yarn deploy:storybook
+      name: 'Publish Storybook'
       deploy:
         provider: pages
         skip-cleanup: true
@@ -36,3 +37,9 @@ jobs:
         target_branch: gh-pages
         on:
           branch: master
+
+stages:
+  - test
+  - build
+  - name: publish
+    if: branch = master
