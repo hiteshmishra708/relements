@@ -4,11 +4,25 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import Icon from 'components/UI/Icon';
-import styles from './DatePicker.scss';
+import styles from './Calendar.scss';
 
 const LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 dayjs.extend(customParseFormat);
+
+const hexToRgb = (hex) => {
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
 
 /**
  * Translates the row/column index for an actual date (we only use the month from date)
@@ -66,7 +80,7 @@ const renderLabels = () => {
 /**
  * Renders each Row
  */
-const renderGridRow = (rowIndex, date, ranges, handleCellClick) => {
+const renderGridRow = (rowIndex, date, ranges, { handleCellClick, mergeColor }) => {
   return new Array(7).fill(0).map((_, columnIndex) => {
     const { text, day, invisible } = getTextForCell(date, rowIndex, columnIndex);
 
@@ -74,13 +88,27 @@ const renderGridRow = (rowIndex, date, ranges, handleCellClick) => {
     let hasLeftEdgeBorder = false;
     let hasRightEdgeBorder = false;
     let hasBottomEdgeBorder = false;
-    ranges.forEach(({ from, to, color }) => {
+    let style = {};
+    let lastColor = '';
+    ranges.forEach(({ from, to, color = '#1b9cfc' }) => {
+      const adjacentCell = day.add(7, 'd');
+      const adjacentCellIsInThisMonth = adjacentCell.month() === day.month();
+
+      lastColor = color;
+
       if (invisible) return;
-      if (day.add(7, 'd').isSame(from, 'd')) hasBottomEdgeBorder = true;
-      if (day.add(7, 'd').isSame(to, 'd')) hasBottomEdgeBorder = true;
+      if (adjacentCell.isSame(from, 'd') && adjacentCellIsInThisMonth) hasBottomEdgeBorder = true;
+      if (adjacentCell.isSame(to, 'd') && adjacentCellIsInThisMonth) hasBottomEdgeBorder = true;
       if (day.isSame(from, 'd')) hasLeftEdgeBorder = true;
       if (day.isSame(to, 'd')) hasRightEdgeBorder = true;
-      if (isSelected(day, from, to)) isSelectedClassName = styles.selected;
+      if (isSelected(day, from, to)) {
+        isSelectedClassName = styles.selected;
+        if (!style.backgroundColor) {
+          style = { borderColor: color, borderBottomColor: color, backgroundColor: `rgba(${Object.values(hexToRgb(color))}, 0.3)` };
+        } else {
+          style = { borderLeftColor: 'transparent', borderRightColor: 'transparent', borderBottomColor: mergeColor, backgroundColor: `rgba(${Object.values(hexToRgb(mergeColor))}, 0.3)`}
+        }
+      }
     });
 
     // const disabledClassName = disabled ? styles.disabled : '';
@@ -92,7 +120,8 @@ const renderGridRow = (rowIndex, date, ranges, handleCellClick) => {
         style={{
           borderLeftWidth: hasLeftEdgeBorder ? 1 : 0,
           borderRightWidth: hasRightEdgeBorder ? 1 : 0,
-          borderBottomColor: hasBottomEdgeBorder ? '#1b9cfc' : undefined,
+          borderBottomColor: hasBottomEdgeBorder ? lastColor : undefined,
+          ...style,
         }}
         className={`${styles.calendarGridRowItem} ${isSelectedClassName} ${invisibleClassName}`}
         // } ${disabledClassName}`}
@@ -106,30 +135,31 @@ const renderGridRow = (rowIndex, date, ranges, handleCellClick) => {
 /**
  * Renders the 6 * 7 grid
  */
-const renderGrid = (date, ranges, handleCellClick) => {
+const renderGrid = (date, ranges, props) => {
   return (
     <div className={styles.calendarGrid}>
       {new Array(6).fill(0).map((_, i) => (
-        <div className={styles.calendarGridRow}>{renderGridRow(i, date, ranges, handleCellClick)}</div>
+        <div className={styles.calendarGridRow}>{renderGridRow(i, date, ranges, props)}</div>
       ))}
     </div>
   );
 };
 
-const renderCalendar = (date, ranges, handleCellClick) => {
+const renderCalendar = (date, ranges, props) => {
   return (
     <div className={styles.calendar}>
       {renderHeader(date)}
       {renderLabels(date)}
-      {renderGrid(date, ranges, handleCellClick)}
+      {renderGrid(date, ranges, props)}
     </div>
   );
 };
 
-const DatePicker = ({
+const Calendar = ({
   value,
   numMonths,
-  onChange
+  onChange,
+  mergeColor,
 }) => {
   const ranges = Array.isArray(value) ? value : [{ from: value, to: value }];
   const [viewingMonth, setViewingMonth] = React.useState(dayjs());
@@ -146,18 +176,23 @@ const DatePicker = ({
     onChange(day);
   });
 
+  const props = {
+    handleCellClick,
+    mergeColor,
+  }
+
   return (
     <div className={styles.datePicker}>
       <Icon src="angle-down" className={styles.datePickerNavigationIcon} onClick={viewPreviousMonth} />
       <Icon src="angle-down" className={`${styles.datePickerNavigationIcon} ${styles.right}`} onClick={viewNextMonth} />
       {new Array(numMonths)
         .fill(0)
-        .map((_, i) => renderCalendar(viewingMonth.subtract(numMonths - i - 1, 'months'), ranges, handleCellClick))}
+        .map((_, i) => renderCalendar(viewingMonth.subtract(numMonths - i - 1, 'months'), ranges, props))}
     </div>
   );
 };
 
-DatePicker.propTypes = {
+Calendar.propTypes = {
   onChange: PropTypes.func,
   numMonths: PropTypes.number,
   value: PropTypes.oneOfType([
@@ -172,11 +207,10 @@ DatePicker.propTypes = {
   ]),
 };
 
-DatePicker.defaultProps = {
+Calendar.defaultProps = {
   onChange: () => {},
-  numMonths: 2,
-  // value: dayjs(),
-  value: [{ from: dayjs(), to: dayjs() }, { from: dayjs().subtract(10, 'd'), to: dayjs().subtract(4, 'd') }]
+  numMonths: 1,
+  value: dayjs(),
 };
 
-export default DatePicker;
+export default Calendar;

@@ -28,13 +28,13 @@ class NumberCounter extends React.Component {
         <div className={`${styles.counter} ${isZeroClassName}`}>
           <Icon
             onClick={this._handleChange(-1)}
-            iconType="minus"
+            src="minus"
             className={`${styles.counterButton} ${minusDisabledClassName}`}
           />
           <Odometer>{value.toString()}</Odometer>
           <Icon
             onClick={this._handleChange(1)}
-            iconType="plus2"
+            src="plus2"
             className={`${styles.counterButton} ${plusDisabledClassName}`}
           />
         </div>

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import NumberCounter from './NumberCounter';
 
-storiesOf('NumberCounterInput', module).add('Single', () => {
+storiesOf('Inputs/NumberCounter', module).add('Single', () => {
   const story = <NumberCounterWrapper />;
   return story;
 });

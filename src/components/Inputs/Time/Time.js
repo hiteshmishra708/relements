@@ -56,7 +56,7 @@ class Time extends React.Component {
           className={`${styles.timeInputWrapper} ${activeClassName} ${focusedClassName}`}
         >
           <div className={styles.timeInput}>{parsedValue || <span>{placeholder}</span>}</div>
-          <Icon src={{ default: AngleDownIcon }} />
+          <Icon src={ AngleDownIcon } />
           <div
             className={styles.timePickrInput}
             ref={(DOMNode) => {

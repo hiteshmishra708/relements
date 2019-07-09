@@ -1,4 +1,5 @@
 import { addParameters, configure } from '@storybook/react';
+import customTheme from './theme';
 import './config.scss';
 
 // automatically import all files ending in *.storybook.js
@@ -11,8 +12,8 @@ addParameters({
   options: {
     showPanel: false,
     isToolshown: false,
-    isFullscreen: true,
     sidebarAnimations: false,
+    theme: customTheme,
   },
 });
 

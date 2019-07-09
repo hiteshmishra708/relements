@@ -9,11 +9,11 @@ import Icon from 'components/UI/Icon';
 import PlusIcon from 'icons/plus.svg';
 import TrashIcon from 'icons/trash.svg';
 import PlaceholderIcon from 'icons/placeholder.svg';
-import styles from './Image.scss';
+import styles from './File.scss';
 
-import FilePlaceholder from './FilePlaceholder';
-import ImagePlaceholder from './ImagePlaceholder';
-import ImageProgressBar from './ImageProgressBar';
+import FilePlaceholder from './components/FilePlaceholder';
+import ImagePlaceholder from './components/ImagePlaceholder';
+import ImageProgressBar from './components/ImageProgressBar';
 
 const FILE_ACCEPT_TYPES = "image/png, image/jpg, image/jpeg, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword";
 const IMAGE_ACCEPT_TYPES = "image/png, image/jpg, image/jpeg";
@@ -69,7 +69,7 @@ export default class Image extends React.Component {
 
   _renderAddMoreButton = () => (
     <div className={styles.addNewFile}>
-      <Icon src={{ default: PlusIcon }} className={styles.addNewFileIcon} />
+      <Icon src={ PlusIcon } className={styles.addNewFileIcon} />
       <span className={styles.addNewFileText}>Add more images</span>
       {this._renderInput(this.props.multiple)}
     </div>
@@ -128,7 +128,7 @@ export default class Image extends React.Component {
     if (!genericUtils.isValidURL(previewURL)) {
       return (
         <div className={styles.customKeyImage}>
-          <Icon className={styles.carouselImagePlaceholderIcon} src={{ default: PlaceholderIcon }} />
+          <Icon className={styles.carouselImagePlaceholderIcon} src={PlaceholderIcon} />
           {previewURL}
         </div>
       );
@@ -138,7 +138,7 @@ export default class Image extends React.Component {
       <div className={styles.imageInputPreviewWrapper}>
         <img src={previewURL} className={`${styles.imageInputPreview} ${isUploadingClassName}`} />
         <div onClick={() => this._deleteFile(index)} className={styles.imageInputPreviewDelete}>
-          <Icon src={{ default: TrashIcon }} className={styles.imageInputPreviewDeleteIcon} />
+          <Icon src={TrashIcon} className={styles.imageInputPreviewDeleteIcon} />
         </div>
       </div>
     );
@@ -152,7 +152,7 @@ export default class Image extends React.Component {
           {this.state.filenames[index] || 'Attachment'}
         </a>
         <div onClick={() => this._deleteFile(index)} className={styles.filePreview}>
-          <Icon src={{ default: TrashIcon }} className={styles.filePreviewDeleteIcon} />
+          <Icon src={TrashIcon} className={styles.filePreviewDeleteIcon} />
         </div>
       </div>
     );

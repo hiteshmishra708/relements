@@ -1,0 +1,47 @@
+@import 'constants/index.scss';
+
+.input {
+  position: relative;
+  margin-bottom: 0px;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 140px;
+  input {
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 4px;
+    font-size: 11px;
+    padding-left: 42px;
+    box-sizing: border-box;
+    min-width: 0;
+    cursor: pointer;
+  }
+
+  &Label {
+    position: absolute;
+    font-size: 10px;
+    color: #999;
+    top: 52%;
+    left: 6px;
+    transform: translateY(-50%);
+    text-transform: uppercase;
+  }
+
+  &.endInput {
+    input {
+      padding-left: 31px;
+    }
+  }
+
+  &.focused {
+    border: 1px solid $primary-color;
+  }
+
+  &.compare.focused {
+    border-color: $yellow-color;
+  }
+}
+

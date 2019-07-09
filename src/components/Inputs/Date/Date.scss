@@ -74,7 +74,7 @@
 
   position: absolute;
   bottom: 0;
-  transform: translate3d(0,100%,0);
+  transform: translate3d(0, 100%, 0);
   padding-top: 4px;
 }
 
@@ -102,8 +102,20 @@
     pointer-events: auto;
   }
 
+  .date-picker-tooltip {
+    height: auto;
+    max-height: inherit;
+    .flatpickr-calendar.inline {
+      position: static;
+    }
+    .flatpickr-prev-month,
+    .flatpickr-next-month {
+      padding-top: 2px;
+    }
+  }
+
   .flatpickr-day.disabled {
     border-right-color: transparent !important;
-    color: rgba(64,72,72,0.1) !important;
+    color: rgba(64, 72, 72, 0.1) !important;
   }
 }

@@ -133,7 +133,7 @@ $GRID_HEIGHT: 28px;
         &.selected {
           background-color: rgba($primary-color, 0.3);
           border-color: $primary-color;
-          border-bottom: 1px solid $primary-color !important;
+          border-bottom: 1px solid $primary-color;
           border-left-style: solid;
           border-right-style: solid;
           border-left-width: 0;

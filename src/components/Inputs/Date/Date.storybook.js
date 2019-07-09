@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import DatePicker from './Date';
 
-storiesOf('DateInput', module)
+storiesOf('Inputs/Date', module)
   .add('Single', () => {
     const story = <DateWrapper />;
     return story;
@@ -15,19 +15,20 @@ storiesOf('DateInput', module)
 
 class DateWrapper extends React.Component {
   state = {
-    value: undefined,
+    value: {
+      startDate: new Date(),
+      endDate: new Date(),
+    },
   };
 
   render() {
-    console.log(this.state.value);
-    console.log(this.props.mode);
     return (
       <DatePicker
-        mode={this.props.mode || 'single'}
         label="Select Date"
         placeholder="Select..."
         value={this.state.value}
         onChange={value => this.setState({ value })}
+        minDate={new Date()}
       />
     );
   }

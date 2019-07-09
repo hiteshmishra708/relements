@@ -1,0 +1,50 @@
+import { CodeBlock, ConfigBlock } from '@src/helpers/DocBlocks';
+import dayjs from 'dayjs';
+import Calendar from './Calendar';
+
+# Calendar
+
+> A clickable UI element with active and hover states. Indicates to the user that it's clickable.
+
+<CodeBlock>
+  <Calendar numMonths={2} />
+</CodeBlock>
+
+## Configuration
+
+<ConfigBlock of={Calendar} />
+
+## Examples
+
+<CodeBlock title="Single">
+  <Calendar />
+</CodeBlock>
+
+<CodeBlock title="Multiple">
+  <Calendar numMonths={2} />
+</CodeBlock>
+
+<CodeBlock title="Range">
+  <Calendar numMonths={1} value={[{ from: dayjs(), to: dayjs().add(7, 'd') }]} />
+</CodeBlock>
+
+<CodeBlock title="Multiple Ranges">
+  <Calendar
+    numMonths={1}
+    value={[
+      { from: dayjs(), to: dayjs().add(7, 'd'), color: '#F00' },
+      { from: dayjs().add(9, 'd'), to: dayjs().add(16, 'd') }
+    ]}
+  />
+</CodeBlock>
+
+<CodeBlock title="Merging Ranges">
+  <Calendar
+    numMonths={1}
+    mergeColor="#22AA22"
+    value={[
+      { from: dayjs(), to: dayjs().add(7, 'd'), color: '#F00' },
+      { from: dayjs().add(4, 'd'), to: dayjs().add(16, 'd') }
+    ]}
+  />
+</CodeBlock>
