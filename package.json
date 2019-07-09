@@ -5,7 +5,6 @@
   "main": "build/bundle.umd.js",
   "module": "build/bundle.mjs",
   "scripts": {
-    "precommit": "lint-staged -c config/lint-staged.config.js",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build": "NODE_ENV=production rollup -c --config config/rollup.config.js",
     "build:storybook": "build-storybook -s public",
@@ -107,7 +106,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn precommit"
+      "pre-commit": "lint-staged -c config/lint-staged.config.js"
     }
   }
 }
