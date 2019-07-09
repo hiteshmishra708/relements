@@ -6,7 +6,7 @@ import ContextMenuItem from './components/ContextMenuItem';
 import ContextMenuButton from './components/ContextMenuButton';
 import ContextMenuIcon from './components/ContextMenuIcon';
 
-const ContextMenu = (props) => {
+const ContextMenu = props => {
   return <ContextMenuPortal {...props} />;
 };
 
@@ -30,7 +30,7 @@ ContextMenu.propTypes = {
 ContextMenu.defaultProps = {
   offset: {
     left: 0,
-    top: 1,
+    top: 0,
   },
   onOverlayClick: () => {},
 };
