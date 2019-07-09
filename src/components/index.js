@@ -1,29 +1,15 @@
-export { default as Accordion } from './Accordion';
-export { AccordionItem } from './Accordion';
+export { default as Slider} from './UI/Slider'
+export { default as Table} from './UI/Table'
+export { default as Tabs} from './UI/Tabs'
+export { default as Calendar} from './UI/Calendar'
+export { default as Accordion} from './UI/Accordion'
+export { default as Icon} from './UI/Icon'
+export { default as Button} from './UI/Button'
+export { default as Pagination} from './UI/Pagination'
+export { default as Odometer} from './UI/Odometer'
+export { default as Loader} from './UI/Loader'
+export { default as Input} from './Inputs'
 
-export { default as Button } from './Button';
-export { default as Pagination } from './Pagination';
-
-export { default as ComponentDrawer } from './ComponentDrawer';
-export { ComponentDrawerHeader } from './ComponentDrawer';
-export { ComponentDrawerBody } from './ComponentDrawer';
-
-export { default as ComponentModal } from './ComponentModal';
-export { default as ComponentSlider } from './ComponentSlider';
-export { default as ComponentToastMessage } from './ComponentToastMessage';
-export { default as ComponentTooltip } from './ComponentTooltip';
-export { default as Icon } from './Icon';
-export { default as Input } from './Input';
-export { default as Loader } from './Loader';
-
-export { default as ContextMenu } from './ContextMenu';
-export { default as ContextMenuItem } from './ContextMenu/ContextMenuItem';
-export { default as ContextMenuIcon } from './ContextMenu/ContextMenuIcon';
-export { default as ContextMenuButton } from './ContextMenu/ContextMenuButton';
-
-export { default as Tabs } from './Tabs';
-export { default as Table } from './Table';
-
-export { default as Header } from './Header';
-export { default as Odometer } from './Odometer';
-export { default as WithTooltip } from './WithTooltip';
+export { default as ContextMenu} from './Overlays/ContextMenu'
+export { default as Drawer} from './Overlays/Drawer'
+export { default as Modal} from './Overlays/Modal'

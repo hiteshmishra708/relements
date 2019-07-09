@@ -47,13 +47,19 @@ const plugins = [
 export default [
   {
     input: { index: 'src/index.js', ...chunkExports },
-    output: [{ dir: 'build/esm', format: 'esm' }],
+    output: [{ dir: 'build/esm', format: 'esm', globals: {
+      react: 'React',
+      'react-dom': 'ReactDOM'
+    }}],
     external: ['react', 'react-dom', 'react-proptypes'],
     plugins,
   },
   {
     input: 'src/index.js',
-    output: [{ name: 'Relements', file: 'build/bundle.umd.js', format: 'umd' }],
+    output: [{ name: 'Relements', file: 'build/bundle.umd.js', format: 'umd', globals: {
+      react: 'React',
+      'react-dom': 'ReactDOM'
+    }}],
     external: ['react', 'react-dom', 'react-proptypes'],
     plugins: [...plugins, terser()],
   },

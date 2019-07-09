@@ -10,23 +10,20 @@ jobs:
   include:
     # Run the entire test suite
     - stage: test
-      script: yarn test
+    - script:
+        - yarn test
+        - yarn coverage
+      name: 'Run Tests & Coverage'
 
     # Build the components for npm registry
-    - stage: build:relements
-      script: yarn build
-
     # Build the documentation website
-    - stage: build:documentation
-      script: yarn build:storybook
-
-    # Publish the package npm
-    - stage: publish:relements
-      script: yarn deploy
-
-    # Publish the website on github pages
-    - stage: publish:storybook
-      script: yarn deploy:storybook
+    - stage: deploy
+    - script:
+        - yarn build
+        # - yarn deploy
+      name: 'Build & Deploy Relements'
+    - script: yarn build:storybook
+      name: 'Build & Deploy Documentation'
       deploy:
         provider: pages
         skip-cleanup: true
@@ -36,3 +33,30 @@ jobs:
         target_branch: gh-pages
         on:
           branch: master
+    
+    # Build the components for npm registry
+    # Build the documentation website
+    - stage: deploy
+    - script:
+        - yarn build
+        # - yarn deploy
+      name: 'Build & Deploy Relements'
+    - script: yarn build:storybook
+      name: 'Build & Deploy Documentation'
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        local_dir: storybook-static
+        repo: pagrawl3/relements
+        target_branch: gh-pages
+        on:
+          branch: master
+
+stages:
+  - test
+  - build
+  - name: deploy
+    if: branch = master
+  - name: preview
+    if: branch = master
