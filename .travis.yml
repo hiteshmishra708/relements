@@ -20,7 +20,7 @@ jobs:
     - stage: build
     - script:
         - yarn build
-        - yarn deploy
+        # - yarn deploy
       name: 'Build & Deploy Relements'
     - script: yarn build:storybook
       name: 'Build & Deploy Documentation'
