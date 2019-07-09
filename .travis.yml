@@ -24,8 +24,8 @@ jobs:
     # Publish the package npm
     # Publish the website on github pages
     - stage: publish
-    - script: yarn deploy
-      name: 'Publish Relements'
+    # - script: yarn deploy
+    #   name: 'Publish Relements'
     - script: yarn deploy:storybook
       name: 'Publish Storybook'
       deploy:
