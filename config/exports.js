@@ -25,9 +25,9 @@ export default {
   'input/toggle': 'src/components/Inputs/Toggle/index.js',
   'input/popup': 'src/components/Inputs/Popup/index.js',
 
-  'overlays/contextMenu': 'src/components/overlays/ContextMenu/index.js',
-  'overlays/drawer': 'src/components/overlays/Drawer/index.js',
-  'overlays/modal': 'src/components/overlays/Modal/index.js',
+  'overlays/contextMenu': 'src/components/Overlays/ContextMenu/index.js',
+  'overlays/drawer': 'src/components/Overlays/Drawer/index.js',
+  'overlays/modal': 'src/components/Overlays/Modal/index.js',
   
   'hooks/useActivify': 'src/hooks/useActivify/index.js',
   'hooks/useLoader': 'src/hooks/useLoader/index.js',
