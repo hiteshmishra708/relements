@@ -1,0 +1,5 @@
+{
+  "hooks": {
+    "pre-commit": "lint-staged -c config/lint-staged.config.js"
+  }
+}
