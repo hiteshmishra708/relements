@@ -18,18 +18,12 @@ jobs:
     # Build the components for npm registry
     # Build the documentation website
     - stage: build
-    - script: yarn build
-      name: 'Build Relements'
+    - script:
+        - yarn build
+        - yarn deploy
+      name: 'Build & Deploy Relements'
     - script: yarn build:storybook
-      name: 'Build Documentation'
-
-    # Publish the package npm
-    # Publish the website on github pages
-    - stage: publish
-    # - script: yarn deploy
-    #   name: 'Publish Relements'
-    - script: yarn deploy:storybook
-      name: 'Publish Storybook'
+      name: 'Build & Deploy Documentation'
       deploy:
         provider: pages
         skip-cleanup: true
