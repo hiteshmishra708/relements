@@ -10,10 +10,10 @@ jobs:
   include:
     # Run the entire test suite
     - stage: test
-    - script: yarn test
-      name: 'Run Tests'
-    - script: yarn coverage
-      name: 'Collect Code Coverage'
+    - script:
+        - yarn test
+        - yarn coverage
+      name: 'Run Tests & Coverage'
 
     # Build the components for npm registry
     # Build the documentation website

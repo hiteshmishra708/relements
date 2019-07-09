@@ -8,7 +8,7 @@ export { default as Button} from './UI/Button'
 export { default as Pagination} from './UI/Pagination'
 export { default as Odometer} from './UI/Odometer'
 export { default as Loader} from './UI/Loader'
-export { default as Input} from './inputs'
+export { default as Input} from './Inputs'
 
 export { default as ContextMenu} from './overlays/ContextMenu'
 export { default as Drawer} from './overlays/Drawer'
