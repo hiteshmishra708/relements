@@ -5,6 +5,7 @@
   "main": "build/bundle.umd.js",
   "module": "build/bundle.mjs",
   "scripts": {
+    "precommit": "lint-staged -c config/lint-staged.config.js",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build": "NODE_ENV=production rollup -c --config config/rollup.config.js",
     "build:storybook": "build-storybook -s public",
@@ -75,6 +76,7 @@
     "json-loader": "^0.5.7",
     "majestic": "^1.6.0",
     "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",
     "react-docgen-external-proptypes-handler": "^1.0.3",
@@ -102,5 +104,10 @@
     "webfontloader": "^1.6.28",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
+    }
   }
 }

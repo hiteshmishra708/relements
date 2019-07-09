@@ -1,0 +1,6 @@
+dist
+node_modules
+coverage
+build
+storybook-static
+__jest__
