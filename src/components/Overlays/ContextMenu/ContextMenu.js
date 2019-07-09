@@ -30,7 +30,7 @@ ContextMenu.propTypes = {
 ContextMenu.defaultProps = {
   offset: {
     left: 0,
-    top: 0,
+    top: 1,
   },
   onOverlayClick: () => {},
 };
