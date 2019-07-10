@@ -1,6 +1,6 @@
 # Tells Travis we're running on a Node environment
 language: node_js
-node_js: '8'
+node_js: "8"
 cache: yarn
 
 install:
@@ -13,36 +13,17 @@ jobs:
     - script:
         - yarn test
         - yarn coverage
-      name: 'Run Tests & Coverage'
+      name: "Run Tests & Coverage"
 
     # Build the components for npm registry
     # Build the documentation website
     - stage: deploy
     - script:
         - yarn build
-        # - yarn deploy
-      name: 'Build & Deploy Relements'
+        - yarn semantic-release
+      name: "Build & Deploy Relements"
     - script: yarn build:storybook
-      name: 'Build & Deploy Documentation'
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        local_dir: storybook-static
-        repo: pagrawl3/relements
-        target_branch: gh-pages
-        on:
-          branch: master
-    
-    # Build the components for npm registry
-    # Build the documentation website
-    - stage: deploy
-    - script:
-        - yarn build
-        # - yarn deploy
-      name: 'Build & Deploy Relements'
-    - script: yarn build:storybook
-      name: 'Build & Deploy Documentation'
+      name: "Build & Deploy Documentation"
       deploy:
         provider: pages
         skip-cleanup: true
