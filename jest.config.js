@@ -10,9 +10,9 @@ module.exports = {
     '^.+\\.js$': 'babel-jest',
   },
   moduleNameMapper: {
-    '\\.(css|less|scss)$': '<rootDir>/__jest__/styleMock.js',
-    '\\.(mdx|md)$': '<rootDir>/__jest__/docsMock.js',
-    '\\.(svg)$': '<rootDir>/__jest__/svgMock.js',
+    '\\.(css|less|scss)$': '<rootDir>/.jest/styleMock.js',
+    '\\.(mdx|md)$': '<rootDir>/.jest/docsMock.js',
+    '\\.(svg)$': '<rootDir>/.jest/svgMock.js',
   },
-  setupFilesAfterEnv: ["<rootDir>/__jest__/setup.js"],
+  setupFilesAfterEnv: ['<rootDir>/.jest/setup.js'],
 };

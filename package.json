@@ -1,6 +1,6 @@
 {
   "name": "@haptik/relements",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "UI Components Library for React",
   "main": "build/bundle.umd.js",
   "module": "build/bundle.mjs",
@@ -11,11 +11,13 @@
     "dev": "NODE_ENV=development webpack --watch --config config/webpack.development.config.js --colors",
     "test": "NODE_ENV=test jest --coverage",
     "test:ui": "NODE_ENV=test majestic --coverage",
-    "coverage": "codecov"
+    "coverage": "codecov",
+    "semantic-release": "semantic-release",
+    "commit": "git cz"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hellohaptik/atlas/zeus/common/hsl"
+    "url": "https://github.com/pagrawl3/relements"
   },
   "author": "Pratham Agrawal",
   "license": "",
@@ -45,6 +47,11 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "@commitlint/prompt": "^8.0.0",
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/git": "^7.0.16",
     "@storybook/addon-actions": "^5.1.9",
     "@storybook/addon-knobs": "^5.1.9",
     "@storybook/addon-links": "^5.1.9",
@@ -58,7 +65,9 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-react-docgen": "^3.1.0",
     "codecov": "^3.5.0",
+    "commitizen": "^3.1.1",
     "css-loader": "^3.0.0",
+    "cz-conventional-changelog": "2.1.0",
     "dayjs": "^1.8.12",
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.0",
@@ -99,11 +108,20 @@
     "rollup-plugin-terser": "^5.0.0",
     "rollup-plugin-uglify": "^6.0.2",
     "sass-loader": "^7.1.0",
+    "semantic-release": "^15.13.18",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.3",
     "url-loader": "^2.0.1",
     "webfontloader": "^1.6.28",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.5"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
