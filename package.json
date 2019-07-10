@@ -67,6 +67,7 @@
     "codecov": "^3.5.0",
     "commitizen": "^3.1.1",
     "css-loader": "^3.0.0",
+    "cz-conventional-changelog": "2.1.0",
     "dayjs": "^1.8.12",
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.0",
@@ -117,5 +118,10 @@
   },
   "publishConfig": {
     "access": "restricted"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
