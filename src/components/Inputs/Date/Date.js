@@ -1,15 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import dayjs from 'dayjs';
+import React from "react";
+import PropTypes from "prop-types";
+import dayjs from "dayjs";
 
-import Tooltip from '@src/components/Overlays/Tooltip';
-import Icon from '@src/components/UI/Icon';
-import AngleDownIcon from '@src/icons/angle-down.svg';
+import Tooltip from "@src/components/Overlays/Tooltip";
+import Icon from "@src/components/UI/Icon";
+import AngleDownIcon from "@src/icons/angle-down.svg";
 
-import RangeComparison from './components/RangeComparison';
-import SinglePicker from './components/SinglePicker';
+import { TextInput } from "../_common/TextInput";
+import { Label } from "../_common/Label";
 
-import styles from './Date.scss';
+import RangeComparison from "./components/RangeComparison";
+import SinglePicker from "./components/SinglePicker";
+
+import styles from "./Date.scss";
 
 class Date extends React.Component {
   state = {
@@ -24,7 +27,6 @@ class Date extends React.Component {
       className,
       error,
       disabled,
-      onChange,
       maxDate,
       minDate,
       comparisonMaxDate,
@@ -33,8 +35,8 @@ class Date extends React.Component {
       withComparison,
       value,
     } = this.props;
-    const errorClassName = error ? styles.dateError : '';
-    const disabledClassName = disabled ? styles.disabled : '';
+    const errorClassName = error ? styles.dateError : "";
+    const disabledClassName = disabled ? styles.disabled : "";
 
     return (
       <div
@@ -43,7 +45,7 @@ class Date extends React.Component {
         {this.renderLabel()}
         {this.renderInput()}
         <Tooltip
-          onClose={this.toggleDate}
+          onClose={this.closeDate}
           attachTo={this.props.attachTo || this._DOMNode}
           active={this.state.active}
           offset={this.props.offset}
@@ -53,7 +55,7 @@ class Date extends React.Component {
           {withRange ? (
             <RangeComparison
               value={value}
-              onChange={onChange}
+              onChange={this._handleChange}
               maxDate={maxDate}
               minDate={minDate}
               comparisonMaxDate={comparisonMaxDate}
@@ -75,36 +77,38 @@ class Date extends React.Component {
   }
 
   renderLabel() {
-    if (!this.props.label) return null;
-    const focusedClassName = this.state.focused ? styles.focused : '';
+    const { prefixClassName, error, label } = this.props;
+    if (!label) return null;
     return (
-      <span className={`${styles.dateLabel} ${focusedClassName}`}>
-        {this.props.label}
-      </span>
+      <Label
+        focused={this.state.focused}
+        error={error}
+        className={`${prefixClassName}-label`}
+      >
+        {label}
+      </Label>
     );
   }
 
   renderInput() {
+    const { focused, active } = this.state;
+    const { placeholder, prefixClassName, onFocus, onBlur } = this.props;
     const parsedValue = this._getParsedDate();
-    const activeClassName = this.state.active ? styles.active : '';
-    const focusedClassName = this.state.focused ? styles.focused : '';
-    const disabledClassName = this.props.disabled ? styles.disabled : '';
     return (
-      <div
-        ref={this._DOMNode}
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex="0"
+      <TextInput
+        className={`${prefixClassName}-input`}
+        innerRef={this._DOMNode}
         onKeyDown={this._handleKeyDown}
-        onFocus={this._handleFocus}
-        onBlur={this._handleBlur}
-        onClick={this.toggleDate}
-        className={`${styles.dateInputWrapper} ${activeClassName} ${disabledClassName} ${focusedClassName}`}
-      >
-        <div className={styles.dateInput}>
-          {parsedValue || <span>{this.props.placeholder}</span>}
-        </div>
-        <Icon src={AngleDownIcon} />
-      </div>
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onMouseDown={this.toggleDate}
+        focused={focused}
+        active={active}
+        value={parsedValue}
+        placeholder={placeholder}
+        disabled
+        postfixComponent={<Icon src={AngleDownIcon} />}
+      />
     );
   }
 
@@ -114,26 +118,23 @@ class Date extends React.Component {
     return (
       <div className={`${styles.dateInputSubtext} ${errorMsgClassName}`}>
         <span className={styles.dateInputSubtextError}>{errorMessage}</span>
-;
       </div>
     );
   };
 
   _getParsedDate = () => {
-    // let parsedValue = '';
-    // const value = this.props.value;
-    let value = '';
-    if (this.props.withRange) {
-      value = this._getParsedValueFromObject(this.props.value);
-      if (!value.startDate.isValid() || !value.endDate.isValid()) return '';
-      return `${value.startDate.format(
-        'DD MMM, YYYY',
-      )} - ${value.endDate.format('DD MMM, YYYY')}`;
+    const { withRange, value } = this.props;
+    const format = "DD MMM, YYYY";
+
+    if (withRange) {
+      const { startDate, endDate } = this._getParsedValueFromObject(value);
+      if (!startDate.isValid() || !endDate.isValid()) return "";
+      return `${startDate.format(format)} - ${endDate.format(format)}`;
     }
 
-    value = this._getParsedValueFromDate(this.props.value);
-    if (!value.isValid()) return '';
-    return `${value.format('DD MMMM, YYYY')}`;
+    const date = this._getParsedValueFromDate(value);
+    if (!date.isValid()) return "Invalid Date";
+    return `${date.format("DD MMMM, YYYY")}`;
   };
 
   _getParsedValueFromObject = () => {
@@ -159,25 +160,17 @@ class Date extends React.Component {
     return dayjs(value);
   };
 
-  _handleChange = (date) => {
+  _handleChange = date => {
     this.setState({ active: false, focused: false });
     this.props.onChange(date);
   };
 
-  _handleFocus = (e) => {
-    this.props.onFocus(e);
-  };
-
-  _handleBlur = (e) => {
-    this.props.onBlur(e);
-  };
-
-  _onDateClick = (option) => {
-    this.props.onChange(option);
-  };
-
   toggleDate = () => {
     this.setState(state => ({ active: !state.active, focused: !state.active }));
+  };
+
+  closeDate = () => {
+    this.setState({ active: false, focused: false });
   };
 }
 
@@ -188,6 +181,7 @@ Date.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
   errorMsgClassName: PropTypes.string,
+  prefixClassName: PropTypes.string,
   label: PropTypes.string,
   offset: PropTypes.object,
   onBlur: PropTypes.func,
@@ -208,14 +202,14 @@ Date.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   onChange: () => {},
-  label: '',
-  className: '',
-  value: '',
-  placeholder: '',
+  label: "",
+  className: "",
+  value: "",
+  placeholder: "",
   error: false,
   disabled: false,
-  errorMessage: '',
-  errorMsgClassName: '',
+  errorMessage: "",
+  errorMsgClassName: "",
   offset: null,
   position: null,
   attachTo: null,
