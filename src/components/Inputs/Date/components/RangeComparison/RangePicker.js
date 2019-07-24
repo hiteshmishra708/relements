@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
+import React from "react";
+import PropTypes from "prop-types";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
-import Calendar from 'components/UI/Calendar';
-import Inputs from '../Inputs';
-import Comparison from '../Comparison';
-import styles from './RangePicker.scss';
+import Calendar from "components/UI/Calendar";
+import Inputs from "../Inputs";
+import Comparison from "../Comparison";
+import styles from "./RangePicker.scss";
 
 export default class RangePicker extends React.Component {
   constructor() {
@@ -19,7 +19,7 @@ export default class RangePicker extends React.Component {
       compare: false,
       comparisonStartDate: null,
       comparisonEndDate: null,
-      selectingKey: 'startDate',
+      selectingKey: "startDate",
     };
     dayjs.extend(customParseFormat);
   }
@@ -32,10 +32,10 @@ export default class RangePicker extends React.Component {
 
   componentDidUpdate(nextProps, prevState) {
     if (
-      this.state.startDate !== prevState.startDate
-      || this.state.endDate !== prevState.endDate
-      || this.state.comparisonStartDate !== prevState.comparisonStartDate
-      || this.state.comparisonEndDate !== prevState.comparisonEndDate
+      this.state.startDate !== prevState.startDate ||
+      this.state.endDate !== prevState.endDate ||
+      this.state.comparisonStartDate !== prevState.comparisonStartDate ||
+      this.state.comparisonEndDate !== prevState.comparisonEndDate
     ) {
       this.props.onChange({
         startDate: this.state.startDate,
@@ -59,26 +59,34 @@ export default class RangePicker extends React.Component {
       value = value.concat({
         from: comparisonStartDate,
         to: comparisonEndDate,
-        color: '#f1c40f',
+        color: "#f1c40f",
       });
     }
 
+    const { prefixClassName } = this.props;
+
     return (
-      <div className={styles.rangePicker}>
-        <div className={styles.rangePickerCalendarColumn}>
+      <div className={`${styles.rangePicker} ${prefixClassName}`}>
+        <div
+          className={`${styles.rangePickerCalendarColumn} ${prefixClassName}-column`}
+        >
           <Calendar
             value={value}
             onChange={this._handleCellClick}
             numMonths={2}
+            prefixClassName={`${prefixClassName}-calendar`}
           />
         </div>
-        <div className={styles.rangePickerInputColumn}>
+        <div
+          className={`${styles.rangePickerCalendarColumn} ${prefixClassName}-column`}
+        >
           <Inputs
             selectingKey={this.state.selectingKey}
             startDate={startDate}
             endDate={endDate}
             onChange={this._setDates}
-            onFocus={(key) => {
+            prefixClassName={`${prefixClassName}-column-inputs`}
+            onFocus={key => {
               this.setState({ selectingKey: key });
             }}
           />
@@ -91,23 +99,25 @@ export default class RangePicker extends React.Component {
               comparisonEndDate={comparisonEndDate}
               toggled={this.state.compare}
               onChange={this._setComparisonDates}
-              onToggle={newCompare => this.setState({
-                compare: newCompare,
-                selectingKey: 'comparisonStartDate',
-                comparisonStartDate:
+              prefixClassName={`${prefixClassName}-column-comparison`}
+              onToggle={newCompare =>
+                this.setState({
+                  compare: newCompare,
+                  selectingKey: "comparisonStartDate",
+                  comparisonStartDate:
                     newCompare && startDate && endDate
                       ? startDate.subtract(
-                        endDate.diff(startDate, 'd') + 1,
-                        'd',
-                      )
+                          endDate.diff(startDate, "d") + 1,
+                          "d",
+                        )
                       : null,
-                comparisonEndDate:
+                  comparisonEndDate:
                     newCompare && startDate && endDate
-                      ? startDate.subtract(1, 'd')
+                      ? startDate.subtract(1, "d")
                       : null,
-              })
+                })
               }
-              onFocus={(key) => {
+              onFocus={key => {
                 this.setState({ selectingKey: key });
               }}
             />
@@ -123,21 +133,21 @@ export default class RangePicker extends React.Component {
    * So if the current selection is startDate, we start endDate selection and so on
    * We use this.state.selectingKey to track this
    */
-  _handleCellClick = (day) => {
-    if (this.state.selectingKey === 'startDate') {
+  _handleCellClick = day => {
+    if (this.state.selectingKey === "startDate") {
       this.setState({
-        selectingKey: 'endDate',
+        selectingKey: "endDate",
         endDate: null,
       });
-    } else if (this.state.selectingKey === 'comparisonStartDate') {
+    } else if (this.state.selectingKey === "comparisonStartDate") {
       const { startDate, endDate } = this.state;
-      const numDays = endDate.diff(startDate, 'd');
+      const numDays = endDate.diff(startDate, "d");
       this.setState({
-        selectingKey: 'comparisonStartDate',
-        comparisonEndDate: day.add(numDays, 'd'),
+        selectingKey: "comparisonStartDate",
+        comparisonEndDate: day.add(numDays, "d"),
       });
     } else {
-      this.setState({ selectingKey: 'startDate' });
+      this.setState({ selectingKey: "startDate" });
     }
 
     this.setState(state => ({ [state.selectingKey]: day }));
@@ -151,7 +161,7 @@ export default class RangePicker extends React.Component {
     this.setState({
       startDate,
       endDate,
-      selectingKey: 'startDate',
+      selectingKey: "startDate",
     });
   };
 
@@ -189,6 +199,7 @@ export default class RangePicker extends React.Component {
 RangePicker.propTypes = {
   onChange: PropTypes.func,
   withComparison: PropTypes.bool,
+  prefixClassName: PropTypes.string,
   value: PropTypes.shape({
     startDate: PropTypes.object,
     endDate: PropTypes.object,
@@ -200,6 +211,7 @@ RangePicker.propTypes = {
 RangePicker.defaultProps = {
   onChange: () => {},
   withComparison: false,
+  prefixClassName: "",
   value: {
     startDate: dayjs(),
     endDate: dayjs(),

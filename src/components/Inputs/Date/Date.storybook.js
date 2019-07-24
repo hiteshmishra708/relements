@@ -2,20 +2,11 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import DatePicker from "./Date";
+import Docs from "./Date.mdx";
 
-storiesOf("Components|Inputs/Date", module)
-  .add("Single", () => {
-    const story = <DateWrapper />;
-    return story;
-  })
-  .add("Range", () => {
-    const story = <DateWrapperRange />;
-    return story;
-  })
-  .add("Comparison", () => {
-    const story = <DateWrapperRangeComparison />;
-    return story;
-  });
+storiesOf("Components|Inputs/Date", module).add("Documentation", () => (
+  <Docs />
+));
 
 class DateWrapper extends React.Component {
   state = {
