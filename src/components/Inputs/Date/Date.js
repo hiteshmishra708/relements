@@ -61,6 +61,7 @@ class Date extends React.Component {
               onChange={this._handleChange}
               maxDate={maxDate}
               minDate={minDate}
+              active={this.state.active}
               comparisonMaxDate={comparisonMaxDate}
               comparisonMinDate={comparisonMinDate}
               withComparison={withComparison}
@@ -155,6 +156,7 @@ class Date extends React.Component {
   };
 
   _handleChange = date => {
+    console.log("HANDLING CHANGE", date);
     this.setState({ active: false, focused: false });
     this.props.onChange(date);
   };

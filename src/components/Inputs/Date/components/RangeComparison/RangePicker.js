@@ -9,34 +9,26 @@ import Comparison from "../Comparison";
 import styles from "./RangePicker.scss";
 
 export default class RangePicker extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    const today = dayjs();
+    const value = { ...this._getParsedValue(props.value) };
+    value.compare = value.comparisonStartDate && value.comparisonEndDate;
+    this.setState(value);
+
     this.state = {
-      startDate: today,
-      endDate: today,
-      compare: false,
-      comparisonStartDate: null,
-      comparisonEndDate: null,
+      startDate: value.startDate,
+      endDate: value.endDate,
+      compare: value.compare,
+      comparisonStartDate: value.comparisonStartDate,
+      comparisonEndDate: value.comparisonEndDate,
       selectingKey: "startDate",
     };
     dayjs.extend(customParseFormat);
   }
 
-  componentDidMount() {
-    const value = { ...this._getParsedValue(this.props.value) };
-    value.compare = value.comparisonStartDate && value.comparisonEndDate;
-    this.setState(value);
-  }
-
-  componentDidUpdate(nextProps, prevState) {
-    if (
-      this.state.startDate !== prevState.startDate ||
-      this.state.endDate !== prevState.endDate ||
-      this.state.comparisonStartDate !== prevState.comparisonStartDate ||
-      this.state.comparisonEndDate !== prevState.comparisonEndDate
-    ) {
+  componentDidUpdate(nextProps) {
+    if (this.props.active !== nextProps.active) {
       this.props.onChange({
         startDate: this.state.startDate,
         endDate: this.state.endDate,
@@ -134,12 +126,13 @@ export default class RangePicker extends React.Component {
    * We use this.state.selectingKey to track this
    */
   _handleCellClick = day => {
-    if (this.state.selectingKey === "startDate") {
+    const { selectingKey } = this.state;
+    if (selectingKey === "startDate") {
       this.setState({
         selectingKey: "endDate",
         endDate: null,
       });
-    } else if (this.state.selectingKey === "comparisonStartDate") {
+    } else if (selectingKey === "comparisonStartDate") {
       const { startDate, endDate } = this.state;
       const numDays = endDate.diff(startDate, "d");
       this.setState({
@@ -150,7 +143,7 @@ export default class RangePicker extends React.Component {
       this.setState({ selectingKey: "startDate" });
     }
 
-    this.setState(state => ({ [state.selectingKey]: day }));
+    this.setState({ [selectingKey]: day });
   };
 
   /**
@@ -197,6 +190,7 @@ export default class RangePicker extends React.Component {
 }
 
 RangePicker.propTypes = {
+  active: PropTypes.bool,
   onChange: PropTypes.func,
   withComparison: PropTypes.bool,
   prefixClassName: PropTypes.string,
@@ -211,6 +205,7 @@ RangePicker.propTypes = {
 RangePicker.defaultProps = {
   onChange: () => {},
   withComparison: false,
+  active: false,
   prefixClassName: "",
   value: {
     startDate: dayjs(),
