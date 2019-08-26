@@ -23,8 +23,8 @@ function Shortcuts({ startDate, endDate, onChange, prefixClassName }) {
       <Button
         onClick={() => {
           onChange(
-            startDate.subtract(numDays, "days"),
-            startDate.subtract(1, "days"),
+            startDate.subtract(numDays, "days").startOf("day"),
+            startDate.subtract(1, "days").endOf("day"),
           );
         }}
         className={`${styles.inputsButton} ${

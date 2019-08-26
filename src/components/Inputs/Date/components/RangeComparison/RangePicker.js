@@ -27,17 +27,6 @@ export default class RangePicker extends React.Component {
     dayjs.extend(customParseFormat);
   }
 
-  componentDidUpdate(nextProps) {
-    if (this.props.active !== nextProps.active) {
-      this.props.onChange({
-        startDate: this.state.startDate,
-        endDate: this.state.endDate,
-        comparisonStartDate: this.state.comparisonStartDate,
-        comparisonEndDate: this.state.comparisonEndDate,
-      });
-    }
-  }
-
   render() {
     const {
       startDate,
@@ -55,7 +44,7 @@ export default class RangePicker extends React.Component {
       });
     }
 
-    const { prefixClassName } = this.props;
+    const { prefixClassName, numMonths } = this.props;
 
     return (
       <div className={`${styles.rangePicker} ${prefixClassName}`}>
@@ -65,7 +54,7 @@ export default class RangePicker extends React.Component {
           <Calendar
             value={value}
             onChange={this._handleCellClick}
-            numMonths={2}
+            numMonths={numMonths}
             prefixClassName={`${prefixClassName}-calendar`}
           />
         </div>
@@ -118,6 +107,25 @@ export default class RangePicker extends React.Component {
       </div>
     );
   }
+
+  getValue = () => {
+    const {
+      startDate,
+      endDate,
+      comparisonStartDate,
+      comparisonEndDate,
+    } = this.state;
+    return {
+      startDate: startDate ? startDate.startOf("day").toDate() : startDate,
+      endDate: endDate ? endDate.endOf("day").toDate() : null,
+      comparisonStartDate: comparisonStartDate
+        ? comparisonStartDate.startOf("day").toDate()
+        : null,
+      comparisonEndDate: comparisonEndDate
+        ? comparisonEndDate.endOf("day").toDate()
+        : null,
+    };
+  };
 
   /**
    * On clicking the cell we want to start/end the range selection depending on the
@@ -190,10 +198,9 @@ export default class RangePicker extends React.Component {
 }
 
 RangePicker.propTypes = {
-  active: PropTypes.bool,
-  onChange: PropTypes.func,
   withComparison: PropTypes.bool,
   prefixClassName: PropTypes.string,
+  numMonths: PropTypes.number,
   value: PropTypes.shape({
     startDate: PropTypes.object,
     endDate: PropTypes.object,
@@ -203,9 +210,8 @@ RangePicker.propTypes = {
 };
 
 RangePicker.defaultProps = {
-  onChange: () => {},
   withComparison: false,
-  active: false,
+  numMonths: 2,
   prefixClassName: "",
   value: {
     startDate: dayjs(),

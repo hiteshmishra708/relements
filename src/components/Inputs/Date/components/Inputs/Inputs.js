@@ -38,34 +38,43 @@ function Shortcuts({ startDate, endDate, onChange, prefixClassName }) {
     endDate,
   );
 
-  const today = dayjs();
+  const today = dayjs().startOf("day");
   return (
     <div className={`${styles.inputsButtons} ${prefixClassName}`}>
       <Button
         primary={isToday}
         className={`${styles.inputsButton} ${prefixClassName}-button`}
-        onClick={() => onChange(today, today)}
+        onClick={() => onChange(today, today.endOf("day"))}
       >
         Today
       </Button>
       <Button
         primary={isYesterday}
         className={`${styles.inputsButton} ${prefixClassName}-button`}
-        onClick={() => onChange(today.subtract(1, "d"), today.subtract(1, "d"))}
+        onClick={() =>
+          onChange(
+            today.subtract(1, "d").startOf("day"),
+            today.subtract(1, "d").endOf("day"),
+          )
+        }
       >
         Yesterday
       </Button>
       <Button
         primary={isLast7Days}
         className={`${styles.inputsButton} ${prefixClassName}-button`}
-        onClick={() => onChange(today.subtract(6, "d"), today)}
+        onClick={() =>
+          onChange(today.subtract(6, "d").startOf("day"), today.endOf("day"))
+        }
       >
         Last 7 Days
       </Button>
       <Button
         primary={isLast30Days}
         className={`${styles.inputsButton} ${prefixClassName}-button`}
-        onClick={() => onChange(today.subtract(29, "d"), today)}
+        onClick={() =>
+          onChange(today.subtract(29, "d").startOf("day"), today.endOf("day"))
+        }
       >
         Last 30 Days
       </Button>

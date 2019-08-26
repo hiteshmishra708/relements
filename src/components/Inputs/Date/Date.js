@@ -22,6 +22,8 @@ class Date extends React.Component {
 
   _DOMNode = React.createRef();
 
+  rangeComparisonRef = React.createRef();
+
   render() {
     const {
       className,
@@ -35,6 +37,7 @@ class Date extends React.Component {
       withComparison,
       value,
       prefixClassName,
+      numMonths,
     } = this.props;
     const errorClassName = error ? styles.dateError : "";
     const disabledClassName = disabled ? styles.disabled : "";
@@ -57,8 +60,8 @@ class Date extends React.Component {
         >
           {withRange ? (
             <RangeComparison
+              ref={this.rangeComparisonRef}
               value={value}
-              onChange={this._handleChange}
               maxDate={maxDate}
               minDate={minDate}
               active={this.state.active}
@@ -66,6 +69,7 @@ class Date extends React.Component {
               comparisonMinDate={comparisonMinDate}
               withComparison={withComparison}
               prefixClassName={`${prefixClassName}-picker`}
+              numMonths={numMonths}
             />
           ) : (
             <SinglePicker
@@ -74,6 +78,7 @@ class Date extends React.Component {
               maxDate={maxDate}
               minDate={minDate}
               prefixClassName={`${prefixClassName}-picker`}
+              numMonths={numMonths}
             />
           )}
         </Tooltip>
@@ -133,7 +138,7 @@ class Date extends React.Component {
   };
 
   _getParsedValueFromObject = () => {
-    const { value = {} } = this.props;
+    const { value } = this.props;
     const startDate = dayjs(value.startDate);
     const endDate = dayjs(value.endDate);
     const comparisonStartDate = value.comparisonStartDate
@@ -151,12 +156,11 @@ class Date extends React.Component {
   };
 
   _getParsedValueFromDate = () => {
-    const { value = {} } = this.props;
+    const { value } = this.props;
     return dayjs(value);
   };
 
   _handleChange = date => {
-    console.log("HANDLING CHANGE", date);
     this.setState({ active: false, focused: false });
     this.props.onChange(date);
   };
@@ -167,6 +171,7 @@ class Date extends React.Component {
 
   closeDate = () => {
     this.setState({ active: false, focused: false });
+    this.props.onChange(this.rangeComparisonRef.current.getValue());
   };
 }
 
@@ -209,6 +214,8 @@ Date.propTypes = {
   withRange: PropTypes.bool,
   /** With Comparison support (comparing 2 ranges) */
   withComparison: PropTypes.bool,
+  /** Number of months to show at a time */
+  numMonths: PropTypes.number,
 };
 
 Date.defaultProps = {
@@ -228,6 +235,7 @@ Date.defaultProps = {
   minDate: null,
   comparisonMaxDate: null,
   comparisonMinDate: null,
+  numMonths: 1,
 };
 
 Date.classNames = {
