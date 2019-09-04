@@ -16,8 +16,8 @@ import FilePlaceholder from "./components/FilePlaceholder";
 import ImagePlaceholder from "./components/ImagePlaceholder";
 import ImageProgressBar from "./components/ImageProgressBar";
 
-// eslint-disable-next-line max-len
 const FILE_ACCEPT_TYPES =
+  // eslint-disable-next-line max-len
   "image/png, image/jpg, image/jpeg, application/pdf, application/ vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword";
 const IMAGE_ACCEPT_TYPES = "image/png, image/jpg, image/jpeg";
 
@@ -28,11 +28,14 @@ class File extends React.Component {
     previewURL: undefined,
   };
 
-  state = {
-    uploads: [],
-    filenames: [],
-    uploadsCompleted: 0,
-  };
+  constructor() {
+    super();
+    this.state = {
+      uploads: [],
+      filenames: [],
+      uploadsCompleted: 0,
+    };
+  }
 
   render() {
     const { value, multiple, className, prefixClassName } = this.props;
