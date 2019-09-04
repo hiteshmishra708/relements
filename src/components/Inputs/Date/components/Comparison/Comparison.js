@@ -1,35 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import dayjs from 'dayjs';
+import React from "react";
+import PropTypes from "prop-types";
+import dayjs from "dayjs";
 
-import Button from 'components/UI/Button';
-import Checkbox from 'components/Inputs/Checkbox';
+import Button from "components/UI/Button";
+import Checkbox from "components/Inputs/Checkbox";
 
-import Input from '../Input';
-import styles from './Comparison.scss';
+import Input from "../Input";
+import styles from "./Comparison.scss";
 
-function Shortcuts({
-  startDate, endDate, onChange, prefixClassName,
-}) {
-  const numDays = endDate ? endDate.diff(startDate, 'd') + 1 : 0;
-  const prevComparisonStartDate = startDate.subtract(numDays, 'd');
-  const prevComparisonEndDate = startDate.subtract(1, 'd');
-  const isPreviousPeriod = startDate
-    && endDate
-    && startDate.isSame(prevComparisonStartDate)
-    && endDate.isSame(prevComparisonEndDate);
+function Shortcuts({ startDate, endDate, onChange, prefixClassName }) {
+  const numDays = endDate ? endDate.diff(startDate, "d") + 1 : 0;
+  const prevComparisonStartDate = startDate.subtract(numDays, "d");
+  const prevComparisonEndDate = startDate.subtract(1, "d");
+  const isPreviousPeriod =
+    startDate &&
+    endDate &&
+    startDate.isSame(prevComparisonStartDate) &&
+    endDate.isSame(prevComparisonEndDate);
 
   return (
     <div className={`${styles.inputsButtons} ${prefixClassName}`}>
       <Button
         onClick={() => {
           onChange(
-            startDate.subtract(numDays, 'days').startOf('day'),
-            startDate.subtract(1, 'days').endOf('day'),
+            startDate.subtract(numDays, "days").startOf("day"),
+            startDate.subtract(1, "days").endOf("day"),
           );
         }}
         className={`${styles.inputsButton} ${
-          isPreviousPeriod ? styles.compare : ''
+          isPreviousPeriod ? styles.compare : ""
         } ${prefixClassName}-button`}
         primary={isPreviousPeriod}
       >
@@ -37,7 +36,7 @@ function Shortcuts({
       </Button>
       <Button
         onClick={() => {
-          onChange(null, null, 'comparisonStartDate');
+          onChange(null, null, "comparisonStartDate");
         }}
         className={`${styles.inputsButton} ${styles.comparison} ${prefixClassName}-button`}
         primary={!isPreviousPeriod}
@@ -83,8 +82,8 @@ function Comparison({
               label="Start"
               key="comparisonStartDate"
               value={comparisonStartDate}
-              onFocus={() => onFocus('comparisonStartDate')}
-              focused={selectingKey === 'comparisonStartDate'}
+              onFocus={() => onFocus("comparisonStartDate")}
+              focused={selectingKey === "comparisonStartDate"}
               compare
               prefixClassName={`${prefixClassName}-input-item`}
             />
@@ -93,8 +92,8 @@ function Comparison({
               label="End"
               key="comparisonEndDate"
               value={comparisonEndDate}
-              onFocus={() => onFocus('comparisonEndDate')}
-              focused={selectingKey === 'comparisonEndDate'}
+              onFocus={() => onFocus("comparisonEndDate")}
+              focused={selectingKey === "comparisonEndDate"}
               compare
               prefixClassName={`${prefixClassName}-input-item`}
             />
@@ -122,8 +121,8 @@ Comparison.defaultProps = {
   onChange: () => {},
   onToggle: () => {},
   onFocus: () => {},
-  prefixClassName: '',
-  selectingKey: '',
+  prefixClassName: "",
+  selectingKey: "",
   toggled: false,
 };
 
@@ -136,7 +135,7 @@ Shortcuts.propTypes = {
 
 Shortcuts.defaultProps = {
   onChange: () => {},
-  prefixClassName: '',
+  prefixClassName: "",
 };
 
 export default Comparison;

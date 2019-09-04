@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { rgba } from '@src/utils/generic';
+import { rgba } from "@src/utils/generic";
 
-import styles from './Button.scss';
-import Context from '../../Context';
+import styles from "./Button.scss";
+import Context from "../../Context";
 
 /**
  * Button component. Renders a button
@@ -12,8 +12,8 @@ import Context from '../../Context';
  * to render the contents of the button.
  */
 const Button = ({
-  prefixClassName = '',
-  className = '',
+  prefixClassName = "",
+  className = "",
   type,
   size,
   disabled,
@@ -42,7 +42,7 @@ const Button = ({
       case Button.TYPES.YELLOW:
         return styles.yellow;
       default:
-        return '';
+        return "";
     }
   });
 
@@ -86,7 +86,7 @@ const Button = ({
   });
 
   const getDisabledClassName = React.useCallback(() => {
-    return disabled ? styles.disabled : '';
+    return disabled ? styles.disabled : "";
   });
 
   return (
@@ -112,19 +112,19 @@ const Button = ({
 };
 
 Button.SIZES = {
-  SMALL: 'small',
-  MEDIUM: 'medium',
-  BIG: 'big',
+  SMALL: "small",
+  MEDIUM: "medium",
+  BIG: "big",
 };
 
 Button.TYPES = {
-  DEFAULT: 'default',
-  PRIMARY: 'primary',
-  SECONDARY: 'secondary',
-  OUTLINE: 'outline',
-  GREY: 'grey',
-  WARNING: 'warning',
-  YELLOW: 'yellow',
+  DEFAULT: "default",
+  PRIMARY: "primary",
+  SECONDARY: "secondary",
+  OUTLINE: "outline",
+  GREY: "grey",
+  WARNING: "warning",
+  YELLOW: "yellow",
 };
 
 Button.propTypes = {
@@ -166,8 +166,8 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  prefixClassName: 'relements-button',
-  className: '',
+  prefixClassName: "relements-button",
+  className: "",
   type: Button.TYPES.DEFAULT,
   size: Button.SIZES.MEDIUM,
   disabled: false,
@@ -175,8 +175,8 @@ Button.defaultProps = {
 };
 
 Button.classNames = {
-  $prefix: 'Outermost element',
-  '$prefix-child': 'Child of the Main Button Component',
+  $prefix: "Outermost element",
+  "$prefix-child": "Child of the Main Button Component",
 };
 
 export default Button;

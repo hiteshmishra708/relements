@@ -1,10 +1,10 @@
-import React from 'react';
-import { Portal } from 'react-portal';
-import PropTypes from 'prop-types';
-import useActivify from '@src/hooks/useActivify';
-import Context from '@src/components/Context';
+import React from "react";
+import { Portal } from "react-portal";
+import PropTypes from "prop-types";
+import useActivify from "@src/hooks/useActivify";
+import Context from "@src/components/Context";
 
-import styles from './DropdownOptions.scss';
+import styles from "./DropdownOptions.scss";
 
 function DropdownOptions({
   focused,
@@ -18,7 +18,7 @@ function DropdownOptions({
   const { visible, enabled } = useActivify(active);
   const { primaryColor } = React.useContext(Context);
   const renderPortalContainer = () => {
-    const activeClassName = visible ? styles.active : '';
+    const activeClassName = visible ? styles.active : "";
     const focusedStyle = focused ? { borderColor: primaryColor } : {};
     const rect = attachTo.current.getBoundingClientRect();
     let isReversed = reverseMode;
@@ -31,11 +31,11 @@ function DropdownOptions({
 
     if (isReversed) {
       isReversed = true;
-      position.top = 'none';
+      position.top = "none";
       position.bottom = window.innerHeight - rect.top + window.scrollY - 1;
     }
 
-    const reverseModeClassName = isReversed ? styles.reverse : '';
+    const reverseModeClassName = isReversed ? styles.reverse : "";
 
     return (
       <div className={`${styles.dropdownOptionsWrapper}  ${className}`}>

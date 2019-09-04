@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import cc from 'classcat';
+import React from "react";
+import PropTypes from "prop-types";
+import cc from "classcat";
 
-import Context from '@src/components/Context';
-import Icon from '@src/components/UI/Icon';
-import TickIcon from '@src/icons/checkmark.svg';
+import Context from "@src/components/Context";
+import Icon from "@src/components/UI/Icon";
+import TickIcon from "@src/icons/checkmark.svg";
 
-import styles from './CheckboxOption.scss';
+import styles from "./CheckboxOption.scss";
 
 const CheckboxOption = ({
   label,
@@ -37,14 +37,14 @@ const CheckboxOption = ({
   const colorStyles = {
     box: value
       ? {
-        background: primaryColor,
-        borderColor: primaryColor,
-      }
+          background: primaryColor,
+          borderColor: primaryColor,
+        }
       : {},
     label: value
       ? {
-        color: primaryColor,
-      }
+          color: primaryColor,
+        }
       : {},
   };
 
@@ -53,7 +53,7 @@ const CheckboxOption = ({
       ref={innerRef}
       data-testid="checkbox-item"
       className={classNames.main}
-      onClick={(e) => onChange(!value, e)}
+      onClick={e => onChange(!value, e)}
     >
       <div style={colorStyles.box} className={classNames.box}>
         <Icon className={classNames.boxIcon} src={TickIcon} />
@@ -81,19 +81,19 @@ CheckboxOption.propTypes = {
 };
 
 CheckboxOption.defaultProps = {
-  label: '',
-  className: '',
+  label: "",
+  className: "",
   onChange: () => {},
   value: false,
   innerRef: () => {},
-  prefixClassName: '',
+  prefixClassName: "",
 };
 
 CheckboxOption.classNames = {
-  $prefix: 'Outermost element',
-  '$prefix-box': 'Div wrapping the icon',
-  '$prefix-box-tick': 'The icon div',
-  '$prefix-text': 'The Text of each of the checkbox options',
+  $prefix: "Outermost element",
+  "$prefix-box": "Div wrapping the icon",
+  "$prefix-box-tick": "The icon div",
+  "$prefix-text": "The Text of each of the checkbox options",
 };
 
 export default CheckboxOption;

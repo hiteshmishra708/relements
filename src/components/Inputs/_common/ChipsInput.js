@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import AutosizeInput from 'react-input-autosize';
-import PropTypes from 'prop-types';
-import Context from '@src/components/Context';
-import Icon from '@src/components/UI/Icon';
-import CrossIcon from '@src/icons/close.svg';
+import React, { useState } from "react";
+import AutosizeInput from "react-input-autosize";
+import PropTypes from "prop-types";
+import Context from "@src/components/Context";
+import Icon from "@src/components/UI/Icon";
+import CrossIcon from "@src/icons/close.svg";
 
-import styles from './ChipsInput.scss';
-import { useChips } from './hooks/useChips';
+import styles from "./ChipsInput.scss";
+import { useChips } from "./hooks/useChips";
 
 export const ChipsInput = ({
   className = "",
@@ -26,7 +26,7 @@ export const ChipsInput = ({
 }) => {
   const { primaryColor } = React.useContext(Context);
   const focusedStyle = focused ? { borderColor: primaryColor } : {};
-  const errorClassName = error ? styles.error : '';
+  const errorClassName = error ? styles.error : "";
   const [inputValue, setInputValue] = useState();
   const [onKeyDownChips, , deleteChip] = useChips(
     value,
@@ -41,19 +41,19 @@ export const ChipsInput = ({
         <Icon
           onClick={() => deleteChip(title)}
           src={CrossIcon}
-          className={styles.deleteChipIcon}
+          className={`${styles.deleteChipIcon} deleteChip`}
         />
       </div>
     );
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const value = e.target.value;
     setInputValue(value);
     onValueChange(value);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     onKeyDownChips(e);
     onKeyDown(e);
   };
@@ -63,7 +63,6 @@ export const ChipsInput = ({
       <AutosizeInput
         ref={inputRef}
         inputClassName={styles.newChip}
-        onFocus={onFocus}
         onKeyDown={handleKeyDown}
         onChange={handleChange}
         value={inputValue}
@@ -77,12 +76,12 @@ export const ChipsInput = ({
       onClick={onFocus}
       ref={innerRef}
       style={focusedStyle}
-      className={`${styles.chips} ${errorClassName} ${className}-input`}
+      className={`${styles.chips} ${focusedStyle} ${errorClassName} ${className}`}
       onBlur={onBlur}
       onMouseDown={onMouseDown}
     >
       <div className={styles.chipsTrack}>
-        {value ? value.map(renderChip) : null}
+        {value.length > 0 ? value.map(renderChip) : null}
         {!disabled ? renderInput() : null}
       </div>
     </div>

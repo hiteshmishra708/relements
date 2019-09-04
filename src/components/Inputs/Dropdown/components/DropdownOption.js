@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Context from '@src/components/Context';
-import { rgba } from '@src/utils/generic';
+import React from "react";
+import PropTypes from "prop-types";
+import Context from "@src/components/Context";
+import { rgba } from "@src/utils/generic";
 
-import styles from './DropdownOption.scss';
+import styles from "./DropdownOption.scss";
 
 const DropdownOption = ({
   children,
@@ -18,7 +18,7 @@ const DropdownOption = ({
     ? { backgroundColor: rgba(primaryColor, 0.1) }
     : {};
   const dropdownOptionTextStyle = selected ? { color: primaryColor } : {};
-  const selectedClassName = selected ? `${className}-selected` : '';
+  const selectedClassName = selected ? `${className}-selected` : "";
   return (
     <div
       ref={innerRef}

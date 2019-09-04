@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import cc from 'classcat';
+import React from "react";
+import PropTypes from "prop-types";
+import cc from "classcat";
 
-import Context from '@src/components/Context';
-import styles from './RadioOption.scss';
+import Context from "@src/components/Context";
+import styles from "./RadioOption.scss";
 
 const RadioOption = ({
   label,
@@ -35,13 +35,13 @@ const RadioOption = ({
     boxIcon: { backgroundColor: primaryColor },
     box: value
       ? {
-        borderColor: primaryColor,
-      }
+          borderColor: primaryColor,
+        }
       : {},
     label: value
       ? {
-        color: primaryColor,
-      }
+          color: primaryColor,
+        }
       : {},
   };
 
@@ -50,7 +50,7 @@ const RadioOption = ({
       data-testid="radio-item"
       ref={innerRef}
       className={classNames.main}
-      onClick={(e) => onChange(!value, e)}
+      onClick={e => onChange(!value, e)}
     >
       <div style={colorStyles.box} className={classNames.box}>
         <div style={colorStyles.boxIcon} className={classNames.boxIcon} />
@@ -78,19 +78,19 @@ RadioOption.propTypes = {
 };
 
 RadioOption.defaultProps = {
-  label: '',
-  className: '',
+  label: "",
+  className: "",
   onChange: () => {},
   value: false,
   innerRef: () => {},
-  prefixClassName: '',
+  prefixClassName: "",
 };
 
 RadioOption.classNames = {
-  $prefix: 'Outermost element',
-  '$prefix-box': 'Div wrapping the icon',
-  '$prefix-box-tick': 'The icon div',
-  '$prefix-text': 'The Text of each of the radio options',
+  $prefix: "Outermost element",
+  "$prefix-box": "Div wrapping the icon",
+  "$prefix-box-tick": "The icon div",
+  "$prefix-text": "The Text of each of the radio options",
 };
 
 export default RadioOption;

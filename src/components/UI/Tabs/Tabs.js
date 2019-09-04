@@ -1,19 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Context from '@src/components/Context';
+import React from "react";
+import PropTypes from "prop-types";
+import Context from "@src/components/Context";
 
-import { TabsItem } from './components/TabsItem';
-import { useTabs } from './hooks/useTabs';
-import styles from './Tabs.scss';
+import { TabsItem } from "./components/TabsItem";
+import { useTabs } from "./hooks/useTabs";
+import styles from "./Tabs.scss";
 
 /**
  * Renders the container for tabs and handles the calculation and placement of the tab
  * indicator.
  * It also exposes a static property called Item which is what the component uses to render the children
  */
-const Tabs = ({
-  className, prefixClassName, children, value = '',
-}) => {
+const Tabs = ({ className, prefixClassName, children, value = "" }) => {
   const { primaryColor } = React.useContext(Context);
   const DOMRefs = new Array(React.Children.count(children))
     .fill()

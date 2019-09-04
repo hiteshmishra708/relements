@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ThemeContext from './Context';
+import React from "react";
+import PropTypes from "prop-types";
+import ThemeContext from "./Context";
 
 const Provider = ({ children, theme }) => {
   return (

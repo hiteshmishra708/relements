@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import cc from 'classcat';
-import PropTypes from 'prop-types';
-import Context from '@src/components/Context';
+import React, { useState, useEffect } from "react";
+import cc from "classcat";
+import PropTypes from "prop-types";
+import Context from "@src/components/Context";
 
-import styles from './TextInput.scss';
+import styles from "./TextInput.scss";
 
 export const TextInput = ({
   className,
@@ -16,7 +16,7 @@ export const TextInput = ({
   onChange,
   focused,
   error,
-  placeholder = 'Type here...',
+  placeholder = "Type here...",
   inputRef,
   disabled = false,
   prefixClassName,
@@ -24,11 +24,12 @@ export const TextInput = ({
   postfixComponent,
 }) => {
   const { primaryColor } = React.useContext(Context);
-  const focusedStyle = !disabled && focused ? { borderColor: primaryColor } : {};
-  const focusedClassNameString = focused ? 'focused' : '';
-  const errorClassName = error ? styles.error : '';
+  const focusedStyle =
+    !disabled && focused ? { borderColor: primaryColor } : {};
+  const focusedClassNameString = focused ? "focused" : "";
+  const errorClassName = error ? styles.error : "";
   const [textValue, setTextValue] = useState();
-  const handleChange = (e) => {
+  const handleChange = e => {
     onChange(e.target.value);
     setTextValue(e.target.value);
   };
@@ -99,7 +100,7 @@ TextInput.propTypes = {
 };
 
 TextInput.defaultProps = {
-  className: '',
+  className: "",
   disabled: false,
   error: false,
   focused: false,
@@ -110,7 +111,7 @@ TextInput.defaultProps = {
   onFocus: () => {},
   onKeyDown: () => {},
   onMouseDown: () => {},
-  placeholder: '',
-  prefixClassName: '',
-  value: '',
+  placeholder: "",
+  prefixClassName: "",
+  value: "",
 };

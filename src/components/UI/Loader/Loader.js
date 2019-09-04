@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Context from '@src/components/Context';
-import styles from './Loader.scss';
+import Context from "@src/components/Context";
+import styles from "./Loader.scss";
 
 const Loader = ({ size, className, prefixClassName }) => {
   const { primaryColor } = React.useContext(Context);
@@ -46,8 +46,8 @@ Loader.propTypes = {
 
 Loader.defaultProps = {
   size: 32,
-  className: '',
-  prefixClassName: '',
+  className: "",
+  prefixClassName: "",
 };
 
 export default Loader;

@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Context from '@src/components/Context';
-import InfoIcon from '@src/icons/info.svg';
-import styles from './Label.scss';
-import WithTooltip from '../../Overlays/WithTooltip';
-import Icon from '../../UI/Icon';
+import React from "react";
+import PropTypes from "prop-types";
+import Context from "@src/components/Context";
+import InfoIcon from "@src/icons/info.svg";
+import styles from "./Label.scss";
+import WithTooltip from "../../Overlays/WithTooltip";
+import Icon from "../../UI/Icon";
 
 export const Label = ({
   children,
@@ -18,7 +18,7 @@ export const Label = ({
 
   const { primaryColor } = React.useContext(Context);
   const focusedStyle = !disabled && focused ? { color: primaryColor } : {};
-  const errorClassName = error ? styles.error : '';
+  const errorClassName = error ? styles.error : "";
   return (
     <>
       <div className={`${styles.container}`}>
