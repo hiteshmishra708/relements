@@ -1,0 +1,85 @@
+import { CodeBlock, ConfigBlock } from '@src/helpers/DocBlocks';
+import Chips from './Chips';
+
+ # Chips
+
+ > A regular input element where user inputs a Number
+
+<CodeBlock defaultValue={[]}>
+{
+    (value, setValue) => (
+        <Chips
+            placeholder="Test placeholder"
+            className="my-dropdown"
+            prefixClassName="my-yoooo"
+            label="This is the label"
+            value={value}
+            onChange={setValue}
+        />
+    )
+}
+</CodeBlock>
+
+ ## Configuration
+
+ <ConfigBlock of={Chips} />
+
+ ## Examples
+
+<CodeBlock title="default" defaultValue={[]}>
+{
+    (value, setValue) => (
+        <Chips
+            className="my-dropdown"
+            value={value}
+            onChange={setValue}
+        />
+    )
+}
+</CodeBlock>
+
+
+<CodeBlock title="with label" defaultValue={[]}>
+{
+    (value, setValue) => (
+        <Chips
+            className="my-dropdown"
+            prefixClassName="my-yoooo"
+            label="This is the label"
+            value={value}
+            onChange={setValue}
+        />
+    )
+}
+</CodeBlock>
+
+
+<CodeBlock title="with placeholder" defaultValue={[]}>
+{
+    (value, setValue) => (
+        <Chips
+            placeholder="Test placeholder"
+            className="my-dropdown"
+            prefixClassName="my-yoooo"
+            value={value}
+            onChange={setValue}
+        />
+    )
+}
+</CodeBlock>
+
+<CodeBlock title="Disabled" defaultValue={[]}>
+{
+    (value, setValue) => (
+        <Chips
+            placeholder="Test placeholder"
+            className="my-dropdown"
+            prefixClassName="my-yoooo"
+            label="This is the label"
+            value={value}
+            onChange={setValue}
+            disabled
+        />
+    )
+}
+</CodeBlock>
