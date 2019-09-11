@@ -1,3 +1,11 @@
+## [2.1.1](https://github.com/hellohaptik/relements/compare/v2.1.0...v2.1.1) (2019-09-11)
+
+
+### Bug Fixes
+
+* **all:** overall fixes across components ([#74](https://github.com/hellohaptik/relements/issues/74)) ([813225f](https://github.com/hellohaptik/relements/commit/813225f))
+* **travis:** build was not uploading to npm ([#62](https://github.com/hellohaptik/relements/issues/62)) ([fb3cf56](https://github.com/hellohaptik/relements/commit/fb3cf56))
+
 # [2.1.0](https://github.com/hellohaptik/relements/compare/v2.0.3...v2.1.0) (2019-09-05)
 
 
