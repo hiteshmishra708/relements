@@ -1,3 +1,18 @@
+# [2.1.0](https://github.com/hellohaptik/relements/compare/v2.0.3...v2.1.0) (2019-09-05)
+
+
+### Bug Fixes
+
+* **build:** staging build was breaking ([#60](https://github.com/hellohaptik/relements/issues/60)) ([ee07ae1](https://github.com/hellohaptik/relements/commit/ee07ae1))
+* **ChipsInput:** fixes onValueChange is not a function ([#52](https://github.com/hellohaptik/relements/issues/52)) ([cbaf7d8](https://github.com/hellohaptik/relements/commit/cbaf7d8))
+
+
+### Features
+
+* **Chips:** added tests and docs for chips ([#57](https://github.com/hellohaptik/relements/issues/57)) ([9cbf20c](https://github.com/hellohaptik/relements/commit/9cbf20c))
+* **File:** Tests for File Input Component #PE-569 ([#17](https://github.com/hellohaptik/relements/issues/17)) ([c84abc7](https://github.com/hellohaptik/relements/commit/c84abc7)), closes [#PE-569](https://github.com/hellohaptik/relements/issues/PE-569)
+* **Odometer:** Docs, test and examples ([#33](https://github.com/hellohaptik/relements/issues/33)) ([e802c63](https://github.com/hellohaptik/relements/commit/e802c63))
+
 # [2.0.0](https://github.com/hellohaptik/relements/compare/v1.0.0...v2.0.0) (2019-08-28)
 
 
