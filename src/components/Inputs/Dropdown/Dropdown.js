@@ -105,7 +105,7 @@ const Dropdown = ({
 
   const isReversed =
     _InputWrapperDOM.current &&
-    _InputWrapperDOM.current.getBoundingClientRect().bottom + 64 >
+    _InputWrapperDOM.current.getBoundingClientRect().bottom + 200 >
       window.innerHeight;
 
   const renderOptions = () => {
