@@ -45,6 +45,10 @@ const Dropdown = ({
   const _InputDOM = useRef();
   const _InputWrapperDOM = useRef();
 
+  React.useEffect(() => {
+    setUpdatedOptions(options);
+  }, [options]);
+
   const getInputValue = () => {
     if (withMultiple) return valueArray;
     return valueArray[0] ? valueArray[0][optionKey] : "";
