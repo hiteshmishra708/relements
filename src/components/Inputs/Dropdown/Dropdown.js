@@ -91,7 +91,7 @@ const Dropdown = ({
       flatExistingOptions.indexOf(flatNewValue) < 0
         ? setUpdatedOptions([...updatedOptions, { text: flatNewValue }])
         : null;
-      onChange({ [optionKey]: flatNewValue });
+      onChange({ ...valueToChange, [optionKey]: flatNewValue });
       // removing '+ Create' option added
       dropdownOptions.splice(0, 1);
     } else {
