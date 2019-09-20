@@ -20,6 +20,7 @@ const Text = ({
   onFocus,
   onBlur,
   disabled,
+  multiline,
 }) => {
   const _TextInputDOM = useRef();
   const { focused, setFocused, handleFocus, handleBlur } = useInput(
@@ -58,6 +59,7 @@ const Text = ({
         placeholder={placeholder}
         disabled={disabled}
         error={error}
+        multiline={multiline}
       />
     </div>
   );
@@ -86,6 +88,8 @@ Text.propTypes = {
   disabled: PropTypes.bool,
   /** Tooltip to help user with the input fields */
   tooltip: PropTypes.string,
+  /** If you want to render a textarea instead */
+  multiline: PropTypes.bool,
 };
 
 Text.defaultProps = {
@@ -96,6 +100,7 @@ Text.defaultProps = {
   error: "",
   tooltip: "",
   disabled: false,
+  multiline: false,
   onChange: () => {},
   onFocus: () => {},
   onBlur: () => {},

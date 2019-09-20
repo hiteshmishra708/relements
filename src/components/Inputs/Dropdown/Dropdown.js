@@ -31,6 +31,7 @@ const Dropdown = ({
   onChange = () => {},
   placeholder = "",
   createPrefix = "+ Create",
+  searchKeys,
 
   onFocus = () => {},
   onBlur = () => {},
@@ -51,12 +52,15 @@ const Dropdown = ({
 
   const getInputValue = () => {
     if (withMultiple) return valueArray;
-    return valueArray[0] ? valueArray[0][optionKey] : "";
+    if (valueArray[0] && typeof valueArray[0] === "object")
+      return valueArray[0][optionKey];
+    return valueArray[0] || "";
   };
 
-  const [searchTerm, searchResults, handleSearch] = useSearch(updatedOptions, [
-    optionKey,
-  ]);
+  const [searchTerm, searchResults, handleSearch] = useSearch(
+    updatedOptions,
+    searchKeys || [optionKey],
+  );
   const useDropdownProps = [
     searchTerm,
     searchResults,
@@ -210,12 +214,10 @@ Dropdown.propTypes = {
   prefixClassName: PropTypes.string,
   /** Text to prefix for Creating a new option */
   createPrefix: PropTypes.string,
-
   /** onFocus Callback */
   onFocus: PropTypes.func,
   /** onBlur Callback */
   onBlur: PropTypes.func,
-
   /** Dropdown with Search Enabled */
   withSearch: PropTypes.bool,
   /**  Dropdown with Creating new Options Enabled */
@@ -224,6 +226,8 @@ Dropdown.propTypes = {
   withMultiple: PropTypes.bool,
   /**  Whether the input is disabled or not */
   disabled: PropTypes.bool,
+  /**  Keys in the options to search for when using withSearch */
+  searchKeys: PropTypes.arrayOf(PropTypes.string),
 };
 
 Dropdown.classNames = {

@@ -22,6 +22,7 @@ class ContextMenuButton extends React.Component {
       children,
       title,
       size,
+      type,
       prefixClassName,
     } = this.props;
     return (
@@ -38,6 +39,7 @@ class ContextMenuButton extends React.Component {
             : children}
         </ContextMenuPortal>
         <Button
+          type={type}
           size={size}
           style={{ cursor: "pointer" }}
           onClick={this._handleClick}
@@ -86,6 +88,8 @@ ContextMenuButton.propTypes = {
   size: PropTypes.number,
   /** The title of the button */
   title: PropTypes.string,
+  /** The type of button */
+  type: PropTypes.string,
 };
 
 ContextMenuButton.defaultProps = {

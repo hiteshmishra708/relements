@@ -56,7 +56,7 @@ const ToastMessage = () => WrappedComponent => {
       }, toastMessage.timeout || TOAST_DEFAULT_TIMEOUT);
     });
 
-    React.useEffect(() => () => clearTimeout(timeout.current));
+    React.useEffect(() => () => clearTimeout(timeout.current), []);
 
     const { title = "Confirm", type = "NEGATIVE" } = toastMessage;
     return (
