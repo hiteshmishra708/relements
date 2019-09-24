@@ -20,7 +20,7 @@ export const ChipsInput = ({
   focused = false,
   error = "",
   placeholder = "Type here...",
-  inputRef = {},
+  inputRef,
   disabled = false,
   onType = () => {},
   prefixComponent = null,
@@ -71,7 +71,7 @@ export const ChipsInput = ({
   };
 
   const renderChip = (chip, i) => {
-    const title = chip[optionKey];
+    const title = typeof chip === "object" ? chip[optionKey] : chip;
     return (
       <div key={i} className={`${styles.chip} ${prefixClassName}-chip`}>
         {title}
