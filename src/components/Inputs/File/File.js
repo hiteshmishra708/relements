@@ -317,7 +317,7 @@ class File extends React.Component {
 
   _onUploadComplete = (fileURL, index, numFiles) => {
     const value = this.props.value || [];
-    const uploadsCompleted = this.state.uploads;
+    let uploadsCompleted;
     let uploads;
     this.setState(
       prevState => {
