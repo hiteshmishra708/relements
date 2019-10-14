@@ -5,6 +5,7 @@ import Fuse from "fuse.js";
 import Context from "@src/components/Context";
 import Icon from "@src/components/UI/Icon";
 import SearchIcon from "@src/icons/search.svg";
+import useEnterKey from "@src/hooks/useEnterKey/useEnterKey";
 
 import styles from "./Search.scss";
 
@@ -27,10 +28,12 @@ function Search({
   options,
   onChange,
   onType,
+  onSubmit,
   searchKeys,
   autoFocus,
   hint,
   placeholder,
+  value,
 }) {
   const { primaryColor } = React.useContext(Context);
   const fuse = React.useRef();
@@ -48,6 +51,12 @@ function Search({
     FUSE_OPTIONS.keys = searchKeys;
     fuse.current = new Fuse(options, FUSE_OPTIONS);
   });
+
+  useEffect(() => {
+    setSearchTerm(value);
+  }, [value]);
+
+  useEnterKey(onSubmit);
 
   const activeClassName = focused ? styles.active : "";
   return (
@@ -93,11 +102,16 @@ Search.propTypes = {
   hint: PropTypes.string,
   /** The onChange for the input (callback called with searchTerm as param) */
   onType: PropTypes.func,
+  /** When enter key is pressed to initiate the search */
+  onSubmit: PropTypes.func,
+  /** The search input value */
+  value: PropTypes.string,
 };
 
 Search.defaultProps = {
   placeholder: "",
   onChange: () => {},
+  onSubmit: () => {},
   searchKeys: [],
   options: [],
   autoFocus: false,
