@@ -30,6 +30,7 @@ export default {
   'overlays/modal': 'src/components/Overlays/Modal/index.js',
   'overlays/toast': 'src/components/Overlays/Toast/index.js',
   'overlays/tooltip': 'src/components/Overlays/Tooltip/index.js',
+  'overlays/withTooltip': 'src/components/Overlays/WithTooltip/index.js',
 
   'hooks/useActivify': 'src/hooks/useActivify/index.js',
   'hooks/useLoader': 'src/hooks/useLoader/index.js',
