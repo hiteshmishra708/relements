@@ -180,5 +180,5 @@ export const ICON_MAP = {
  * @returns {Object} the react component corresponding to the iconType
  */
 export function getIcon(iconType) {
-  return ICON_MAP[iconType] || null;
+  return ICON_MAP[iconType] || (() => null);
 }
