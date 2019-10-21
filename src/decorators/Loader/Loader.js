@@ -3,6 +3,20 @@ import LoadingComponent from "@src/components/UI/Loader";
 import Activify from "@src/decorators/Activify";
 import styles from "./Loader.scss";
 
+const Loading = Activify()(
+  ({ active, zIndex = 1000000000, customStyles = {} }) => {
+    const activeClassName = active ? styles.active : "";
+    return (
+      <div
+        style={{ zIndex, ...customStyles }}
+        className={`${styles.loaderWrapper} ${activeClassName}`}
+      >
+        <LoadingComponent />
+      </div>
+    );
+  },
+);
+
 const Loader = ({ customStyles, zIndex }) => WrappedComponent => {
   return props => {
     const [active, setActive] = React.useState(false);
@@ -18,20 +32,6 @@ const Loader = ({ customStyles, zIndex }) => WrappedComponent => {
       }
       setActive(false);
     });
-
-    const Loading = Activify()(
-      ({ active, zIndex = 1000000000, customStyles = {} }) => {
-        const activeClassName = active ? styles.active : "";
-        return (
-          <div
-            style={{ zIndex, ...customStyles }}
-            className={`${styles.loaderWrapper} ${activeClassName}`}
-          >
-            <LoadingComponent />
-          </div>
-        );
-      },
-    );
 
     return (
       <>
