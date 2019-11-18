@@ -1,7 +1,7 @@
 import React from "react";
 
 const Context = React.createContext({
-  primaryColor: "#20ABF3",
+  primaryColor: "#124fa0",
   fontSize: 14,
 });
 
