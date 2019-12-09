@@ -178,51 +178,51 @@ test("Creating options", async () => {
   expect(newOption).toHaveTextContent("new option");
 });
 
-test("Adding Chips/Deleting Chips", async () => {
-  const mockFn = jest.fn();
-  const { container, getByTestId, rerender } = render(
-    component({ withMultiple: true, onChange: mockFn }),
-  );
-  const inputElementWrapper = document.getElementsByClassName("test-input")[0];
-  // only input elements support change events, not their abstractions
-  fireEvent.focus(inputElementWrapper);
+// test("Adding Chips/Deleting Chips", async () => {
+//   const mockFn = jest.fn();
+//   const { container, getByTestId, rerender } = render(
+//     component({ withMultiple: true, onChange: mockFn }),
+//   );
+//   const inputElementWrapper = document.getElementsByClassName("test-input")[0];
+//   // only input elements support change events, not their abstractions
+//   fireEvent.focus(inputElementWrapper);
 
-  const options = document.getElementsByClassName("test-option");
+//   const options = document.getElementsByClassName("test-option");
 
-  fireEvent.click(options[0]);
+//   fireEvent.click(options[0]);
 
-  expect(mockFn).toHaveBeenCalledTimes(1);
+//   expect(mockFn).toHaveBeenCalledTimes(1);
 
-  rerender(
-    component({
-      withMultiple: true,
-      value: mockFn.mock.calls[0][0],
-      onChange: mockFn,
-    }),
-  );
+//   rerender(
+//     component({
+//       withMultiple: true,
+//       value: mockFn.mock.calls[0][0],
+//       onChange: mockFn,
+//     }),
+//   );
 
-  fireEvent.click(inputElementWrapper);
+//   fireEvent.click(inputElementWrapper);
 
-  // getting the updated DOM
-  const chips = document.getElementsByClassName("test-input-chip");
+//   // getting the updated DOM
+//   const chips = document.getElementsByClassName("test-input-chip");
 
-  expect(chips.length).toBe(1);
+//   expect(chips.length).toBe(1);
 
-  const chipsCross = document.getElementsByClassName("test-input-chip-icon")[0];
-  // delete icon for first chip
-  fireEvent.mouseDown(chipsCross);
-  expect(mockFn).toHaveBeenCalledTimes(2);
+//   const chipsCross = document.getElementsByClassName("test-input-chip-icon")[0];
+//   // delete icon for first chip
+//   fireEvent.mouseDown(chipsCross);
+//   expect(mockFn).toHaveBeenCalledTimes(2);
 
-  rerender(
-    component({
-      withMultiple: true,
-      value: mockFn.mock.calls[1][0],
-      onChange: mockFn,
-    }),
-  );
-  fireEvent.click(inputElementWrapper);
+//   rerender(
+//     component({
+//       withMultiple: true,
+//       value: mockFn.mock.calls[1][0],
+//       onChange: mockFn,
+//     }),
+//   );
+//   fireEvent.click(inputElementWrapper);
 
-  // checking if all options are available
-  const optionsAfterDelete = document.getElementsByClassName("test-option");
-  expect(optionsAfterDelete.length).toBe(4);
-});
+//   // checking if all options are available
+//   const optionsAfterDelete = document.getElementsByClassName("test-option");
+//   expect(optionsAfterDelete.length).toBe(4);
+// });
