@@ -58,6 +58,7 @@ function TimePicker({ value, onChange, prefixClassName }) {
         onChange={handleHHChange}
         placeholder="HH"
         increment={1}
+        max={12}
         prefixClassName={`${prefixClassName}-input`}
       />
       <span className={`${prefixClassName}-separator`}>:</span>
@@ -66,7 +67,8 @@ function TimePicker({ value, onChange, prefixClassName }) {
         value={MM}
         onChange={handleMMChange}
         placeholder="MM"
-        increment={30}
+        increment={1}
+        max={59}
         prefixClassName={`${prefixClassName}-input`}
       />
       <div

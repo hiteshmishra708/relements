@@ -119,7 +119,7 @@ class Date extends React.Component {
         active={active}
         value={parsedValue}
         placeholder={placeholder}
-        disabled
+        editable={false}
         postfixComponent={<Icon src={AngleDownIcon} />}
       />
     );
@@ -160,6 +160,7 @@ class Date extends React.Component {
 
   _getParsedValueFromDate = () => {
     const { value } = this.props;
+    if (!value) return dayjs();
     return dayjs(value);
   };
 

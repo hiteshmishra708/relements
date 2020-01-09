@@ -11,12 +11,19 @@ function TimePickerInput({
   value,
   increment,
   prefixClassName,
+  max,
 }) {
+  const handleChange = React.useCallback(newValue => {
+    if (+newValue > max) onChange(0);
+    else onChange(newValue);
+  });
+
   return (
     <div className={`${styles.timePickerInput} ${prefixClassName}`}>
       <input
+        type="number"
         value={value}
-        onChange={onChange}
+        onChange={e => handleChange(e.target.value)}
         ref={innerRef}
         className={`${prefixClassName}-element`}
       />
@@ -24,12 +31,12 @@ function TimePickerInput({
         className={`${styles.timePickerInputArrows} ${prefixClassName}-arrows`}
       >
         <Icon
-          onClick={() => onChange(+value + increment)}
+          onClick={() => handleChange(+value + increment)}
           src={AngleDownIcon}
           className={`${styles.timePickerInputArrow} ${prefixClassName}-arrow`}
         />
         <Icon
-          onClick={() => onChange(+value - increment)}
+          onClick={() => handleChange(+value - increment)}
           src={AngleDownIcon}
           className={`${styles.timePickerInputArrow} ${prefixClassName}-arrow`}
         />
@@ -43,12 +50,14 @@ TimePickerInput.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.object,
   increment: PropTypes.number,
+  max: PropTypes.number,
   prefixClassName: PropTypes.string,
 };
 
 TimePickerInput.defaultProps = {
   innerRef: null,
   increment: 1,
+  max: Number.MAX_SAFE_INTEGER,
   onChange: () => {},
   prefixClassName: "",
 };
