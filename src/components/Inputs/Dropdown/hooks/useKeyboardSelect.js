@@ -27,6 +27,7 @@ export function useKeyboardSelect(options, onSelect, onClose) {
       case KEY_CODES.ENTER:
         e.preventDefault();
         e.stopPropagation();
+        if (!options[highlightIndex]) return onClose(false);
         return onSelect(options[highlightIndex]);
       case KEY_CODES.ESC:
         e.preventDefault();
