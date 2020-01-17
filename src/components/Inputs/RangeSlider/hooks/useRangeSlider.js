@@ -28,6 +28,8 @@ export function useRangeSlider({
   single,
   onDrag,
   placeholder,
+  startPlaceholder,
+  endPlaceholder,
 }) {
   const [startPosition, setStartPosition] = useState({});
   const [endPosition, setEndPosition] = useState({});
@@ -169,14 +171,17 @@ export function useRangeSlider({
     let inputValue;
     let knobPositionRounded;
     let setter;
+    let inputPlaceholder;
     if (knobType === "start") {
       inputValue = startValue.value;
       knobPositionRounded = startPosition.rounded;
       setter = setStartValue;
+      inputPlaceholder = startPlaceholder || knobType;
     } else if (knobType === "end") {
       inputValue = endValue.value;
       knobPositionRounded = endPosition.rounded;
       setter = setEndValue;
+      inputPlaceholder = endPlaceholder || knobType;
     }
     const value =
       inputValue || (!knobPositionRounded && knobPositionRounded !== 0)
@@ -187,7 +192,7 @@ export function useRangeSlider({
       : "";
     return (
       <div className={styles.sliderTextInput}>
-        <div className={styles.sliderTextInputLabel}>{knobType}</div>
+        <div className={styles.sliderTextInputLabel}>{inputPlaceholder}</div>
         <input
           type="text"
           placeholder={placeholder || "enter..."}

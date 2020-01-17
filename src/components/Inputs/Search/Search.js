@@ -34,6 +34,8 @@ function Search({
   hint,
   placeholder,
   value,
+  onBlur,
+  onFocus,
 }) {
   const { primaryColor } = React.useContext(Context);
   const fuse = React.useRef();
@@ -48,6 +50,16 @@ function Search({
     setSearchTerm(termToSearch);
   });
 
+  const handleFocus = React.useCallback(e => {
+    setFocused(true);
+    onFocus(e);
+  });
+
+  const handleBlur = React.useCallback(e => {
+    setFocused(false);
+    onBlur(e);
+  });
+
   useEffect(() => {
     FUSE_OPTIONS.keys = searchKeys;
     fuse.current = new Fuse(options, FUSE_OPTIONS);
@@ -56,6 +68,10 @@ function Search({
   useEffect(() => {
     setSearchTerm(value);
   }, [value]);
+
+  useEffect(() => {
+    if (autoFocus && searchInputRef.current) searchInputRef.current.focus();
+  }, [autoFocus]);
 
   useEnterKey(onSubmit, searchInputRef);
 
@@ -77,8 +93,8 @@ function Search({
         onChange={handleSearch}
         value={searchTerm}
         autoFocus={autoFocus}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
       <div className={`${styles.hint} ${prefixClassName}-hint`}>{hint}</div>
     </div>
@@ -104,6 +120,10 @@ Search.propTypes = {
   hint: PropTypes.string,
   /** The onChange for the input (callback called with searchTerm as param) */
   onType: PropTypes.func,
+  /** The onFocus for the input (callback called when focusing the input) */
+  onFocus: PropTypes.func,
+  /** The onBlur for the input (callback called with blurring the input) */
+  onBlur: PropTypes.func,
   /** When enter key is pressed to initiate the search */
   onSubmit: PropTypes.func,
   /** The search input value */
@@ -120,6 +140,8 @@ Search.defaultProps = {
   className: "",
   hint: "",
   onType: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
 };
 
 Search.classNames = {

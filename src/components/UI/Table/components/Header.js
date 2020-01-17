@@ -27,6 +27,7 @@ function Header({ prefixClassName, onSort, columns, sortKey, sortOrder }) {
             }}
             onClick={() => onSort(column)}
           >
+            {column.prefixComponent || null}
             <div
               style={{ color: isActive ? primaryColor : undefined }}
               className={`${styles.tableHeaderItemText} ${prefixClassName}-title`}
@@ -39,6 +40,7 @@ function Header({ prefixClassName, onSort, columns, sortKey, sortOrder }) {
             >
               {sortIcon}
             </div>
+            {column.postfixComponent || null}
           </div>
         );
       })}
