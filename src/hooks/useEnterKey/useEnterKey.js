@@ -1,15 +1,18 @@
-import React from 'react';
-import { KEY_CODES } from 'constants/key_codes';
+import React from "react";
+import { KEY_CODES } from "constants/key_codes";
 
-export default function useEnterKey(onEnter) {
-  const handleKeyUp = React.useCallback((e) => {
-    if (e.keyCode === KEY_CODES.ENTER) {
-      onEnter(e);
-    }
-  });
+export default function useEnterKey(onEnter, ref = { current: document }) {
+  const handleKeyUp = React.useCallback(
+    e => {
+      if (e.keyCode === KEY_CODES.ENTER) {
+        onEnter(e);
+      }
+    },
+    [onEnter],
+  );
 
   React.useEffect(() => {
-    document.addEventListener('keyup', handleKeyUp);
-    return () => document.removeEventListener('keyup', handleKeyUp);
-  }, []);
+    ref.current && ref.current.addEventListener("keyup", handleKeyUp);
+    return () => ref.current.removeEventListener("keyup", handleKeyUp);
+  }, [handleKeyUp]);
 }

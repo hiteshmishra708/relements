@@ -14,15 +14,15 @@ export const ChipsInput = ({
   onFocus = () => {},
   onBlur = () => {},
   onMouseDown = () => {},
-  innerRef = {},
+  innerRef = React.createRef(),
   value = [],
   onChange = () => {},
   focused = false,
   error = "",
   placeholder = "Type here...",
-  inputRef = {},
+  inputRef,
   disabled = false,
-  onValueChange = () => {},
+  onType = () => {},
   prefixComponent = null,
   postfixComponent = null,
   optionKey = "text",
@@ -42,19 +42,25 @@ export const ChipsInput = ({
 
   const handleDelete = React.useCallback(i => e => {
     e.stopPropagation();
+    e.preventDefault();
     deleteChip(i);
   });
 
   const handleChange = React.useCallback(e => {
     const value = e.target.value;
     setInputValue(value);
-    onValueChange(value);
+    onType(value);
   });
 
   const handleKeyDown = React.useCallback(e => {
     onKeyDownChips(e);
     onKeyDown(e);
   });
+
+  const handleFocus = e => {
+    onFocus(e);
+    inputRef.current.focus();
+  };
 
   const renderInput = () => {
     return (
@@ -70,29 +76,32 @@ export const ChipsInput = ({
   };
 
   const renderChip = (chip, i) => {
-    const title = chip[optionKey];
+    const title = typeof chip === "object" ? chip[optionKey] : chip;
     return (
       <div key={i} className={`${styles.chip} ${prefixClassName}-chip`}>
         {title}
-        <div
-          className={`${prefixClassName}-chip-icon`}
-          onMouseDown={handleDelete(i)}
-        >
-          <Icon
-            src={CrossIcon}
-            className={`${styles.deleteChipIcon} ${prefixClassName}-chip-icon-svg`}
-          />
-        </div>
+        {!disabled && (
+          <div
+            className={`${prefixClassName}-chip-icon`}
+            onMouseDown={handleDelete(i)}
+          >
+            <Icon
+              src={CrossIcon}
+              className={`${styles.deleteChipIcon} ${prefixClassName}-chip-icon-svg`}
+            />
+          </div>
+        )}
       </div>
     );
   };
 
   return (
     <div
-      onClick={onFocus}
+      tabIndex="-1"
       ref={innerRef}
       style={focusedStyle}
       className={`${styles.chips} ${prefixClassName} ${errorClassName} ${className} ${focusedClassNameString}`}
+      onFocus={handleFocus}
       onBlur={onBlur}
       onMouseDown={onMouseDown}
     >
@@ -116,7 +125,7 @@ ChipsInput.propTypes = {
   value: PropTypes.string,
   disabled: PropTypes.string,
   onChange: PropTypes.func,
-  onValueChange: PropTypes.func,
+  onType: PropTypes.func,
   focused: PropTypes.bool,
   error: PropTypes.bool,
   placeholder: PropTypes.string,

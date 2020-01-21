@@ -57,6 +57,10 @@ export default function useSlider(
     slideTo(initialSlide || 0);
   }, [sliderWrapperRef.current]);
 
+  React.useEffect(() => {
+    setSlide(initialSlide);
+  }, [initialSlide]);
+
   return {
     left,
     offset,

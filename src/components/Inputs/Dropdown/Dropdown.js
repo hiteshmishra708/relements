@@ -31,6 +31,7 @@ const Dropdown = ({
   onChange = () => {},
   placeholder = "",
   createPrefix = "+ Create",
+  searchKeys,
 
   onFocus = () => {},
   onBlur = () => {},
@@ -45,14 +46,21 @@ const Dropdown = ({
   const _InputDOM = useRef();
   const _InputWrapperDOM = useRef();
 
+  React.useEffect(() => {
+    setUpdatedOptions(options);
+  }, [options]);
+
   const getInputValue = () => {
     if (withMultiple) return valueArray;
-    return valueArray[0] ? valueArray[0][optionKey] : "";
+    if (valueArray[0] && typeof valueArray[0] === "object")
+      return valueArray[0][optionKey];
+    return valueArray[0] || "";
   };
 
-  const [searchTerm, searchResults, handleSearch] = useSearch(updatedOptions, [
-    optionKey,
-  ]);
+  const [searchTerm, searchResults, handleSearch] = useSearch(
+    updatedOptions,
+    searchKeys || [optionKey],
+  );
   const useDropdownProps = [
     searchTerm,
     searchResults,
@@ -63,23 +71,11 @@ const Dropdown = ({
   ];
 
   const [dropdownOptions] = useDropdown(...useDropdownProps);
-  const [
-    highlightIndex,
-    handleKeyDown,
-    _DropdownOptionDOMs,
-  ] = useKeyboardSelect(dropdownOptions, onChange);
   const { focused, setFocused, handleFocus, handleBlur } = useInput(
     _InputDOM,
     onFocus,
     onBlur,
   );
-
-  const handleToggle = () => setFocused(!focused);
-
-  const isReversed =
-    _InputWrapperDOM.current &&
-    _InputWrapperDOM.current.getBoundingClientRect().bottom + 64 >
-      window.innerHeight;
 
   const handleChange = valueToChange => {
     const newValue = withMultiple ? [...value, valueToChange] : valueToChange;
@@ -99,13 +95,26 @@ const Dropdown = ({
       flatExistingOptions.indexOf(flatNewValue) < 0
         ? setUpdatedOptions([...updatedOptions, { text: flatNewValue }])
         : null;
-      onChange({ [optionKey]: flatNewValue });
+      onChange({ ...valueToChange, [optionKey]: flatNewValue });
       // removing '+ Create' option added
       dropdownOptions.splice(0, 1);
     } else {
       onChange(newValue);
     }
+
+    if (!withMultiple) setFocused(false);
   };
+
+  const [
+    highlightIndex,
+    handleKeyDown,
+    _DropdownOptionDOMs,
+  ] = useKeyboardSelect(dropdownOptions, handleChange, setFocused);
+
+  const isReversed =
+    _InputWrapperDOM.current &&
+    _InputWrapperDOM.current.getBoundingClientRect().bottom + 200 >
+      window.innerHeight;
 
   const renderOptions = () => {
     if (!dropdownOptions.length) {
@@ -152,10 +161,10 @@ const Dropdown = ({
         prefixClassName={`${prefixClassName}-input`}
         error={error}
         onKeyDown={handleKeyDown}
-        onFocus={handleFocus}
+        onFocus={!disabled ? handleFocus : undefined}
         onBlur={handleBlur}
-        onMouseDown={handleToggle}
         onChange={withMultiple ? onChange : handleSearch}
+        onType={handleSearch}
         focused={focused}
         active={focused}
         value={inputValue}
@@ -164,12 +173,14 @@ const Dropdown = ({
         editable={withSearch || withCreate}
         withMultiple={withMultiple}
         postfixComponent={
-          <Icon className={styles.dropdownInputIcon} src={AngleDownIcon} />
+          !disabled ? (
+            <Icon className={styles.dropdownInputIcon} src={AngleDownIcon} />
+          ) : null
         }
         optionKey={optionKey}
       />
       <DropdownOptions
-        // onClose={handleBlur}
+        onClose={handleBlur}
         attachTo={_InputWrapperDOM}
         active={focused}
         focused={focused}
@@ -205,12 +216,10 @@ Dropdown.propTypes = {
   prefixClassName: PropTypes.string,
   /** Text to prefix for Creating a new option */
   createPrefix: PropTypes.string,
-
   /** onFocus Callback */
   onFocus: PropTypes.func,
   /** onBlur Callback */
   onBlur: PropTypes.func,
-
   /** Dropdown with Search Enabled */
   withSearch: PropTypes.bool,
   /**  Dropdown with Creating new Options Enabled */
@@ -219,6 +228,8 @@ Dropdown.propTypes = {
   withMultiple: PropTypes.bool,
   /**  Whether the input is disabled or not */
   disabled: PropTypes.bool,
+  /**  Keys in the options to search for when using withSearch */
+  searchKeys: PropTypes.arrayOf(PropTypes.string),
 };
 
 Dropdown.classNames = {

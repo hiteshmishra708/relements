@@ -22,6 +22,9 @@ function RangeSlider({
   end,
   step,
   testId,
+  startPlaceholder,
+  endPlaceholder,
+  inputPlaceholder,
 }) {
   const _TextInputDOM = useRef();
   const _TrackDOM = useRef();
@@ -40,6 +43,8 @@ function RangeSlider({
     single,
     onDrag,
     placeholder,
+    startPlaceholder,
+    endPlaceholder: endPlaceholder || inputPlaceholder,
   });
 
   return (
@@ -112,6 +117,12 @@ RangeSlider.propTypes = {
   ]),
   /** For testing purpose */
   testId: PropTypes.string,
+  /** Placeholder (LHS) of the input for the start knob */
+  startPlaceholder: PropTypes.string,
+  /** Placeholder (LHS) of the input for the end knob */
+  endPlaceholder: PropTypes.string,
+  /** Placeholder (LHS) of the input for the start knob */
+  inputPlaceholder: PropTypes.string,
 };
 
 RangeSlider.defaultProps = {
@@ -120,6 +131,9 @@ RangeSlider.defaultProps = {
   end: 0,
   error: "",
   label: "",
+  startPlaceholder: "",
+  endPlaceholder: "",
+  inputPlaceholder: "",
   onBlur: () => {},
   onChange: () => {},
   onDrag: () => {},

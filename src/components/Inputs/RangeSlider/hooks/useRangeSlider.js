@@ -6,6 +6,7 @@ export const toPosition = (start, end, step) => knobValue => {
   const value = start + (knobValue / 100) * (end - start);
   return Math.ceil(value / step) * step;
 };
+
 export const fromPosition = (start, end) => position => {
   return (100 * (position - start)) / (end - start);
 };
@@ -27,6 +28,8 @@ export function useRangeSlider({
   single,
   onDrag,
   placeholder,
+  startPlaceholder,
+  endPlaceholder,
 }) {
   const [startPosition, setStartPosition] = useState({});
   const [endPosition, setEndPosition] = useState({});
@@ -95,14 +98,29 @@ export function useRangeSlider({
     });
   };
 
+  const onKnobValueChange = (isStartKnob, knobValue) => {
+    if (single) onChange(knobValue);
+    else {
+      const startValue = translateToPosition(startPosition.exact);
+      const endValue = translateToPosition(endPosition.exact);
+      isStartKnob
+        ? onChange([knobValue, endValue])
+        : onChange([startValue, knobValue]);
+    }
+  };
+
   const handleKeyDown = knobType => e => {
     const changeKnobPosition = () => {
-      const setter = knobType === "start" ? setStartPosition : setEndPosition;
+      const isStartKnob = knobType === "start";
+      const setter = isStartKnob ? setStartPosition : setEndPosition;
       let knobPosition = translateFromPosition(e.target.value);
       if (knobPosition < 0) knobPosition = 0;
       if (knobPosition > 100) knobPosition = 100;
       setter({ exact: knobPosition, rounded: knobPosition });
-      endDrag(knobType);
+
+      // calling on change for input field updates
+      const knobValue = translateToPosition(knobPosition);
+      onKnobValueChange(isStartKnob, knobValue);
     };
     switch (e.keyCode) {
       case KEY_CODES.TAB:
@@ -114,6 +132,15 @@ export function useRangeSlider({
         break;
       default:
     }
+  };
+
+  const handleBlur = (e, knobType) => {
+    const isStartKnob = !!(knobType === "start");
+    const setter = isStartKnob ? setStartPosition : setEndPosition;
+    const knobPosition = translateFromPosition(e.target.value);
+    setter({ exact: knobPosition, rounded: knobPosition });
+    const knobValue = translateToPosition(knobPosition);
+    onKnobValueChange(isStartKnob, knobValue);
   };
 
   const renderKnob = (knobType, prefixClassName) => {
@@ -144,14 +171,17 @@ export function useRangeSlider({
     let inputValue;
     let knobPositionRounded;
     let setter;
+    let inputPlaceholder;
     if (knobType === "start") {
       inputValue = startValue.value;
       knobPositionRounded = startPosition.rounded;
       setter = setStartValue;
+      inputPlaceholder = startPlaceholder || knobType;
     } else if (knobType === "end") {
       inputValue = endValue.value;
       knobPositionRounded = endPosition.rounded;
       setter = setEndValue;
+      inputPlaceholder = endPlaceholder || knobType;
     }
     const value =
       inputValue || (!knobPositionRounded && knobPositionRounded !== 0)
@@ -162,7 +192,7 @@ export function useRangeSlider({
       : "";
     return (
       <div className={styles.sliderTextInput}>
-        <div className={styles.sliderTextInputLabel}>{knobType}</div>
+        <div className={styles.sliderTextInputLabel}>{inputPlaceholder}</div>
         <input
           type="text"
           placeholder={placeholder || "enter..."}
@@ -171,6 +201,9 @@ export function useRangeSlider({
           className={className}
           onChange={e => {
             setter({ value: e.target.value });
+          }}
+          onBlur={e => {
+            handleBlur(e, knobType);
           }}
         />
       </div>
