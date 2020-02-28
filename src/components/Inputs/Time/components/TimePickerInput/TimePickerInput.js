@@ -14,15 +14,19 @@ function TimePickerInput({
   max,
 }) {
   const handleChange = React.useCallback(newValue => {
-    if (+newValue > max) onChange(0);
-    else onChange(newValue);
+    if (+newValue > max) onChange("00");
+    else onChange(`${newValue}`);
   });
+
+  // in display we want to always show 2 digits 
+  // [1 should show up as 01, but 13 should show up as 13]
+  const inputValue = +value > 9 ? `${+value}` : `0${+value}`;
 
   return (
     <div className={`${styles.timePickerInput} ${prefixClassName}`}>
       <input
         type="number"
-        value={value}
+        value={inputValue}
         onChange={e => handleChange(e.target.value)}
         ref={innerRef}
         className={`${prefixClassName}-element`}
