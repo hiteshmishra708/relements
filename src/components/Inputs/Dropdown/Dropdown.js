@@ -35,8 +35,17 @@ const Dropdown = ({
   const [createdOption, setCreatedOption] = React.useState();
   const [focused, setFocused] = React.useState(false);
 
+  // simple mode is when the options are an array of strings instead of objects
+  // and the value and onChange also expect strings.
+  const isSimpleInputMode = typeof value === "string";
+  const isSimpleOptionsMode =
+    options.length && typeof propOptions[0] === "string";
+
   // the ref for the input wrapper (used for positioning the dropdown)
   const inputWrapperRef = React.useRef();
+
+  // the ref for blur lock (whether to lock the blur event or not)
+  const blurCount = React.useRef(false);
 
   // the ref for the actual input itself (used for focus/blur of input)
   const inputRef = React.useRef();
@@ -45,14 +54,21 @@ const Dropdown = ({
   // [when the typeable input clears]
   const timeoutRef = React.useRef();
 
+  let inputValue = "";
+  // if the value is a simple string, convert it to an object
+  inputValue = isSimpleInputMode ? { [optionKey]: value } : value;
+  // we normalize it to always be an array of objects depending on the useMultiple flag
+  inputValue = withMultiple ? inputValue : [inputValue];
+
+  const firstValueLabel = inputValue[0] ? inputValue[0][optionKey] || "" : "";
+
   // based on the typed text, the options are filtered using the useSearch hook
   // Fuse.js is used for fuzzy searching.
+  // searchText is set to empty (show all results if a valid value is already selected)
   // searchKeys determines the array of keys withing the options to search
   const searchInKeys = searchKeys.length ? searchKeys : [optionKey];
-  const searchResults = useSearch(text, options, searchInKeys);
-
-  // we normalize it to always be an array depending on the useMultiple flag
-  const inputValue = withMultiple ? value : [value];
+  const searchText = text === firstValueLabel ? "" : text;
+  const searchResults = useSearch(searchText, options, searchInKeys);
 
   // we need to normalize the options for display.
   // - It filters out the option that was selected
@@ -82,15 +98,39 @@ const Dropdown = ({
     setFocused(false);
     onBlur(e);
     if (inputRef.current) inputRef.current.blur();
-    // we need a timeout, otherwise the list resets sending the wrong event
-    // [since the list is outside the context of the dropdown, the blur event is fired as well
-    timeoutRef.current = setTimeout(() => setText(""), 100);
+
+    // increment the blur count
+    blurCount.current += 1;
+
+    const target = e.target;
+    // we set a timeout to give the component enough time to dispatch both the events.
+    // once both the events fire, we can ignore the second one. (when blurCount is 2)
+    // otherwise it will reset the text to the old value.
+    // 200 is a sufficiently high value
+    // the delay is non-consequential as it's only there when the input resets
+    setTimeout(() => {
+      if (text !== firstValueLabel && target && blurCount.current === 1) {
+        const optionIndex = dropdownOptions
+          .map(option => option.label)
+          .indexOf(text);
+
+        if (withMultiple) setText("");
+        else if (optionIndex > -1) onChange(dropdownOptions[optionIndex].value);
+        else setText(firstValueLabel);
+      }
+    }, 200);
   };
 
   const handleFocus = e => {
     if (disabled) return;
     setFocused(true);
     onFocus(e);
+
+    // blur count keeps track of how many times the blur event was called
+    // this is to ensure that the when the user clicks on the option
+    // we can ignore the duplicate blur event
+    blurCount.current = 0;
+
     // sometimes the input isn't immediately available
     // only available on the next tick (hence the timeout is 0)
     setTimeout(() => inputRef.current && inputRef.current.focus(), 0);
@@ -98,7 +138,8 @@ const Dropdown = ({
   };
 
   const handleChange = e => {
-    onChange(e);
+    // if it's simple mode, then we return a string value
+    onChange(isSimpleOptionsMode ? e[optionKey] : e);
     // we don't blur if multiple options can be selected
     // this is a UX decision.
     if (!withMultiple) handleBlur(e);
@@ -125,13 +166,32 @@ const Dropdown = ({
   };
 
   React.useEffect(() => {
+    // we also support an array of strings instead of objects
+    // we normalize it to objects with the default optionKey
+    // [simple mode]
+    let listOfOptionObjects = propOptions;
+    if (isSimpleOptionsMode) {
+      listOfOptionObjects = propOptions.map(option => ({
+        [optionKey]: option,
+      }));
+    }
+
     // merged options contains the extra created option if available
     const mergedOptions =
       createdOption && withCreate
-        ? [createdOption, ...propOptions]
-        : propOptions;
+        ? [createdOption, ...listOfOptionObjects]
+        : listOfOptionObjects;
+
     setOptions(mergedOptions);
   }, [propOptions.length, createdOption]);
+
+  React.useEffect(() => {
+    // we set the search text for single selection
+    // items to the selected value. This is so that
+    // the input text shows the selected value
+    if (withMultiple) return;
+    setText(firstValueLabel || "");
+  }, [firstValueLabel]);
 
   return (
     <div

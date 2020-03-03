@@ -22,7 +22,7 @@ export default function useKeyboardSelect({
   attachTo,
   enabled,
 }) {
-  const [highlightIndex, setHighlightIndex] = useState(-1);
+  const [highlightIndex, setHighlightIndex] = useState(0);
 
   const changeHighlightIndex = newIndex => {
     if (newIndex >= options.length) {
@@ -65,7 +65,7 @@ export default function useKeyboardSelect({
       if (!attachTo.current) return;
       attachTo.current.removeEventListener("keydown", handleKeyDown);
     };
-  }, [attachTo.current, highlightIndex, options.length, enabled]);
+  }, [attachTo.current, highlightIndex, options, enabled]);
 
   return highlightIndex;
 }

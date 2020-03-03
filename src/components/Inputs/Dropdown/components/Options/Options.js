@@ -113,10 +113,12 @@ const Options = ({
           {options.map((option, i) => {
             return (
               <Option
-                key={`${options.label}-${i}`}
+                key={`${option.label}-${i}`}
                 selected={highlightIndex === i}
                 innerRef={dropdownDOMs.current[i]}
-                onClick={() => onChange(option.value)}
+                onClick={() => {
+                  onChange(option.value);
+                }}
                 isZeroState={option.isZeroState}
                 isNew={option.isNew}
                 className={`${prefixClassName}-option`}
