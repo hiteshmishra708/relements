@@ -21,7 +21,8 @@ function TimePicker({ value, onChange, prefixClassName }) {
       let date = dayjs(value);
       let hoursToAdd = 0;
       if (newAMPM === "PM" && +newHH === 12) hoursToAdd = 0;
-      if (newAMPM === "AM" && +newHH === 12) hoursToAdd = 12;
+      else if (newAMPM === "PM") hoursToAdd = 12;
+      else if (newAMPM === "AM" && +newHH === 12) hoursToAdd = 12;
 
       date = date.set("h", parseInt(newHH, 10) + hoursToAdd);
       date = date.set("m", parseInt(newMM, 10));

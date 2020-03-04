@@ -108,7 +108,7 @@ test("On Change", async () => {
 
   expect(mockFn).toHaveBeenCalledTimes(2);
   const date2 = dayjs(mockFn.mock.calls[1][0]);
-  expect(date2.get("hour")).toBe(3);
+  expect(date2.get("hour")).toBe(15);
   expect(date2.get("minute")).toBe(10);
 
   rerender(
