@@ -133,6 +133,10 @@ export function useRangeSlider({
     onKnobValueChange(isStartKnob, knobValue, knobPosition);
   };
 
+  /**
+   * returns a function that takes value and keyDown event as parameter to change knob position
+   * @param {*} knobType
+   */
   const handleKeyDown = knobType => (value, e) => {
     switch (e.keyCode) {
       case KEY_CODES.ESC:
@@ -147,6 +151,10 @@ export function useRangeSlider({
     }
   };
 
+  /**
+   * returns a function that accepts a value parameter to change knob position
+   * @param {*} knobType
+   */
   const handleBlur = knobType => value => changeKnobPosition(knobType, value);
 
   const renderKnob = (knobType, prefixClassName) => {
@@ -210,6 +218,10 @@ export function useRangeSlider({
       ? `${prefixClassName}-${knobType}-input`
       : "";
 
+    /**
+     * returns a wrapped function that accepts keyDown event as a parameter
+     * @param {*} wrapped event handler to be wrapped
+     */
     const reflectKeyPressedWrapper = wrapped => e => {
       if (
         e.keyCode === KEY_CODES.ESC ||
@@ -219,6 +231,10 @@ export function useRangeSlider({
         wrapped(e);
     };
 
+    /**
+     * returns a function that takes event as a paramter and reflects the knob value and render input
+     * @param {*} handler event handler function that takes event as input
+     */
     const reflectInput = handler => e => {
       const isIntegerOnly = Number.isInteger(step);
       const isIntegerInput = Number.isInteger(parseFloat(renderValue));
@@ -227,6 +243,10 @@ export function useRangeSlider({
       const currentValue = value;
 
       // resets to previous valid value for invalid inputs
+      /**
+       * returns converted value based on expected input if required otherwise returns previous valid value
+       * @param {*} value
+       */
       const convertInputValue = value => {
         if (isIntegerOnly && isIntegerInput) return parseInt(value, 10);
         if (!isIntegerOnly && isFloatInput) return value;
@@ -241,10 +261,14 @@ export function useRangeSlider({
         ? renderInputValue(currentValue)
         : currentValue;
 
+      /**
+       * handles invalid input cases by returning fallback values
+       */
       const handleInvalidInput = () => {
-        const isValidFloatInput =
+        const isInValidFloatInput =
           !isIntegerOnly && !Number.isInteger(inputValue / step);
-        if (isValidFloatInput) return [currentValue, currentRenderValue];
+
+        if (isInValidFloatInput) return [currentValue, currentRenderValue];
 
         // only for custom input where some partial representation is of equal value to the current value
         const isPartiallyValidInput =
@@ -262,9 +286,13 @@ export function useRangeSlider({
         const hitsLowerBound = isNumberInput && inputValue < start;
         const hitsUpperBound = isNumberInput && inputValue > end;
 
+        /**
+         * returns capped value for range violating input
+         */
         const capInput = () => {
-          if (hitsUpperBound) return end;
-          if (hitsLowerBound) return start;
+          if (hitsLowerBound && single) return start;
+          if (hitsUpperBound) return knobType === "start" ? currentValue : end;
+          if (hitsLowerBound) return knobType === "end" ? currentValue : start;
           return inputValue;
         };
         const cappedInput = capInput();
@@ -272,6 +300,10 @@ export function useRangeSlider({
         if ((hitsLowerBound || hitsUpperBound) && isTranslatedInput)
           return [cappedInput, renderInputValue(cappedInput)];
         if (hitsLowerBound || hitsUpperBound) return [cappedInput, cappedInput];
+
+        // check for invalid integer input
+        const isInValidIntInput = isIntegerOnly && inputValue % step !== 0;
+        if (isInValidIntInput) return [currentValue, currentRenderValue];
 
         // ensures start input does not cross or equates to end input and vice versa
         const hitsStart =

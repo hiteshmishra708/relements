@@ -97,12 +97,36 @@ test("On change input value for start and end", async () => {
   expect(inputStart.value).toBe(newStart.toString());
   expect(knobStart.style.left).toBe(`${startLeft}%`);
 
+  // upper bound range violation by start input
+  newStart = 1100;
+  fireEvent.change(inputStart, { target: { value: newStart } });
+  fireEvent.keyDown(inputStart, { key: "tab", keyCode: KEY_CODES.TAB });
+  startLeft = translateFromPosition(newStart);
+  expect(inputStart.value).toBe("200");
+  expect(knobStart.style.left).toBe(`20%`);
+
   let newEnd = 500;
   fireEvent.change(inputEnd, { target: { value: newEnd } });
   fireEvent.keyDown(inputEnd, { key: "enter", keyCode: KEY_CODES.ENTER });
   let endLeft = translateFromPosition(newEnd);
   expect(inputEnd.value).toBe(newEnd.toString());
   expect(knobEnd.style.left).toBe(`${endLeft}%`);
+
+  // invalid value w.r.t step should reset to previous valid value
+  newEnd = 510;
+  fireEvent.change(inputEnd, { target: { value: newEnd } });
+  fireEvent.keyDown(inputEnd, { key: "enter", keyCode: KEY_CODES.ENTER });
+  endLeft = translateFromPosition(newEnd);
+  expect(inputEnd.value).toBe("500");
+  expect(knobEnd.style.left).toBe(`${"50"}%`);
+
+  // lower bound range violation by end input
+  newEnd = -100;
+  fireEvent.change(inputEnd, { target: { value: newEnd } });
+  fireEvent.keyDown(inputEnd, { key: "enter", keyCode: KEY_CODES.ENTER });
+  endLeft = translateFromPosition(newEnd);
+  expect(inputEnd.value).toBe("500");
+  expect(knobEnd.style.left).toBe(`${"50"}%`);
 
   // lower bound range violation
   newStart = -1;
@@ -248,12 +272,28 @@ test("On change input value for start and end: custom format", async () => {
   expect(inputStart.value).toBe(getColonSeparatedDuration(0));
   expect(knobStart.style.left).toBe(`${startLeft}%`);
 
+  //partial input
+  newStart = 100;
+  fireEvent.change(inputStart, { target: { value: "1:40" } });
+  fireEvent.keyDown(inputStart, { key: "enter", keyCode: KEY_CODES.ENTER });
+  startLeft = translateFromPosition(newStart);
+  expect(inputStart.value).toBe(getColonSeparatedDuration(newStart));
+  expect(knobStart.style.left).toBe(`${startLeft}%`);
+
   let newEnd = 200;
   fireEvent.change(inputEnd, {
     target: { value: getColonSeparatedDuration(newEnd) },
   });
   fireEvent.keyDown(inputEnd, { key: "enter", keyCode: KEY_CODES.ENTER });
   let endLeft = translateFromPosition(newEnd);
+  expect(inputEnd.value).toBe(getColonSeparatedDuration(newEnd));
+  expect(knobEnd.style.left).toBe(`${endLeft}%`);
+
+  // partial input
+  newEnd = 600;
+  fireEvent.change(inputEnd, { target: { value: "10:" } });
+  fireEvent.keyDown(inputEnd, { key: "enter", keyCode: KEY_CODES.ENTER });
+  endLeft = translateFromPosition(newEnd);
   expect(inputEnd.value).toBe(getColonSeparatedDuration(newEnd));
   expect(knobEnd.style.left).toBe(`${endLeft}%`);
 });
