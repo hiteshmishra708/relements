@@ -25,6 +25,8 @@ function RangeSlider({
   startPlaceholder,
   endPlaceholder,
   inputPlaceholder,
+  renderInputValue,
+  translateInputValue,
 }) {
   const _TextInputDOM = useRef();
   const _TrackDOM = useRef();
@@ -45,6 +47,8 @@ function RangeSlider({
     placeholder,
     startPlaceholder,
     endPlaceholder: endPlaceholder || inputPlaceholder,
+    renderInputValue,
+    translateInputValue,
   });
 
   return (
@@ -104,6 +108,10 @@ RangeSlider.propTypes = {
   onDrag: PropTypes.func,
   /** Method fired on focusing on the slider */
   onFocus: PropTypes.func,
+  /** Method to format input value */
+  renderInputValue: PropTypes.func,
+  /** Method to translate formatted input value to input */
+  translateInputValue: PropTypes.func,
   /** The prefix classname prepended to all elements */
   prefixClassName: PropTypes.string,
   /** Defines the type of slider. Whether it will have a range or a single knob */
@@ -138,6 +146,8 @@ RangeSlider.defaultProps = {
   onChange: () => {},
   onDrag: () => {},
   onFocus: () => {},
+  renderInputValue: undefined,
+  translateInputValue: undefined,
   prefixClassName: "",
   single: false,
   start: 0,
