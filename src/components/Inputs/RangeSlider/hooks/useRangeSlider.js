@@ -147,7 +147,7 @@ export function useRangeSlider({
 
   /**
    * returns a function that takes value and keyDown event as parameter to change knob position
-   * @param {*} knobType
+   * @param {string} knobType
    */
   const handleKeyDown = knobType => (value, e) => {
     switch (e.keyCode) {
@@ -165,7 +165,7 @@ export function useRangeSlider({
 
   /**
    * returns a function that accepts a value parameter to change knob position
-   * @param {*} knobType
+   * @param {string} knobType
    */
   const handleBlur = knobType => value => changeKnobPosition(knobType, value);
 
@@ -232,7 +232,7 @@ export function useRangeSlider({
 
     /**
      * returns a wrapped function that accepts keyDown event as a parameter
-     * @param {*} wrapped event handler to be wrapped
+     * @param {function} wrapped event handler to be wrapped
      */
     const reflectKeyPressedWrapper = wrapped => e => {
       if (
@@ -244,8 +244,10 @@ export function useRangeSlider({
     };
 
     /**
-     * returns a function that takes event as a paramter and reflects the knob value and render input
-     * @param {*} handler event handler function that takes event as input
+     * event handler wrapper takes event handler as an input
+     * returns a function that takes event as a parameter and
+     * reflects the knob value and render input value by invoking the handler as a callback function
+     * @param {function} handler event handler that takes event as an input
      */
     const reflectInput = handler => e => {
       const isIntegerOnly = Number.isInteger(step);
@@ -278,6 +280,15 @@ export function useRangeSlider({
 
       /**
        * handles invalid input cases by returning fallback values
+       *  1. Invalid float :- returns previous valid value
+       *  2. Partially valid:- applicable for representational input only returns input value
+       *  3. Empty :- returns previous valid value and its representation
+       *  4. Out of range :- returns capped range values e.g start or end
+       *  5. start input box hits or crosses end prop :- returns value of start prop
+       *  6. end input box hits or crosses start prop :- returns value of end prop
+       *  7. start input box hits or crosses end input box :- returns previous valid value
+       *  8. end input box hits or crosses start input box :- returns previous valid value
+       *  9. valid input value :- returns input value
        * returns a pair of range value and its representation in the input box
        * @returns {array}
        */
@@ -354,10 +365,25 @@ export function useRangeSlider({
       shouldUpdateRenderValue(newRenderValue) && setRenderValue(newRenderValue);
     };
 
+    /*
+      handleKeyDown returns a function that handles onKeyDown event for a knob type.
+      reflectInput takes function returned by handleKeyDown function as a parameter
+      and returns event handler that takes event as a parameter.
+      reflectKeyPressedWrapper takes event handler returned by reflect input as a parameter
+      and returns a wrapped event handler, event handler is invoked when reflect input keys pressed.
+      reflect input keys are TAB, ENTER and ESC
+    */
     const onKeyDown = reflectKeyPressedWrapper(
       reflectInput(handleKeyDown(knobType)),
     );
+
+    /*
+      handleBlur returns a function that handles onBlur event for a knob type.
+      reflectInput takes function returned by handleBlur function as a parameter
+      and returns event handler that takes event as a parameter.
+    */
     const onBlur = reflectInput(handleBlur(knobType));
+
     const onChange = e => setRenderValue(e.target.value);
 
     return (
