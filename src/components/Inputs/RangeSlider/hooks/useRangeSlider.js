@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import { KEY_CODES } from "constants";
 import styles from "./useRangeSlider.scss";
 
+/**
+ * returns a function that takes exact knob position as a parameter and returns rounded range value.
+ * @param {number} start start value from props
+ * @param {number} end end value from props
+ * @param {number} step step value from props
+ * @returns {number}
+ */
 export const toPosition = (start, end, step) => position => {
   const value = start + (position / 100) * (end - start);
   return Math.round(value / step) * step;
@@ -126,6 +133,11 @@ export function useRangeSlider({
     }
   };
 
+  /**
+   * calculates knob position and knob value and passes it to the onKnobValueChange function
+   * @param {string} knobType type of knob (start or end)
+   * @param {string} value range value
+   */
   const changeKnobPosition = (knobType, value) => {
     const isStartKnob = knobType === "start";
     const knobPosition = translateFromPosition(value);
@@ -245,7 +257,8 @@ export function useRangeSlider({
       // resets to previous valid value for invalid inputs
       /**
        * returns converted value based on expected input if required otherwise returns previous valid value
-       * @param {*} value
+       * @param {string} value
+       * @returns {number}
        */
       const convertInputValue = value => {
         if (isIntegerOnly && isIntegerInput) return parseInt(value, 10);
@@ -253,16 +266,20 @@ export function useRangeSlider({
         return currentValue;
       };
 
+      // value from input text box is converted to range value
       const inputValue = isTranslatedInput
         ? translateInputValue(renderValue, currentValue)
         : convertInputValue(renderValue);
 
+      // range value is converted to a representational value to be displayed in the input box
       const currentRenderValue = isTranslatedInput
         ? renderInputValue(currentValue)
         : currentValue;
 
       /**
        * handles invalid input cases by returning fallback values
+       * returns a pair of range value and its representation in the input box
+       * @returns {array}
        */
       const handleInvalidInput = () => {
         const isInValidFloatInput =
@@ -277,7 +294,7 @@ export function useRangeSlider({
           currentRenderValue !== renderValue;
         if (isPartiallyValidInput) return [inputValue, currentRenderValue];
 
-        // empty input resets to previos valid input
+        // empty input resets to previous valid input
         const isEmptyInput = !isTranslatedInput && inputValue === "";
         if (isEmptyInput) return [currentValue, currentRenderValue];
 
@@ -288,6 +305,7 @@ export function useRangeSlider({
 
         /**
          * returns capped value for range violating input
+         * @returns {number}
          */
         const capInput = () => {
           if (hitsLowerBound && single) return start;
@@ -297,9 +315,12 @@ export function useRangeSlider({
         };
         const cappedInput = capInput();
 
-        if ((hitsLowerBound || hitsUpperBound) && isTranslatedInput)
-          return [cappedInput, renderInputValue(cappedInput)];
-        if (hitsLowerBound || hitsUpperBound) return [cappedInput, cappedInput];
+        // checks if input value hits start or end bounds provided by props
+        if (hitsLowerBound || hitsUpperBound)
+          if (isTranslatedInput)
+            // checks if translation of the value is required
+            return [cappedInput, renderInputValue(cappedInput)];
+          else return [cappedInput, cappedInput];
 
         // check for invalid integer input
         const isInValidIntInput = isIntegerOnly && inputValue % step !== 0;

@@ -30,7 +30,7 @@ export const translateColonSeparatedDuration = (
 ) => {
   const isValidInput = input =>
     RegExp(`^[012345]?\\d?:[012345]?\\d?$`).test(input);
-  const convertColonSeperatedDuration = duration => {
+  const convertColonSeparatedDuration = duration => {
     const [minutes, seconds] = duration.split(":");
     return { minutes, seconds };
   };
@@ -42,7 +42,7 @@ export const translateColonSeparatedDuration = (
     return totalSeconds;
   };
   if (isValidInput(input)) {
-    const { minutes, seconds } = convertColonSeperatedDuration(input);
+    const { minutes, seconds } = convertColonSeparatedDuration(input);
     return getSeconds({ minutes, seconds });
   }
   return prevInputSeconds;
