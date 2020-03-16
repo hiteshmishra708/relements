@@ -147,7 +147,7 @@ export function useRangeSlider({
 
   /**
    * returns a function that takes value and keyDown event as parameter to change knob position
-   * @param {string} knobType
+   * @param {string} knobType type of knob (start or end)
    */
   const handleKeyDown = knobType => (value, e) => {
     switch (e.keyCode) {
@@ -165,7 +165,7 @@ export function useRangeSlider({
 
   /**
    * returns a function that accepts a value parameter to change knob position
-   * @param {string} knobType
+   * @param {string} knobType type of knob (start or end)
    */
   const handleBlur = knobType => value => changeKnobPosition(knobType, value);
 
@@ -193,6 +193,11 @@ export function useRangeSlider({
     );
   };
 
+  /**
+   * A custom hook returns value, setter and inputPlaceholder of a knob based on knob type.
+   * @param {string} knobType type of knob (start or end)
+   * @returns {[number, function, string]} value, setter, inputPlaceholder
+   */
   const useValue = knobType => {
     let inputValue;
     let knobPositionRounded;
@@ -248,6 +253,7 @@ export function useRangeSlider({
      * returns a function that takes event as a parameter and
      * reflects the knob value and render input value by invoking the handler as a callback function
      * @param {function} handler event handler that takes event as an input
+     * @author Swapnil Misal <swapnil.misal@gmail.com>
      */
     const reflectInput = handler => e => {
       const isIntegerOnly = Number.isInteger(step);
@@ -261,6 +267,7 @@ export function useRangeSlider({
        * returns converted value based on expected input if required otherwise returns previous valid value
        * @param {string} value
        * @returns {number}
+       * @author Swapnil Misal <swapnil.misal@gmail.com>
        */
       const convertInputValue = value => {
         if (isIntegerOnly && isIntegerInput) return parseInt(value, 10);
@@ -291,6 +298,7 @@ export function useRangeSlider({
        *  9. valid input value :- returns input value
        * returns a pair of range value and its representation in the input box
        * @returns {array}
+       * @author Swapnil Misal <swapnil.misal@gmail.com>
        */
       const handleInvalidInput = () => {
         const isInValidFloatInput =
@@ -317,6 +325,7 @@ export function useRangeSlider({
         /**
          * returns capped value for range violating input
          * @returns {number}
+         * @author Swapnil Misal <swapnil.misal@gmail.com>
          */
         const capInput = () => {
           if (hitsLowerBound && single) return start;
