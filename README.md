@@ -18,7 +18,7 @@ Built from the ground up with zero dependencies. This lightweight component libr
 
 ## Installation
 
-### Prerequisites
+### Prerequisites:-
 
 This library heavily uses React Hooks. It needs the following versions of `react` and `react-dom`
 
