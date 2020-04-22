@@ -15,6 +15,14 @@ const options = [
   { text: "Option text 3" },
   { text: "Option text 4" },
 ];
+
+const simpleOptions = [
+  "Option text 1",
+  "Option text 2",
+  "Option text 3",
+  "Option text 4",
+];
+
 const component = props => (
   <Dropdown
     prefixClassName="test"
@@ -43,7 +51,7 @@ test("Error", async () => {
   const { container } = render(component({ error: "error", label: "label" }));
   expect(
     container.getElementsByClassName("test-error").length,
-  ).toBeGreaterThanOrEqual(2);
+  ).toBeGreaterThanOrEqual(1);
 });
 
 test("Options", () => {
@@ -127,19 +135,54 @@ test("Handling Keydowns", async () => {
   const mockFn = jest.fn();
   const { container } = render(component({ onChange: mockFn }));
   const inputElement = container.getElementsByClassName("test-input")[0];
-  fireEvent.mouseDown(inputElement);
-  const dropdownOption = document.getElementsByClassName("test-options")[0];
+  fireEvent.focus(inputElement);
+  const dropdownOption = document.getElementsByClassName("test-option")[1];
+  await new Promise(r => setTimeout(r, 100));
   fireEvent.keyDown(inputElement, { key: "down", keyCode: KEY_CODES.DOWN });
   fireEvent.keyDown(inputElement, { key: "down", keyCode: KEY_CODES.DOWN });
   fireEvent.keyDown(inputElement, { key: "up", keyCode: KEY_CODES.UP });
   fireEvent.keyDown(inputElement, { key: "enter", keyCode: KEY_CODES.ENTER });
-  expect(mockFn).toHaveBeenCalled();
+  expect(mockFn.mock.calls[0][0]).toStrictEqual({ text: "Option text 2" });
+});
+
+test("Handling Simple Mode", async () => {
+  // scrollIntoView is not implemented in JSDOM, this bypasses the issue.
+  window.HTMLElement.prototype.scrollIntoView = function() {};
+
+  const mockFn = jest.fn();
+  const { container } = render(
+    component({ value: "", onChange: mockFn, options: simpleOptions }),
+  );
+  const inputElement = container.getElementsByClassName("test-input")[0];
+  fireEvent.focus(inputElement);
+  await new Promise(r => setTimeout(r, 100));
+  fireEvent.keyDown(inputElement, { key: "enter", keyCode: KEY_CODES.ENTER });
+  expect(mockFn.mock.calls[0][0]).toStrictEqual(simpleOptions[0]);
+});
+
+test("Handling HSL Case", async () => {
+  // scrollIntoView is not implemented in JSDOM, this bypasses the issue.
+  window.HTMLElement.prototype.scrollIntoView = function() {};
+
+  const mockFn = jest.fn();
+  const { container } = render(
+    component({ value: "Open Screen", onChange: mockFn }),
+  );
+  const inputElement = container.getElementsByClassName("test-input")[0];
+  const inputElementText = container.getElementsByClassName(
+    "test-input-input",
+  )[0];
+  fireEvent.focus(inputElement);
+  await new Promise(r => setTimeout(r, 100));
+  fireEvent.keyDown(inputElement, { key: "enter", keyCode: KEY_CODES.ENTER });
+  expect(mockFn.mock.calls[0][0]).toStrictEqual(options[0]);
+  expect(inputElementText.value).toBe("Open Screen");
 });
 
 test("Searching options", async () => {
   const mockFn = jest.fn();
   const { container } = render(
-    component({ withSearch: false, onChange: mockFn }),
+    component({ withSearch: true, onChange: mockFn }),
   );
 
   const inputElementWrapper = container.getElementsByClassName("test-input")[0];
@@ -174,55 +217,55 @@ test("Creating options", async () => {
   expect(options.length).toBe(5);
 
   // confirming the option created has the right text
-  const newOption = document.getElementsByClassName("test-option")[4];
+  const newOption = document.getElementsByClassName("test-option")[0];
   expect(newOption).toHaveTextContent("new option");
 });
 
-// test("Adding Chips/Deleting Chips", async () => {
-//   const mockFn = jest.fn();
-//   const { container, getByTestId, rerender } = render(
-//     component({ withMultiple: true, onChange: mockFn }),
-//   );
-//   const inputElementWrapper = document.getElementsByClassName("test-input")[0];
-//   // only input elements support change events, not their abstractions
-//   fireEvent.focus(inputElementWrapper);
+test("Adding Chips/Deleting Chips", async () => {
+  const mockFn = jest.fn();
+  const { container, getByTestId, rerender } = render(
+    component({ withMultiple: true, withSearch: true, onChange: mockFn }),
+  );
+  const inputElementWrapper = container.getElementsByClassName("test-input")[0];
+  // only input elements support change events, not their abstractions
+  fireEvent.focus(inputElementWrapper);
 
-//   const options = document.getElementsByClassName("test-option");
+  const options = document.getElementsByClassName("test-option");
 
-//   fireEvent.click(options[0]);
+  fireEvent.click(options[0]);
 
-//   expect(mockFn).toHaveBeenCalledTimes(1);
+  expect(mockFn).toHaveBeenCalledTimes(1);
 
-//   rerender(
-//     component({
-//       withMultiple: true,
-//       value: mockFn.mock.calls[0][0],
-//       onChange: mockFn,
-//     }),
-//   );
+  rerender(
+    component({
+      withMultiple: true,
+      value: mockFn.mock.calls[0][0],
+      onChange: mockFn,
+    }),
+  );
 
-//   fireEvent.click(inputElementWrapper);
+  fireEvent.click(inputElementWrapper);
 
-//   // getting the updated DOM
-//   const chips = document.getElementsByClassName("test-input-chip");
+  // getting the updated DOM
+  const chips = document.getElementsByClassName("test-input-chip");
 
-//   expect(chips.length).toBe(1);
+  expect(chips.length).toBe(1);
 
-//   const chipsCross = document.getElementsByClassName("test-input-chip-icon")[0];
-//   // delete icon for first chip
-//   fireEvent.mouseDown(chipsCross);
-//   expect(mockFn).toHaveBeenCalledTimes(2);
+  const chipsCross = document.getElementsByClassName("test-input-chip-icon")[0];
+  // delete icon for first chip
+  fireEvent.mouseDown(chipsCross);
+  expect(mockFn).toHaveBeenCalledTimes(2);
 
-//   rerender(
-//     component({
-//       withMultiple: true,
-//       value: mockFn.mock.calls[1][0],
-//       onChange: mockFn,
-//     }),
-//   );
-//   fireEvent.click(inputElementWrapper);
+  rerender(
+    component({
+      withMultiple: true,
+      value: mockFn.mock.calls[1][0],
+      onChange: mockFn,
+    }),
+  );
+  fireEvent.click(inputElementWrapper);
 
-//   // checking if all options are available
-//   const optionsAfterDelete = document.getElementsByClassName("test-option");
-//   expect(optionsAfterDelete.length).toBe(4);
-// });
+  // checking if all options are available
+  const optionsAfterDelete = document.getElementsByClassName("test-option");
+  expect(optionsAfterDelete.length).toBe(4);
+});

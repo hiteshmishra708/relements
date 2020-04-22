@@ -3,15 +3,16 @@ import PropTypes from "prop-types";
 import Context from "@src/components/Context";
 import { rgba } from "@src/utils/generic";
 
-import styles from "./DropdownOption.scss";
+import styles from "./Option.scss";
 
-const DropdownOption = ({
+const Option = ({
   children,
   onClick,
   selected,
   innerRef,
-  value,
   className,
+  isZeroState,
+  isNew,
 }) => {
   const { primaryColor } = React.useContext(Context);
   const dropdownOptionSelectedStyle = selected
@@ -19,31 +20,43 @@ const DropdownOption = ({
     : {};
   const dropdownOptionTextStyle = selected ? { color: primaryColor } : {};
   const selectedClassName = selected ? `${className}-selected` : "";
+  const zeroStateClassName = isZeroState ? styles.zeroState : "";
+  const isNewClassName = isNew ? styles.isNew : "";
   return (
     <div
       ref={innerRef}
       style={dropdownOptionSelectedStyle}
-      className={`${styles.dropdownOption} ${className} ${selectedClassName}`}
-      onClick={() => onClick(value)}
+      className={`${styles.dropdownOption} ${className} ${selectedClassName} ${zeroStateClassName} ${isNewClassName}`}
+      onClick={!isZeroState ? onClick : null}
       data-testid="dropdown-option"
     >
       <span
         style={dropdownOptionTextStyle}
         className={`${styles.dropdownOptionText}`}
-      >
-        {children}
-      </span>
+        dangerouslySetInnerHTML={{ __html: children }}
+      />
     </div>
   );
 };
 
-DropdownOption.propTypes = {
-  value: PropTypes.string,
+Option.propTypes = {
   children: PropTypes.string,
   className: PropTypes.string,
+  innerRef: PropTypes.func,
+  isNew: PropTypes.bool,
+  isZeroState: PropTypes.bool,
   onClick: PropTypes.func,
   selected: PropTypes.bool,
-  innerRef: PropTypes.func,
 };
 
-export default DropdownOption;
+Option.defaultProps = {
+  children: "",
+  className: "",
+  innerRef: () => {},
+  onClick: () => {},
+  isNew: false,
+  isZeroState: false,
+  selected: false,
+};
+
+export default Option;
