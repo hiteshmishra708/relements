@@ -81,7 +81,9 @@ test("Prefix Placeholder Class", async () => {
     className.replace("$prefix", "test"),
   );
 
-  const { rerender } = render(<FileComponent prefixClassName="test" />);
+  const { rerender } = render(
+    <FileComponent value="" prefixClassName="test" />,
+  );
 
   classNames
     .filter(className => !previewClassNamesNotAllowed.includes(className))
@@ -96,7 +98,7 @@ test("Prefix Placeholder Class", async () => {
     <FileComponent
       prefixClassName="test"
       type="image"
-      value="hi.jpg"
+      value={["hi.jpg"]}
       multiple={true}
     />,
   );
@@ -114,7 +116,7 @@ test("Prefix Placeholder Class", async () => {
     <FileComponent
       prefixClassName="test"
       type="file"
-      value="hi.csv"
+      value={["hi.csv"]}
       multiple={true}
     />,
   );
@@ -156,7 +158,7 @@ test("File size", async () => {
   });
 
   const { rerender } = render(
-    <FileComponent prefixClassName="test" size={0.000001} />,
+    <FileComponent prefixClassName="test" maxFileSize={0.000001} />,
   );
   const input = document.getElementsByClassName("test-input")[0];
 
@@ -167,7 +169,7 @@ test("File size", async () => {
   fireEvent.change(input);
 
   rerender(
-    <FileComponent type="file" prefixClassName="test" size={0.000001} />,
+    <FileComponent type="file" prefixClassName="test" maxFileSize={0.000001} />,
   );
   const input_file = document.getElementsByClassName("test-input")[0];
   Object.defineProperty(input_file, "file", {

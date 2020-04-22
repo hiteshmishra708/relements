@@ -1,142 +1,213 @@
-import React, { useRef, useState } from "react";
-
+import React from "react";
 import PropTypes from "prop-types";
 
-import Icon from "components/UI/Icon";
-import AngleDownIcon from "icons/angle-down.svg";
-
-import DropdownOptions from "./components/DropdownOptions";
-import DropdownOption from "./components/DropdownOption";
-
-import { TextInput } from "../_common/TextInput";
 import { Label } from "../_common/Label";
-
-import { useKeyboardSelect } from "./hooks/useKeyboardSelect";
 import { useSearch } from "./hooks/useSearch";
-import { useDropdown } from "./hooks/useDropdown";
 
 import styles from "./Dropdown.scss";
-import { ChipsInput } from "../_common/ChipsInput";
-import { useInput } from "../_common/hooks/useInput";
+import Options from "./components/Options";
+import Input from "./components/Input";
+import getOptions from "./utils/getOptions";
 
 const Dropdown = ({
-  className = "",
-  prefixClassName = "",
-  label = "",
-  noOptionsText = "No options present",
-  error = "",
-  optionKey = "text",
-  value = [],
-  options = [],
-  onChange = () => {},
-  placeholder = "",
-  createPrefix = "+ Create",
-
-  onFocus = () => {},
-  onBlur = () => {},
-
-  disabled = false,
-  withSearch = false,
-  withCreate = false,
-  withMultiple = false,
+  className,
+  prefixClassName,
+  label,
+  noOptionsText,
+  error,
+  optionKey,
+  value,
+  options: propOptions,
+  onChange,
+  placeholder,
+  createPrefix,
+  searchKeys,
+  onFocus,
+  onBlur,
+  disabled,
+  withSearch,
+  withCreate,
+  withMultiple,
 }) => {
-  const [updatedOptions, setUpdatedOptions] = useState(options);
-  const valueArray = Array.isArray(value) ? value : [value];
-  const _InputDOM = useRef();
-  const _InputWrapperDOM = useRef();
+  // stores the currently typed input (in case of withSearch)
+  const [text, setText] = React.useState("");
+  const [options, setOptions] = React.useState(propOptions);
 
-  const getInputValue = () => {
-    if (withMultiple) return valueArray;
-    return valueArray[0] ? valueArray[0][optionKey] : "";
-  };
+  // updates initial set of options, whenever propOptions changes
+  // because on re-render, useState for options doesn't get called, which results in
+  // options always using the old value of propOptions.
+  React.useEffect(() => {
+    setOptions(propOptions);
+  }, [propOptions]);
 
-  const [searchTerm, searchResults, handleSearch] = useSearch(updatedOptions, [
+  const [createdOption, setCreatedOption] = React.useState();
+  const [focused, setFocused] = React.useState(false);
+
+  // simple mode is when the options are an array of strings instead of objects
+  // and the value and onChange also expect strings.
+  const isSimpleInputMode = typeof value === "string";
+  const isSimpleOptionsMode =
+    options.length && typeof propOptions[0] === "string";
+
+  // the ref for the input wrapper (used for positioning the dropdown)
+  const inputWrapperRef = React.useRef();
+
+  // the ref for blur lock (whether to lock the blur event or not)
+  const blurCount = React.useRef(false);
+
+  // the ref for the actual input itself (used for focus/blur of input)
+  const inputRef = React.useRef();
+
+  // the ref for the clear timeout
+  // [when the typeable input clears]
+  const timeoutRef = React.useRef();
+
+  let inputValue = "";
+  // if the value is a simple string, convert it to an object
+  inputValue = isSimpleInputMode ? { [optionKey]: value } : value;
+  // we normalize it to always be an array of objects depending on the useMultiple flag
+  inputValue = withMultiple ? inputValue : [inputValue];
+
+  const firstValueLabel = inputValue[0] ? inputValue[0][optionKey] || "" : "";
+
+  // based on the typed text, the options are filtered using the useSearch hook
+  // Fuse.js is used for fuzzy searching.
+  // searchText is set to empty (show all results if a valid value is already selected)
+  // searchKeys determines the array of keys withing the options to search
+  const searchInKeys = searchKeys.length ? searchKeys : [optionKey];
+  const searchText = text === firstValueLabel ? "" : text;
+  const searchResults = useSearch(searchText, options, searchInKeys);
+
+  // we need to normalize the options for display.
+  // - It filters out the option that was selected
+  // - Injects the zero state in case there are no options
+  // - Injects the withCreate option in case creation is allowed
+  const dropdownOptions = getOptions({
+    options: withSearch || withMultiple ? searchResults : options,
     optionKey,
-  ]);
-  const useDropdownProps = [
-    searchTerm,
-    searchResults,
-    optionKey,
-    valueArray,
+    noOptionsText,
     withCreate,
     createPrefix,
-  ];
+    text,
+    value: inputValue,
+  });
 
-  const [dropdownOptions] = useDropdown(...useDropdownProps);
-  const [
-    highlightIndex,
-    handleKeyDown,
-    _DropdownOptionDOMs,
-  ] = useKeyboardSelect(dropdownOptions, onChange);
-  const { focused, setFocused, handleFocus, handleBlur } = useInput(
-    _InputDOM,
-    onFocus,
-    onBlur,
-  );
-
-  const handleToggle = () => setFocused(!focused);
-
+  // To determine whether the dropdown options container opens above the dropdown
+  // or below.
+  // The 200 is the max height of the dropdown. (To account for some space for the dropdown to open)
   const isReversed =
-    _InputWrapperDOM.current &&
-    _InputWrapperDOM.current.getBoundingClientRect().bottom + 64 >
+    inputWrapperRef.current &&
+    inputWrapperRef.current.getBoundingClientRect().bottom + 200 >
       window.innerHeight;
 
-  const handleChange = valueToChange => {
-    const newValue = withMultiple ? [...value, valueToChange] : valueToChange;
+  // on blurring we clear + blur the input
+  const handleBlur = e => {
+    if (disabled) return;
+    setFocused(false);
+    onBlur(e);
+    if (inputRef.current) inputRef.current.blur();
 
-    if (withCreate) {
-      // cleaning the create prefix if it exists
-      const flatNewValue =
-        valueToChange[optionKey].indexOf(createPrefix) > -1
-          ? valueToChange[optionKey].slice(createPrefix.length + 1)
-          : valueToChange[optionKey];
+    // increment the blur count
+    blurCount.current += 1;
 
-      const flatExistingOptions = updatedOptions.map(option => {
-        return option[optionKey];
-      });
+    const target = e.target;
+    // we set a timeout to give the component enough time to dispatch both the events.
+    // once both the events fire, we can ignore the second one. (when blurCount is 2)
+    // otherwise it will reset the text to the old value.
+    // 200 is a sufficiently high value
+    // the delay is non-consequential as it's only there when the input resets
+    setTimeout(() => {
+      if (text !== firstValueLabel && target && blurCount.current === 1) {
+        const optionIndex = dropdownOptions
+          .map(option => option.label)
+          .indexOf(text);
 
-      // if updatedOptions already has that value, we don't update updatedOptions
-      flatExistingOptions.indexOf(flatNewValue) < 0
-        ? setUpdatedOptions([...updatedOptions, { text: flatNewValue }])
-        : null;
-      onChange({ [optionKey]: flatNewValue });
-      // removing '+ Create' option added
-      dropdownOptions.splice(0, 1);
-    } else {
-      onChange(newValue);
+        if (withMultiple) setText("");
+        else if (optionIndex > -1) onChange(dropdownOptions[optionIndex].value);
+        else setText(firstValueLabel);
+      }
+    }, 200);
+  };
+
+  const handleFocus = e => {
+    if (disabled) return;
+    setFocused(true);
+    onFocus(e);
+
+    // blur count keeps track of how many times the blur event was called
+    // this is to ensure that the when the user clicks on the option
+    // we can ignore the duplicate blur event
+    blurCount.current = 0;
+
+    // sometimes the input isn't immediately available
+    // only available on the next tick (hence the timeout is 0)
+    setTimeout(() => inputRef.current && inputRef.current.focus(), 0);
+    clearTimeout(timeoutRef.current);
+  };
+
+  const handleChange = e => {
+    // if it's simple mode, then we return a string value
+    onChange(isSimpleOptionsMode ? e[optionKey] : e);
+    // we don't blur if multiple options can be selected
+    // this is a UX decision.
+    if (!withMultiple) handleBlur(e);
+    else setText("");
+
+    // if we allow creation and the new option selected
+    // is a new option (does not exist in the options list)
+    // then we set the temp option to store the new option so that it's there in the
+    // dropdown
+    if (
+      withCreate &&
+      !dropdownOptions.map(option => option.label).includes(e[optionKey])
+    ) {
+      setCreatedOption(e);
     }
   };
 
-  const renderOptions = () => {
-    if (!dropdownOptions.length) {
-      return (
-        <span className={styles.dropdownInputZeroState}>
-          {noOptionsText || "No options present"}
-        </span>
-      );
-    }
-
-    return dropdownOptions.map((option, i) => (
-      <DropdownOption
-        key={i}
-        className={`${prefixClassName}-option`}
-        innerRef={_DropdownOptionDOMs.current[i]}
-        selected={i === highlightIndex}
-        onClick={handleChange}
-        value={option}
-      >
-        {option[optionKey]}
-      </DropdownOption>
-    ));
+  const handleOptionClick = e => {
+    // based on if multiple selection is allowed
+    // then we append the new option to the existing value array
+    // otherwise we return the value as is
+    const newValue = withMultiple ? [...inputValue, e] : e;
+    handleChange(newValue);
   };
 
-  const reverseModeClassName = isReversed ? styles.reverse : "";
-  const inputValue = getInputValue();
-  const Input = withMultiple ? ChipsInput : TextInput;
+  React.useEffect(() => {
+    // we also support an array of strings instead of objects
+    // we normalize it to objects with the default optionKey
+    // [simple mode]
+    let listOfOptionObjects = propOptions;
+    if (isSimpleOptionsMode) {
+      listOfOptionObjects = propOptions.map(option => ({
+        [optionKey]: option,
+      }));
+    }
+
+    // merged options contains the extra created option if available
+    const mergedOptions =
+      createdOption && withCreate
+        ? [createdOption, ...listOfOptionObjects]
+        : listOfOptionObjects;
+
+    setOptions(mergedOptions);
+  }, [propOptions.length, createdOption]);
+
+  React.useEffect(() => {
+    // we set the search text for single selection
+    // items to the selected value. This is so that
+    // the input text shows the selected value
+    if (withMultiple) return;
+    setText(firstValueLabel || "");
+  }, [firstValueLabel]);
+
   return (
     <div
       className={`${styles.dropdown} ${prefixClassName} ${className}`}
       data-testid="dropdown"
+      tabIndex="0"
+      onFocus={handleFocus}
+      onBlur={handleBlur}
     >
       <Label
         focused={focused}
@@ -146,38 +217,30 @@ const Dropdown = ({
         {label}
       </Label>
       <Input
-        innerRef={_InputWrapperDOM}
-        inputRef={_InputDOM}
-        className={`${styles.dropdownInput} ${prefixClassName}-input ${prefixClassName}-error ${reverseModeClassName}`}
-        prefixClassName={`${prefixClassName}-input`}
-        error={error}
-        onKeyDown={handleKeyDown}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onMouseDown={handleToggle}
-        onChange={withMultiple ? onChange : handleSearch}
-        focused={focused}
-        active={focused}
+        innerRef={inputWrapperRef}
+        inputRef={inputRef}
         value={inputValue}
-        placeholder={placeholder}
-        disabled={disabled}
-        editable={withSearch || withCreate}
-        withMultiple={withMultiple}
-        postfixComponent={
-          <Icon className={styles.dropdownInputIcon} src={AngleDownIcon} />
-        }
-        optionKey={optionKey}
-      />
-      <DropdownOptions
-        // onClose={handleBlur}
-        attachTo={_InputWrapperDOM}
-        active={focused}
+        text={text}
+        onTextChange={setText}
+        onChange={handleChange}
+        isReversed={isReversed}
         focused={focused}
-        className={`${prefixClassName}-options`}
-        reverseMode={isReversed}
-      >
-        {renderOptions()}
-      </DropdownOptions>
+        placeholder={placeholder}
+        withSearch={withSearch}
+        withMultiple={withMultiple}
+        optionKey={optionKey}
+        disabled={disabled}
+        prefixClassName={`${prefixClassName}-input`}
+      />
+      <Options
+        attachTo={inputWrapperRef}
+        focused={focused}
+        options={dropdownOptions}
+        onChange={handleOptionClick}
+        isReversed={isReversed}
+        onBlur={handleBlur}
+        prefixClassName={prefixClassName}
+      />
     </div>
   );
 };
@@ -188,7 +251,10 @@ Dropdown.propTypes = {
   /** ClassName for the Dropdown element */
   className: PropTypes.string,
   /** Value of the Dropdown Input */
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.shape({}),
+    PropTypes.arrayOf(PropTypes.shape({})),
+  ]),
   /** Label for the Dropdown */
   label: PropTypes.string,
   /** Text to be shown if there are no options */
@@ -205,12 +271,10 @@ Dropdown.propTypes = {
   prefixClassName: PropTypes.string,
   /** Text to prefix for Creating a new option */
   createPrefix: PropTypes.string,
-
   /** onFocus Callback */
   onFocus: PropTypes.func,
   /** onBlur Callback */
   onBlur: PropTypes.func,
-
   /** Dropdown with Search Enabled */
   withSearch: PropTypes.bool,
   /**  Dropdown with Creating new Options Enabled */
@@ -219,6 +283,29 @@ Dropdown.propTypes = {
   withMultiple: PropTypes.bool,
   /**  Whether the input is disabled or not */
   disabled: PropTypes.bool,
+  /**  Keys in the options to search for when using withSearch */
+  searchKeys: PropTypes.arrayOf(PropTypes.string),
+};
+
+Dropdown.defaultProps = {
+  className: "",
+  prefixClassName: "",
+  label: "",
+  noOptionsText: "No options present",
+  error: "",
+  optionKey: "text",
+  value: [],
+  options: [],
+  onChange: () => {},
+  placeholder: "",
+  createPrefix: "+ Create",
+  searchKeys: [],
+  onFocus: () => {},
+  onBlur: () => {},
+  disabled: false,
+  withSearch: false,
+  withCreate: false,
+  withMultiple: false,
 };
 
 Dropdown.classNames = {
