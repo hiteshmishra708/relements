@@ -6,6 +6,7 @@ import ConnectionsIcon from "icons/connections.svg";
 import ApiIcon from "icons/api.svg";
 import GearIcon from "icons/gear.svg";
 import CloseIcon from "icons/close.svg";
+import CloseIconV2 from "icons/close-v2.svg";
 import InactiveIcon from "icons/inactive.svg";
 import ActiveIcon from "icons/active.svg";
 import EditIcon from "icons/edit.svg";
@@ -93,6 +94,7 @@ export const ICON_MAP = {
   api: ApiIcon,
   gear: GearIcon,
   close: CloseIcon,
+  closeV2: CloseIconV2,
   inactive: InactiveIcon,
   active: ActiveIcon,
   edit: EditIcon,
@@ -180,5 +182,5 @@ export const ICON_MAP = {
  * @returns {Object} the react component corresponding to the iconType
  */
 export function getIcon(iconType) {
-  return ICON_MAP[iconType] || null;
+  return ICON_MAP[iconType] || (() => null);
 }

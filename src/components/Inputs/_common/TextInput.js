@@ -20,10 +20,12 @@ export const TextInput = ({
   inputRef,
   disabled,
   editable,
+  multiline,
   prefixClassName,
   prefixComponent,
   postfixComponent,
 }) => {
+  const input = React.useRef(null);
   const { primaryColor } = React.useContext(Context);
   const focusedStyle =
     !disabled && focused ? { borderColor: primaryColor } : {};
@@ -31,22 +33,45 @@ export const TextInput = ({
   const errorClassName = error ? styles.error : "";
   const disabledClassName = disabled ? styles.disabled : "";
   const [textValue, setTextValue] = useState();
+
+  const handleRef = React.useCallback(ref => {
+    input.current = ref;
+    if (typeof inputRef === "function") inputRef(ref);
+    else inputRef.current = ref;
+  });
+
   const handleChange = e => {
     onChange(e.target.value);
     setTextValue(e.target.value);
+
+    if (multiline && input.current) {
+      input.current.style.height = `auto`;
+      input.current.style.height = `${input.current.scrollHeight}px`;
+    }
   };
 
-  const renderInput = () => (
-    <input
-      disabled={disabled || !editable}
-      value={textValue}
-      onChange={handleChange}
-      placeholder={placeholder}
-      type="text"
-      ref={inputRef}
-      className={`${prefixClassName}-input`}
-    />
-  );
+  const renderInput = () =>
+    multiline ? (
+      <textarea
+        disabled={disabled || !editable}
+        value={textValue}
+        onChange={handleChange}
+        placeholder={placeholder}
+        type="text"
+        ref={handleRef}
+        className={`${prefixClassName}-input`}
+      />
+    ) : (
+      <input
+        disabled={disabled || !editable}
+        value={textValue}
+        onChange={handleChange}
+        placeholder={placeholder}
+        type="text"
+        ref={handleRef}
+        className={`${prefixClassName}-input`}
+      />
+    );
 
   useEffect(() => {
     setTextValue(value);
@@ -67,10 +92,10 @@ export const TextInput = ({
     <div
       ref={innerRef}
       tabIndex="0"
-      onKeyDown={onKeyDown}
       onFocus={onFocus}
       onBlur={onBlur}
       onMouseDown={onMouseDown}
+      onKeyDown={onKeyDown}
       className={classNames.main}
       style={focusedStyle}
     >
@@ -101,14 +126,16 @@ TextInput.propTypes = {
   prefixClassName: PropTypes.string,
   prefixComponent: PropTypes.node,
   value: PropTypes.string,
+  multiline: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
   className: "",
-  editable: false,
+  editable: true,
   disabled: false,
   error: false,
   focused: false,
+  multiline: false,
   innerRef: () => {},
   inputRef: () => {},
   onBlur: () => {},
