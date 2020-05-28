@@ -18,7 +18,7 @@ import ImageProgressBar from "./components/ImageProgressBar";
 
 const FILE_ACCEPT_TYPES =
   // eslint-disable-next-line max-len
-  "image/png, image/jpg, image/jpeg, application/pdf, application/ vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword";
+  "image/png, image/jpg, image/jpeg, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword";
 const IMAGE_ACCEPT_TYPES = "image/png, image/jpg, image/jpeg";
 
 class File extends React.Component {
@@ -350,23 +350,63 @@ class File extends React.Component {
   _areFilesValid = files => {
     let isValid = true;
     const errorMessages = [];
+    const { type, maxFileSize } = this.props;
+
     [...files].map(file => {
+      const fileType = file.type;
+
+      // Image Validations
       if (
-        this.props.type !== "file" &&
-        file.size > 1024 * 1024 * this.props.maxFileSize
+        type === "image" ||
+        type.includes("png") ||
+        type.includes("jpg") ||
+        type.includes("jpeg")
       ) {
-        errorMessages.push(
-          `File: ${file.name} must be less than ${this.props.maxFileSize}MB`,
-        );
-        isValid = false;
-      } else if (
-        this.props.type === "file" &&
-        file.size > 1024 * 1024 * this.props.maxFileSize
-      ) {
-        errorMessages.push(
-          `File: ${file.name} must be less than ${this.props.maxFileSize}MB`,
-        );
-        isValid = false;
+        const acceptedImgArr = IMAGE_ACCEPT_TYPES.split(", ");
+
+        let validImg = false;
+        for (const i in acceptedImgArr) {
+          if (fileType.includes(acceptedImgArr[i])) {
+            validImg = true;
+            break;
+          }
+        }
+
+        if (!validImg) {
+          errorMessages.push(
+            `Invalid File selected. Supported formats: ${type}`,
+          );
+          isValid = false;
+        }
+      }
+
+      // File Validations
+      else {
+        const acceptedFilesArr = FILE_ACCEPT_TYPES.split(", ");
+        let validFile = false;
+        for (const i in acceptedFilesArr) {
+          if (fileType.includes(acceptedFilesArr[i])) {
+            validFile = true;
+            break;
+          }
+        }
+
+        if (!validFile) {
+          errorMessages.push(
+            `Invalid File selected. Supported formats: ${type}`,
+          );
+          isValid = false;
+        }
+      }
+
+      // File Size Validation
+      if (isValid) {
+        if (file.size > 1024 * 1024 * maxFileSize) {
+          errorMessages.push(
+            `File: ${file.name} must be less than ${maxFileSize}MB`,
+          );
+          isValid = false;
+        }
       }
     });
 
