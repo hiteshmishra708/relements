@@ -353,50 +353,35 @@ class File extends React.Component {
     const { type, maxFileSize } = this.props;
 
     [...files].map(file => {
-      const fileType = file.type;
+      const fileType = file.type.split("/")[1];
+      const propTypeData = type.split(", ");
+      const multiplePropTypes = type.includes(",") ? true : false;
+      let validFile = false;
 
-      // Image Validations
-      if (
-        type === "image" ||
-        type.includes("png") ||
-        type.includes("jpg") ||
-        type.includes("jpeg")
-      ) {
-        const acceptedImgArr = IMAGE_ACCEPT_TYPES.split(", ");
-
-        let validImg = false;
-        for (const i in acceptedImgArr) {
-          if (fileType.includes(acceptedImgArr[i])) {
-            validImg = true;
-            break;
-          }
-        }
-
-        if (!validImg) {
-          errorMessages.push(
-            `Invalid File selected. Supported formats: ${type}`,
-          );
-          isValid = false;
-        }
-      }
-
-      // File Validations
-      else {
-        const acceptedFilesArr = FILE_ACCEPT_TYPES.split(", ");
-        let validFile = false;
-        for (const i in acceptedFilesArr) {
-          if (fileType.includes(acceptedFilesArr[i])) {
+      // Absolute type check
+      if (!multiplePropTypes) {
+        const acceptedFileArr = FILE_ACCEPT_TYPES.split(", ");
+        for (const index in acceptedFileArr) {
+          if (file.type.includes(acceptedFileArr[index])) {
             validFile = true;
             break;
           }
         }
+      }
 
-        if (!validFile) {
-          errorMessages.push(
-            `Invalid File selected. Supported formats: ${type}`,
-          );
-          isValid = false;
+      // Custom Extenstions Check
+      else {
+        for (const i in propTypeData) {
+          if (propTypeData[i].includes(fileType)) {
+            validFile = true;
+            break;
+          }
         }
+      }
+
+      if (!validFile) {
+        errorMessages.push(`Invalid File selected. Supported formats: ${type}`);
+        isValid = false;
       }
 
       // File Size Validation
