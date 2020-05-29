@@ -131,9 +131,9 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "husky":{
-    "hooks":{
-      "prepare-commit-msg": "npx exec < /dev/tty && git cz --hook || true"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
   }
 }
