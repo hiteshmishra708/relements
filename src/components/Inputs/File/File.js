@@ -372,6 +372,7 @@ class File extends React.Component {
       // Custom Extenstions Check
       else {
         for (const i in propTypeData) {
+          debugger;
           if (propTypeData[i].includes(fileType)) {
             validFile = true;
             break;
